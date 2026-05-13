@@ -1,0 +1,398 @@
++ export MPLCONFIGDIR=/scratch-local/bartb.22635589/matplotlib
++ MPLCONFIGDIR=/scratch-local/bartb.22635589/matplotlib
++ export XDG_CACHE_HOME=/scratch-local/bartb.22635589/.cache
++ XDG_CACHE_HOME=/scratch-local/bartb.22635589/.cache
++ mkdir -p /scratch-local/bartb.22635589/matplotlib /scratch-local/bartb.22635589/.cache
++ export RAY_TMPDIR=/scratch-local/bartb.22635589/ray_22635589
++ RAY_TMPDIR=/scratch-local/bartb.22635589/ray_22635589
++ mkdir -p /scratch-local/bartb.22635589/ray_22635589
++ module load 2023
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+Shell debugging restarted
++ unset __lmod_sh_dbg
++ return 0
++ source /gpfs/home4/bartb/venvs/boids/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/home/bartb/venvs/boids
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ PATH=/home/bartb/venvs/boids/bin:/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(boids) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(boids) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ cd /gpfs/home4/bartb/T256/T256-SUBBOX
++ python -c '
+import torch, ray
+print(f'\''PyTorch {torch.__version__}, CUDA {torch.cuda.is_available()}, {torch.cuda.device_count()} GPUs'\'')
+print(f'\''Ray {ray.__version__}'\'')
+'
++ python src/train_tune.py --config Configs/overfit_configs.yaml --num_samples 20 --tune_epochs 300 --grace_period 50 --gpus_per_trial 1.0
+2026-05-11 11:21:28,040	INFO worker.py:2007 -- Started a local Ray instance.
+/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py:2046: FutureWarning: Tip: In future versions of Ray, Ray will no longer override accelerator visible devices env var if num_gpus=0 or num_gpus=None (default). To enable this behavior and turn off this error message, set RAY_ACCEL_ENV_VAR_OVERRIDE_ON_ZERO=0
+  warnings.warn(
+2026-05-11 11:21:44,599	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00002
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1430819, ip=145.136.62.137, actor_id=6255a1a12e1aaa1b4c30b88901000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+2026-05-11 11:21:44,608	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00000
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1430821, ip=145.136.62.137, actor_id=bd1505e9d522d2c8c583821901000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+2026-05-11 11:21:44,620	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00003
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1430818, ip=145.136.62.137, actor_id=a27a0ff333472014d2f8382901000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+2026-05-11 11:21:44,631	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00001
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1430820, ip=145.136.62.137, actor_id=bfa3b5d15918c337d78fb7c501000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+2026-05-11 11:21:54,070	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00006
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1431457, ip=145.136.62.137, actor_id=8505b84b2a6936670bff81c801000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+2026-05-11 11:21:54,429	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00005
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1431459, ip=145.136.62.137, actor_id=337b85d858c7ca18c52c2b7401000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+2026-05-11 11:21:54,434	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00004
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1431456, ip=145.136.62.137, actor_id=09f1786978b40dff0751b18e01000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+2026-05-11 11:21:54,461	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00007
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1431458, ip=145.136.62.137, actor_id=9cf01274aab1fa667ce7d6e701000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+[36m(pid=gcs_server)[0m [2026-05-11 11:21:55,099 E 1426811 1426811] (gcs_server) gcs_server.cc:303: Failed to establish connection to the event+metrics exporter agent. Events and metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[33m(raylet)[0m [2026-05-11 11:21:57,994 E 1427004 1427004] (raylet) main.cc:1032: Failed to establish connection to the metrics exporter agent. Metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+2026-05-11 11:22:02,079	ERROR tune_controller.py:1331 -- Trial task failed for trial train_one_trial_ce1c4_00009
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/execution/_internal/event_manager.py", line 110, in resolve_future
+    result = ray.get(future)
+             ^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/auto_init_hook.py", line 22, in auto_init_wrapper
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/client_mode_hook.py", line 104, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 2967, in get
+    values, debugger_breakpoint = worker.get_objects(
+                                  ^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/_private/worker.py", line 1015, in get_objects
+    raise value.as_instanceof_cause()
+ray.exceptions.RayTaskError(KeyError): [36mray::ImplicitFunc.train()[39m (pid=1431922, ip=145.136.62.137, actor_id=f4d006812b961645f43014c701000000, repr=train_one_trial)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/trainable.py", line 331, in train
+    raise skipped from exception_cause(skipped)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/air/_internal/util.py", line 98, in run
+    self._ret = self._target(*self._args, **self._kwargs)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 44, in <lambda>
+    training_func=lambda: self._trainable_func(self.config),
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/function_trainable.py", line 249, in _trainable_func
+    output = fn()
+             ^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/ray/tune/trainable/util.py", line 130, in inner
+    return trainable(config, **fn_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_tune.py", line 98, in train_one_trial
+    norm=ray_config["model"]["egnn"]["norm"],
+         ~~~~~~~~~~^^^^^^^^^
+KeyError: 'model'
+[36m(bundle_reservation_check_func pid=1427108)[0m [2026-05-11 11:22:02,261 E 1427108 1427292] core_worker_process.cc:842: Failed to establish connection to the metrics exporter agent. Metrics will not be exported. Exporter agent status: RpcError: Running out of retries to initialize the metrics agent. rpc_code: 14
+[2026-05-11T11:22:02.868] error: *** JOB 22635589 ON gcn137 CANCELLED AT 2026-05-11T11:22:02 DUE to SIGNAL Terminated ***

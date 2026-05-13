@@ -1,0 +1,315 @@
++ export MPLCONFIGDIR=/scratch-local/bartb.22583304/matplotlib
++ MPLCONFIGDIR=/scratch-local/bartb.22583304/matplotlib
++ export XDG_CACHE_HOME=/scratch-local/bartb.22583304/.cache
++ XDG_CACHE_HOME=/scratch-local/bartb.22583304/.cache
++ mkdir -p /scratch-local/bartb.22583304/matplotlib /scratch-local/bartb.22583304/.cache
++ export TORCH_DISTRIBUTED_DEBUG=DETAIL
++ TORCH_DISTRIBUTED_DEBUG=DETAIL
++ module load 2023
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+Shell debugging restarted
++ unset __lmod_sh_dbg
++ return 0
++ source /gpfs/home4/bartb/venvs/boids/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/home/bartb/venvs/boids
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ PATH=/home/bartb/venvs/boids/bin:/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(boids) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(boids) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ torchrun --standalone --nproc_per_node=4 src/train_ddp.py --config Configs/overfit_configs.yaml --log_wandb
+W0508 15:07:00.695000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] 
+W0508 15:07:00.695000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+W0508 15:07:00.695000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0508 15:07:00.695000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+Group initialized? True
+host: gcn147.local.snellius.surf.nl, rank: 0, local_rank: 0
+2026-05-08 15:07:13,421 - INFO - Output_dir: ./results/run_20260508_150712
+2026-05-08 15:07:13,422 - INFO - Final training configuration:
+{'config': 'Configs/overfit_configs.yaml',
+ 'data': {'cosm_param': None,
+          'cosmologies_dir': '../Data/subboxes/',
+          'cosmologies_info_dir': '../Data/subboxes/',
+          'dataset': 'subset_5000',
+          'rotations': False,
+          'translations': False},
+ 'log_wandb': True,
+ 'logging': {'epoch_log_interval': 1,
+             'level': 'INFO',
+             'model_save_interval': 100},
+ 'model': {'egnn': {'activation': 'silu',
+                    'aggregation_fn': 'sum',
+                    'attention': True,
+                    'coords_weight': 1.0,
+                    'hidden_nf': 128,
+                    'input_node_d': 2,
+                    'input_theta_d': 5,
+                    'latent_nf': 64,
+                    'mlp_layers': 2,
+                    'n_layers': 4,
+                    'norm': 'layer',
+                    'norm_diff': False,
+                    'recurrent': True,
+                    'scale_pred': True,
+                    'single_layer': True,
+                    'theta_nf': 64,
+                    'theta_param_embd_dim': 32},
+           'fm': {'k': 32,
+                  'lambda_reg': 0.1,
+                  'optimal_transport': True,
+                  'prior': 'uniform',
+                  'r': 0.3,
+                  'sigma_0': 0.0,
+                  'sigma_sched': False,
+                  't_embed': 'sinusoidal',
+                  't_embed_dim': 64,
+                  'version': 'icfm'}},
+ 'output': {'base_path': './results/'},
+ 'training': {'batch_size': 16,
+              'batch_size_valid': 16,
+              'checkpoint_path': None,
+              'clip_value': 1.0,
+              'early_stopping': {'min_delta': 0.0001, 'patience': 9999},
+              'epochs': 10000,
+              'optimizer': {'weight_decay': 0},
+              'scheduler': {'factor': 0.5,
+                            'initial_lr': '1e-3',
+                            'min_lr': 1e-08,
+                            'patience': 50,
+                            'target_lr': '1e-5',
+                            'threshold': 0.0001,
+                            'type': 'cosine',
+                            'warmup_epochs': 10},
+              'start_from_scratch': True},
+ 'wandb': {'log_freq': 50,
+           'project_name': 'T256-SUBBOX',
+           'run_name': 'egnn_mass_mean'}}
+host: gcn147.local.snellius.surf.nl, rank: 1, local_rank: 1
+host: gcn147.local.snellius.surf.nl, rank: 2, local_rank: 2
+host: gcn147.local.snellius.surf.nl, rank: 3, local_rank: 3
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+
+wandb: Currently logged in as: bart-bronsgeest (bart-bronsgeest-eindhoven-university-of-technology) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 8lu8ri4g
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /gpfs/home4/bartb/T256/T256-SUBBOX/wandb/run-20260508_150713-8lu8ri4g
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run egnn_mass_mean
+wandb: ⭐️ View project at https://wandb.ai/bart-bronsgeest-eindhoven-university-of-technology/T256-SUBBOX
+wandb: 🚀 View run at https://wandb.ai/bart-bronsgeest-eindhoven-university-of-technology/T256-SUBBOX/runs/8lu8ri4g
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+2026-05-08 15:07:18,893 - INFO - Number of trainable parameters: 538698
+2026-05-08 15:07:18,893 - INFO - Model architecture: DistributedDataParallel(
+  (module): FlowMatching(
+    (vnet): EGNN(
+      (h_embed): MLP(
+        (layer): Linear(in_features=2, out_features=64, bias=True)
+      )
+      (theta_embed): SinusoidalThetaEmbedding()
+      (global_attr_projection): Linear(in_features=224, out_features=64, bias=True)
+      (mass_readout): MLP(
+        (mlp): Sequential(
+          (0): Linear(in_features=64, out_features=128, bias=True)
+          (1): SiLU()
+          (2): Linear(in_features=128, out_features=128, bias=True)
+          (3): SiLU()
+          (4): Linear(in_features=128, out_features=1, bias=True)
+        )
+      )
+      (layers): ModuleList(
+        (0-3): 4 x EGCL(
+          (activation): SiLU()
+          (edge_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=196, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=192, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (coord_mlp): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=False)
+          )
+          (attn_mlp): Sequential(
+            (0): Linear(in_features=64, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=True)
+          )
+        )
+      )
+      (theta_predictor): Linear(in_features=64, out_features=5, bias=True)
+    )
+    (time_mlp): Linear(in_features=1, out_features=64, bias=True)
+    (sinusoidal_time_embedding): SinusoidalTimeEmbedding()
+  )
+)
+2026-05-08 15:07:18,897 - INFO - Started training
+2026-05-08 15:08:00,051 - INFO - Epoch 1, Total: 0.019100, Pos: 0.005548, Mass: 0.008197
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 413, in <module>
+[rank2]:     main()
+[rank2]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 410, in main
+[rank2]:     train_model(final_config, output_dir, rank, local_rank)
+[rank2]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 351, in train_model
+[rank2]:     adjust_learning_rate(optimizer, epoch, config) 
+[rank2]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/utils.py", line 264, in adjust_learning_rate
+[rank2]:     current_lr = initial_lr + (target_lr - initial_lr) * (epoch / warmup_epochs)
+[rank2]:                                ~~~~~~~~~~^~~~~~~~~~~~
+[rank2]: TypeError: unsupported operand type(s) for -: 'str' and 'str'
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 413, in <module>
+[rank1]:     main()
+[rank1]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 410, in main
+[rank1]:     train_model(final_config, output_dir, rank, local_rank)
+[rank1]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 351, in train_model
+[rank1]:     adjust_learning_rate(optimizer, epoch, config) 
+[rank1]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/utils.py", line 264, in adjust_learning_rate
+[rank1]:     current_lr = initial_lr + (target_lr - initial_lr) * (epoch / warmup_epochs)
+[rank1]:                                ~~~~~~~~~~^~~~~~~~~~~~
+[rank1]: TypeError: unsupported operand type(s) for -: 'str' and 'str'
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 413, in <module>
+[rank3]:     main()
+[rank3]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 410, in main
+[rank3]:     train_model(final_config, output_dir, rank, local_rank)
+[rank3]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 351, in train_model
+[rank3]:     adjust_learning_rate(optimizer, epoch, config) 
+[rank3]:     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank3]:   File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/utils.py", line 264, in adjust_learning_rate
+[rank3]:     current_lr = initial_lr + (target_lr - initial_lr) * (epoch / warmup_epochs)
+[rank3]:                                ~~~~~~~~~~^~~~~~~~~~~~
+[rank3]: TypeError: unsupported operand type(s) for -: 'str' and 'str'
+W0508 15:08:01.837000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 132467 closing signal SIGTERM
+W0508 15:08:01.840000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 132469 closing signal SIGTERM
+W0508 15:08:01.841000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 132470 closing signal SIGTERM
+E0508 15:08:01.905000 132447 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 1 (pid: 132468) of binary: /home/bartb/venvs/boids/bin/python
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+src/train_ddp.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-05-08_15:08:01
+  host      : gcn147.local.snellius.surf.nl
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 132468)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

@@ -1,0 +1,80 @@
+data:
+  cosmologies_dir: "../Data/subboxes/" 
+  cosmologies_info_dir: "../Data/subboxes/" 
+  dataset: subset_5000
+  rotations: False 
+  translations: False 
+  cosm_param: null # null for all
+
+model:
+  fm:
+    sigma_0: 0.
+    sigma_sched: False
+    t_embed_dim: 64
+    version: "icfm"
+    prior: "uniform"
+    t_embed: "sinusoidal"
+    k: 32
+    r: 0.3
+    optimal_transport: True
+    lambda_mass: 0.1
+    lambda_reg: 0.1
+  egnn:
+    input_node_d: 2
+    input_theta_d: 5
+    theta_param_embd_dim: 32
+    hidden_nf: 256
+    latent_nf: 64
+    theta_nf: 64
+    n_layers: 4
+    mlp_layers: 2
+    single_layer: True 
+    recurrent: True
+    activation: silu 
+    norm: "layer" # None, layer, weight
+    attention: True
+    aggregation_fn: sum 
+    scale_pred: True 
+    coords_weight: 0.5
+    norm_diff: False
+
+training: 
+  epochs: 10000
+  batch_size: 16 #### CHANGE TO 4
+  batch_size_valid: 16
+  clip_value: 1.0
+  start_from_scratch: True
+  checkpoint_path: Null
+
+  optimizer: 
+    weight_decay: 0
+
+  scheduler:
+    warmup_epochs: 10
+    initial_lr: 5e-4
+    target_lr: 1e-5 
+    
+    type: cosine # plateau or cosine
+    
+    # plateau
+    factor: 0.5
+    threshold: 1.e-4
+    min_lr: 1.e-8
+    patience: 50
+  
+  early_stopping:
+    patience: 9999
+    min_delta: 1.e-4
+
+output: 
+  base_path: "./results/"
+
+logging:
+  level: INFO
+  epoch_log_interval: 1
+  model_save_interval: 100
+
+wandb:
+  log_freq: 50  
+  project_name: T256-SUBBOX
+  run_name: egnn_tuned

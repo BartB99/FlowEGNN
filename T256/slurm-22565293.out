@@ -1,0 +1,83 @@
++ export MPLCONFIGDIR=/scratch-local/bartb.22565293/matplotlib
++ MPLCONFIGDIR=/scratch-local/bartb.22565293/matplotlib
++ export XDG_CACHE_HOME=/scratch-local/bartb.22565293/.cache
++ XDG_CACHE_HOME=/scratch-local/bartb.22565293/.cache
++ mkdir -p /scratch-local/bartb.22565293/matplotlib /scratch-local/bartb.22565293/.cache
++ export TORCH_DISTRIBUTED_DEBUG=DETAIL
++ TORCH_DISTRIBUTED_DEBUG=DETAIL
++ export WANDB_HTTP_TIMEOUT=60
++ WANDB_HTTP_TIMEOUT=60
++ module load 2023
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+Shell debugging restarted
++ unset __lmod_sh_dbg
++ return 0
++ source /gpfs/home4/bartb/venvs/boids/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/home/bartb/venvs/boids
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ PATH=/home/bartb/venvs/boids/bin:/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(boids) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(boids) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ torchrun --standalone --nproc_per_node=1 src/train_ddp.py --config Configs/overfit_configs.yaml --log_wandb
+Traceback (most recent call last):
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/train_ddp.py", line 13, in <module>
+    from fm import FlowMatching
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/fm.py", line 8, in <module>
+    from utils import gpu_knn_graph_pbc_batch, gpu_knn_graph_batch, scale_thetas, scale_masses, SinusoidalTimeEmbedding, \
+ImportError: cannot import name 'scaled_log10_gaussian_mass_prior' from 'utils' (/gpfs/home4/bartb/T256/T256-SUBBOX/src/utils.py)
+E0507 17:10:55.762000 1621281 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 0 (pid: 1621303) of binary: /home/bartb/venvs/boids/bin/python
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+src/train_ddp.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-05-07_17:10:55
+  host      : gcn39.local.snellius.surf.nl
+  rank      : 0 (local_rank: 0)
+  exitcode  : 1 (pid: 1621303)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

@@ -1,0 +1,2045 @@
++ export MPLCONFIGDIR=/scratch-local/bartb.22585278/matplotlib
++ MPLCONFIGDIR=/scratch-local/bartb.22585278/matplotlib
++ export XDG_CACHE_HOME=/scratch-local/bartb.22585278/.cache
++ XDG_CACHE_HOME=/scratch-local/bartb.22585278/.cache
++ mkdir -p /scratch-local/bartb.22585278/matplotlib /scratch-local/bartb.22585278/.cache
++ export TORCH_DISTRIBUTED_DEBUG=DETAIL
++ TORCH_DISTRIBUTED_DEBUG=DETAIL
++ module load 2023
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+Shell debugging restarted
++ unset __lmod_sh_dbg
++ return 0
++ source /gpfs/home4/bartb/venvs/boids/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/home/bartb/venvs/boids
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ PATH=/home/bartb/venvs/boids/bin:/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(boids) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(boids) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ torchrun --standalone --nproc_per_node=4 src/train_ddp.py --config Configs/overfit_configs.yaml --log_wandb
+W0508 15:48:46.135000 143698 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] 
+W0508 15:48:46.135000 143698 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+W0508 15:48:46.135000 143698 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0508 15:48:46.135000 143698 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+Group initialized? True
+host: gcn90.local.snellius.surf.nl, rank: 0, local_rank: 0
+2026-05-08 15:48:58,582 - INFO - Output_dir: ./results/run_20260508_154857
+2026-05-08 15:48:58,583 - INFO - Final training configuration:
+{'config': 'Configs/overfit_configs.yaml',
+ 'data': {'cosm_param': None,
+          'cosmologies_dir': '../Data/subboxes/',
+          'cosmologies_info_dir': '../Data/subboxes/',
+          'dataset': 'subset_5000',
+          'rotations': False,
+          'translations': False},
+ 'log_wandb': True,
+ 'logging': {'epoch_log_interval': 1,
+             'level': 'INFO',
+             'model_save_interval': 100},
+ 'model': {'egnn': {'activation': 'silu',
+                    'aggregation_fn': 'sum',
+                    'attention': True,
+                    'coords_weight': 1.0,
+                    'hidden_nf': 128,
+                    'input_node_d': 2,
+                    'input_theta_d': 5,
+                    'latent_nf': 64,
+                    'mlp_layers': 2,
+                    'n_layers': 4,
+                    'norm': 'layer',
+                    'norm_diff': False,
+                    'recurrent': True,
+                    'scale_pred': True,
+                    'single_layer': True,
+                    'theta_nf': 64,
+                    'theta_param_embd_dim': 32},
+           'fm': {'k': 32,
+                  'lambda_reg': 0.1,
+                  'optimal_transport': True,
+                  'prior': 'uniform',
+                  'r': 0.3,
+                  'sigma_0': 0.0,
+                  'sigma_sched': False,
+                  't_embed': 'sinusoidal',
+                  't_embed_dim': 64,
+                  'version': 'icfm'}},
+ 'output': {'base_path': './results/'},
+ 'training': {'batch_size': 16,
+              'batch_size_valid': 16,
+              'checkpoint_path': None,
+              'clip_value': 1.0,
+              'early_stopping': {'min_delta': 0.0001, 'patience': 9999},
+              'epochs': 10000,
+              'optimizer': {'weight_decay': 0},
+              'scheduler': {'factor': 0.5,
+                            'initial_lr': '1e-3',
+                            'min_lr': 1e-08,
+                            'patience': 50,
+                            'target_lr': '1e-5',
+                            'threshold': 0.0001,
+                            'type': 'cosine',
+                            'warmup_epochs': 10},
+              'start_from_scratch': True},
+ 'wandb': {'log_freq': 50,
+           'project_name': 'T256-SUBBOX',
+           'run_name': 'egnn_mass_mean'}}
+host: gcn90.local.snellius.surf.nl, rank: 1, local_rank: 1
+host: gcn90.local.snellius.surf.nl, rank: 2, local_rank: 2
+host: gcn90.local.snellius.surf.nl, rank: 3, local_rank: 3
+wandb: Currently logged in as: bart-bronsgeest (bart-bronsgeest-eindhoven-university-of-technology) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+wandb: setting up run f0ye37gr
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /gpfs/home4/bartb/T256/T256-SUBBOX/wandb/run-20260508_154858-f0ye37gr
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run egnn_mass_mean
+wandb: ⭐️ View project at https://wandb.ai/bart-bronsgeest-eindhoven-university-of-technology/T256-SUBBOX
+wandb: 🚀 View run at https://wandb.ai/bart-bronsgeest-eindhoven-university-of-technology/T256-SUBBOX/runs/f0ye37gr
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+2026-05-08 15:49:03,929 - INFO - Number of trainable parameters: 538698
+2026-05-08 15:49:03,931 - INFO - Model architecture: DistributedDataParallel(
+  (module): FlowMatching(
+    (vnet): EGNN(
+      (h_embed): MLP(
+        (layer): Linear(in_features=2, out_features=64, bias=True)
+      )
+      (theta_embed): SinusoidalThetaEmbedding()
+      (global_attr_projection): Linear(in_features=224, out_features=64, bias=True)
+      (mass_readout): MLP(
+        (mlp): Sequential(
+          (0): Linear(in_features=64, out_features=128, bias=True)
+          (1): SiLU()
+          (2): Linear(in_features=128, out_features=128, bias=True)
+          (3): SiLU()
+          (4): Linear(in_features=128, out_features=1, bias=True)
+        )
+      )
+      (layers): ModuleList(
+        (0-3): 4 x EGCL(
+          (activation): SiLU()
+          (edge_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=196, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=192, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (coord_mlp): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=False)
+          )
+          (attn_mlp): Sequential(
+            (0): Linear(in_features=64, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=True)
+          )
+        )
+      )
+      (theta_predictor): Linear(in_features=64, out_features=5, bias=True)
+    )
+    (time_mlp): Linear(in_features=1, out_features=64, bias=True)
+    (sinusoidal_time_embedding): SinusoidalTimeEmbedding()
+  )
+)
+2026-05-08 15:49:03,934 - INFO - Started training
+2026-05-08 15:49:44,586 - INFO - Epoch 1, Total: 0.018956, Pos: 0.005691, Mass: 0.009344
+2026-05-08 15:49:56,903 - INFO - Epoch 1, Validation loss: 0.016356914383797053
+2026-05-08 15:50:30,375 - INFO - Epoch 2, Total: 0.015808, Pos: 0.005996, Mass: 0.010177
+2026-05-08 15:50:43,711 - INFO - Epoch 2, Validation loss: 0.015547978476836132
+2026-05-08 15:51:17,804 - INFO - Epoch 3, Total: 0.015700, Pos: 0.005484, Mass: 0.009737
+2026-05-08 15:51:31,575 - INFO - Epoch 3, Validation loss: 0.015529116416652488
+2026-05-08 15:52:05,903 - INFO - Epoch 4, Total: 0.015502, Pos: 0.005731, Mass: 0.009999
+2026-05-08 15:52:19,059 - INFO - Epoch 4, Validation loss: 0.015333085854211424
+2026-05-08 15:52:52,960 - INFO - Epoch 5, Total: 0.015464, Pos: 0.005774, Mass: 0.009466
+2026-05-08 15:53:07,950 - INFO - Epoch 5, Validation loss: 0.01532344363279577
+2026-05-08 15:53:44,725 - INFO - Epoch 6, Total: 0.015334, Pos: 0.005641, Mass: 0.008134
+2026-05-08 15:53:57,229 - INFO - Epoch 6, Validation loss: 0.015328457165095542
+2026-05-08 15:54:31,298 - INFO - Epoch 7, Total: 0.015399, Pos: 0.005618, Mass: 0.008884
+2026-05-08 15:54:44,278 - INFO - Epoch 7, Validation loss: 0.01519978636254867
+2026-05-08 15:55:18,897 - INFO - Epoch 8, Total: 0.015401, Pos: 0.005720, Mass: 0.009708
+2026-05-08 15:55:31,406 - INFO - Epoch 8, Validation loss: 0.015151939370756986
+2026-05-08 15:56:05,438 - INFO - Epoch 9, Total: 0.015307, Pos: 0.005525, Mass: 0.009793
+2026-05-08 15:56:17,978 - INFO - Epoch 9, Validation loss: 0.015211021495807884
+2026-05-08 15:56:51,893 - INFO - Epoch 10, Total: 0.015317, Pos: 0.005350, Mass: 0.009288
+2026-05-08 15:57:04,314 - INFO - Epoch 10, Validation loss: 0.01527158549039537
+2026-05-08 15:57:37,934 - INFO - Epoch 11, Total: 0.015267, Pos: 0.005883, Mass: 0.009202
+2026-05-08 15:57:50,484 - INFO - Epoch 11, Validation loss: 0.015170764846679492
+2026-05-08 15:58:24,600 - INFO - Epoch 12, Total: 0.015276, Pos: 0.005626, Mass: 0.009249
+2026-05-08 15:58:36,829 - INFO - Epoch 12, Validation loss: 0.015213885702765904
+2026-05-08 15:59:10,885 - INFO - Epoch 13, Total: 0.015258, Pos: 0.005509, Mass: 0.010126
+2026-05-08 15:59:25,855 - INFO - Epoch 13, Validation loss: 0.015147556423440449
+2026-05-08 16:00:02,389 - INFO - Epoch 14, Total: 0.015255, Pos: 0.005766, Mass: 0.009601
+2026-05-08 16:00:16,606 - INFO - Epoch 14, Validation loss: 0.015075742275032222
+2026-05-08 16:00:50,742 - INFO - Epoch 15, Total: 0.015200, Pos: 0.005873, Mass: 0.008635
+2026-05-08 16:01:03,991 - INFO - Epoch 15, Validation loss: 0.015060448127551975
+2026-05-08 16:01:37,925 - INFO - Epoch 16, Total: 0.015196, Pos: 0.005805, Mass: 0.009389
+2026-05-08 16:01:53,093 - INFO - Epoch 16, Validation loss: 0.01510260882986407
+2026-05-08 16:02:26,951 - INFO - Epoch 17, Total: 0.015147, Pos: 0.005288, Mass: 0.009536
+2026-05-08 16:02:39,629 - INFO - Epoch 17, Validation loss: 0.015037002917538341
+2026-05-08 16:03:13,545 - INFO - Epoch 18, Total: 0.015131, Pos: 0.005414, Mass: 0.008633
+2026-05-08 16:03:28,873 - INFO - Epoch 18, Validation loss: 0.015006084186144365
+2026-05-08 16:04:03,476 - INFO - Epoch 19, Total: 0.015041, Pos: 0.005338, Mass: 0.010037
+2026-05-08 16:04:15,806 - INFO - Epoch 19, Validation loss: 0.014998447691273486
+2026-05-08 16:04:49,651 - INFO - Epoch 20, Total: 0.015035, Pos: 0.005573, Mass: 0.008925
+2026-05-08 16:05:03,121 - INFO - Epoch 20, Validation loss: 0.014960581882514505
+2026-05-08 16:05:39,822 - INFO - Epoch 21, Total: 0.015029, Pos: 0.005365, Mass: 0.009475
+2026-05-08 16:05:52,372 - INFO - Epoch 21, Validation loss: 0.01495436396704525
+2026-05-08 16:06:26,359 - INFO - Epoch 22, Total: 0.015067, Pos: 0.005506, Mass: 0.009981
+2026-05-08 16:06:41,095 - INFO - Epoch 22, Validation loss: 0.014872529145935152
+2026-05-08 16:07:15,038 - INFO - Epoch 23, Total: 0.014980, Pos: 0.005420, Mass: 0.009148
+2026-05-08 16:07:27,436 - INFO - Epoch 23, Validation loss: 0.014843992045165127
+2026-05-08 16:08:01,743 - INFO - Epoch 24, Total: 0.014971, Pos: 0.005494, Mass: 0.011043
+2026-05-08 16:08:14,225 - INFO - Epoch 24, Validation loss: 0.014929001959852682
+2026-05-08 16:08:48,487 - INFO - Epoch 25, Total: 0.014982, Pos: 0.005771, Mass: 0.011581
+2026-05-08 16:09:00,854 - INFO - Epoch 25, Validation loss: 0.014910180145540299
+2026-05-08 16:09:34,954 - INFO - Epoch 26, Total: 0.014900, Pos: 0.005428, Mass: 0.009877
+2026-05-08 16:09:48,216 - INFO - Epoch 26, Validation loss: 0.014919912450524986
+2026-05-08 16:10:23,704 - INFO - Epoch 27, Total: 0.015011, Pos: 0.005288, Mass: 0.010474
+2026-05-08 16:10:36,263 - INFO - Epoch 27, Validation loss: 0.014908509328961372
+2026-05-08 16:11:12,876 - INFO - Epoch 28, Total: 0.015009, Pos: 0.005395, Mass: 0.008728
+2026-05-08 16:11:26,874 - INFO - Epoch 28, Validation loss: 0.014942183477692625
+2026-05-08 16:12:01,309 - INFO - Epoch 29, Total: 0.014982, Pos: 0.005041, Mass: 0.009362
+2026-05-08 16:12:13,739 - INFO - Epoch 29, Validation loss: 0.014930476633529378
+2026-05-08 16:12:52,393 - INFO - Epoch 30, Total: 0.014956, Pos: 0.005406, Mass: 0.009361
+2026-05-08 16:13:04,826 - INFO - Epoch 30, Validation loss: 0.014775639877487451
+2026-05-08 16:13:38,647 - INFO - Epoch 31, Total: 0.015019, Pos: 0.005749, Mass: 0.010090
+2026-05-08 16:13:53,923 - INFO - Epoch 31, Validation loss: 0.014799043599866394
+2026-05-08 16:14:28,547 - INFO - Epoch 32, Total: 0.014975, Pos: 0.005698, Mass: 0.009843
+2026-05-08 16:14:42,558 - INFO - Epoch 32, Validation loss: 0.014960798586153576
+2026-05-08 16:15:17,072 - INFO - Epoch 33, Total: 0.014950, Pos: 0.005372, Mass: 0.009862
+2026-05-08 16:15:30,399 - INFO - Epoch 33, Validation loss: 0.014910460991036689
+2026-05-08 16:16:04,229 - INFO - Epoch 34, Total: 0.014960, Pos: 0.005598, Mass: 0.009113
+2026-05-08 16:16:16,755 - INFO - Epoch 34, Validation loss: 0.014859055630607992
+2026-05-08 16:16:50,877 - INFO - Epoch 35, Total: 0.014944, Pos: 0.005224, Mass: 0.008466
+2026-05-08 16:17:03,402 - INFO - Epoch 35, Validation loss: 0.014868151293032698
+2026-05-08 16:17:39,612 - INFO - Epoch 36, Total: 0.014886, Pos: 0.005096, Mass: 0.009295
+2026-05-08 16:17:51,736 - INFO - Epoch 36, Validation loss: 0.014709712053911809
+2026-05-08 16:18:31,111 - INFO - Epoch 37, Total: 0.014913, Pos: 0.005316, Mass: 0.009156
+2026-05-08 16:18:43,578 - INFO - Epoch 37, Validation loss: 0.014870180724523006
+2026-05-08 16:19:17,741 - INFO - Epoch 38, Total: 0.014860, Pos: 0.005366, Mass: 0.009950
+2026-05-08 16:19:30,975 - INFO - Epoch 38, Validation loss: 0.014837245345434062
+2026-05-08 16:20:04,707 - INFO - Epoch 39, Total: 0.014954, Pos: 0.005149, Mass: 0.008980
+2026-05-08 16:20:17,364 - INFO - Epoch 39, Validation loss: 0.014824607035415804
+2026-05-08 16:20:51,338 - INFO - Epoch 40, Total: 0.014943, Pos: 0.005305, Mass: 0.008411
+2026-05-08 16:21:03,889 - INFO - Epoch 40, Validation loss: 0.014846679324714037
+2026-05-08 16:21:37,894 - INFO - Epoch 41, Total: 0.014914, Pos: 0.005384, Mass: 0.008306
+2026-05-08 16:21:50,397 - INFO - Epoch 41, Validation loss: 0.01488630679778309
+2026-05-08 16:22:24,078 - INFO - Epoch 42, Total: 0.014888, Pos: 0.005681, Mass: 0.008489
+2026-05-08 16:22:40,417 - INFO - Epoch 42, Validation loss: 0.014727004445516147
+2026-05-08 16:23:15,923 - INFO - Epoch 43, Total: 0.014836, Pos: 0.005408, Mass: 0.010422
+2026-05-08 16:23:28,500 - INFO - Epoch 43, Validation loss: 0.014820262885246521
+2026-05-08 16:24:02,579 - INFO - Epoch 44, Total: 0.014874, Pos: 0.005460, Mass: 0.009596
+2026-05-08 16:24:15,042 - INFO - Epoch 44, Validation loss: 0.01479642374170387
+2026-05-08 16:24:50,561 - INFO - Epoch 45, Total: 0.014908, Pos: 0.005158, Mass: 0.009736
+2026-05-08 16:25:03,100 - INFO - Epoch 45, Validation loss: 0.014798441464001806
+2026-05-08 16:25:38,187 - INFO - Epoch 46, Total: 0.014899, Pos: 0.005555, Mass: 0.008961
+2026-05-08 16:25:51,396 - INFO - Epoch 46, Validation loss: 0.014769663779526694
+2026-05-08 16:26:25,316 - INFO - Epoch 47, Total: 0.014814, Pos: 0.005631, Mass: 0.009471
+2026-05-08 16:26:40,624 - INFO - Epoch 47, Validation loss: 0.014808137160845293
+2026-05-08 16:27:14,606 - INFO - Epoch 48, Total: 0.014819, Pos: 0.005424, Mass: 0.009572
+2026-05-08 16:27:27,091 - INFO - Epoch 48, Validation loss: 0.014835352014400002
+2026-05-08 16:28:00,931 - INFO - Epoch 49, Total: 0.014829, Pos: 0.005465, Mass: 0.009072
+2026-05-08 16:28:13,495 - INFO - Epoch 49, Validation loss: 0.014743587607119838
+2026-05-08 16:28:47,841 - INFO - Epoch 50, Total: 0.014896, Pos: 0.005886, Mass: 0.009509
+2026-05-08 16:29:00,276 - INFO - Epoch 50, Validation loss: 0.014758124151545713
+2026-05-08 16:29:34,139 - INFO - Epoch 51, Total: 0.014882, Pos: 0.005284, Mass: 0.010370
+2026-05-08 16:29:46,672 - INFO - Epoch 51, Validation loss: 0.014867920173793776
+2026-05-08 16:30:20,671 - INFO - Epoch 52, Total: 0.014891, Pos: 0.005293, Mass: 0.010664
+2026-05-08 16:30:33,253 - INFO - Epoch 52, Validation loss: 0.014794275268084474
+2026-05-08 16:31:11,111 - INFO - Epoch 53, Total: 0.014811, Pos: 0.005532, Mass: 0.009569
+2026-05-08 16:31:23,689 - INFO - Epoch 53, Validation loss: 0.014807319833745813
+2026-05-08 16:31:57,689 - INFO - Epoch 54, Total: 0.014845, Pos: 0.005441, Mass: 0.010380
+2026-05-08 16:32:12,007 - INFO - Epoch 54, Validation loss: 0.014766659898062548
+2026-05-08 16:32:46,651 - INFO - Epoch 55, Total: 0.014901, Pos: 0.005601, Mass: 0.010513
+2026-05-08 16:32:59,206 - INFO - Epoch 55, Validation loss: 0.014663715472715532
+2026-05-08 16:33:32,986 - INFO - Epoch 56, Total: 0.014822, Pos: 0.005711, Mass: 0.009834
+2026-05-08 16:33:45,487 - INFO - Epoch 56, Validation loss: 0.014750396283582235
+2026-05-08 16:34:19,664 - INFO - Epoch 57, Total: 0.014865, Pos: 0.005467, Mass: 0.007210
+2026-05-08 16:34:32,424 - INFO - Epoch 57, Validation loss: 0.014814948400434775
+2026-05-08 16:35:06,306 - INFO - Epoch 58, Total: 0.014730, Pos: 0.005378, Mass: 0.009613
+2026-05-08 16:35:18,893 - INFO - Epoch 58, Validation loss: 0.014710117107591568
+2026-05-08 16:35:52,727 - INFO - Epoch 59, Total: 0.014733, Pos: 0.005280, Mass: 0.009065
+2026-05-08 16:36:05,291 - INFO - Epoch 59, Validation loss: 0.014729783305118227
+2026-05-08 16:36:39,067 - INFO - Epoch 60, Total: 0.014828, Pos: 0.005150, Mass: 0.009409
+2026-05-08 16:36:51,844 - INFO - Epoch 60, Validation loss: 0.014780662826493256
+2026-05-08 16:37:32,225 - INFO - Epoch 61, Total: 0.014862, Pos: 0.005702, Mass: 0.008853
+2026-05-08 16:37:53,430 - INFO - Epoch 61, Validation loss: 0.014712161296962673
+2026-05-08 16:38:28,719 - INFO - Epoch 62, Total: 0.014771, Pos: 0.005070, Mass: 0.009446
+2026-05-08 16:38:41,228 - INFO - Epoch 62, Validation loss: 0.014683679733266179
+2026-05-08 16:39:15,336 - INFO - Epoch 63, Total: 0.014858, Pos: 0.005578, Mass: 0.010832
+2026-05-08 16:39:27,913 - INFO - Epoch 63, Validation loss: 0.01470124401534215
+2026-05-08 16:40:01,818 - INFO - Epoch 64, Total: 0.014771, Pos: 0.005811, Mass: 0.009457
+2026-05-08 16:40:14,226 - INFO - Epoch 64, Validation loss: 0.01474766718207771
+2026-05-08 16:40:48,718 - INFO - Epoch 65, Total: 0.014723, Pos: 0.005384, Mass: 0.009223
+2026-05-08 16:41:02,336 - INFO - Epoch 65, Validation loss: 0.014676096514822582
+2026-05-08 16:41:36,070 - INFO - Epoch 66, Total: 0.014811, Pos: 0.005351, Mass: 0.007997
+2026-05-08 16:42:59,876 - INFO - Epoch 66, Validation loss: 0.014790129378183275
+2026-05-08 16:43:33,678 - INFO - Epoch 67, Total: 0.014827, Pos: 0.005578, Mass: 0.010306
+2026-05-08 16:43:46,238 - INFO - Epoch 67, Validation loss: 0.014588857443732584
+2026-05-08 16:44:20,499 - INFO - Epoch 68, Total: 0.014814, Pos: 0.004987, Mass: 0.009751
+2026-05-08 16:44:32,989 - INFO - Epoch 68, Validation loss: 0.014744774104119876
+2026-05-08 16:45:07,434 - INFO - Epoch 69, Total: 0.014835, Pos: 0.005093, Mass: 0.008084
+2026-05-08 16:45:19,840 - INFO - Epoch 69, Validation loss: 0.014679598534463817
+2026-05-08 16:45:53,777 - INFO - Epoch 70, Total: 0.014817, Pos: 0.005793, Mass: 0.010101
+2026-05-08 16:46:08,864 - INFO - Epoch 70, Validation loss: 0.014780842181709077
+2026-05-08 16:46:42,884 - INFO - Epoch 71, Total: 0.014824, Pos: 0.005389, Mass: 0.011134
+2026-05-08 16:46:56,048 - INFO - Epoch 71, Validation loss: 0.014713797988927262
+2026-05-08 16:47:34,529 - INFO - Epoch 72, Total: 0.014797, Pos: 0.005196, Mass: 0.009955
+2026-05-08 16:47:46,675 - INFO - Epoch 72, Validation loss: 0.014762195073959664
+2026-05-08 16:48:20,400 - INFO - Epoch 73, Total: 0.014773, Pos: 0.005140, Mass: 0.010365
+2026-05-08 16:48:32,904 - INFO - Epoch 73, Validation loss: 0.014734242429845354
+2026-05-08 16:49:07,408 - INFO - Epoch 74, Total: 0.014758, Pos: 0.005704, Mass: 0.011713
+2026-05-08 16:49:19,722 - INFO - Epoch 74, Validation loss: 0.014763223301842172
+2026-05-08 16:49:53,771 - INFO - Epoch 75, Total: 0.014723, Pos: 0.005232, Mass: 0.009336
+2026-05-08 16:50:09,162 - INFO - Epoch 75, Validation loss: 0.014759897198687252
+2026-05-08 16:50:43,130 - INFO - Epoch 76, Total: 0.014779, Pos: 0.005539, Mass: 0.009632
+2026-05-08 16:50:55,605 - INFO - Epoch 76, Validation loss: 0.014654752479977587
+2026-05-08 16:51:29,329 - INFO - Epoch 77, Total: 0.014788, Pos: 0.005775, Mass: 0.010160
+2026-05-08 16:51:41,902 - INFO - Epoch 77, Validation loss: 0.014633649769119727
+2026-05-08 16:52:16,159 - INFO - Epoch 78, Total: 0.014772, Pos: 0.005092, Mass: 0.009547
+2026-05-08 16:52:28,658 - INFO - Epoch 78, Validation loss: 0.014727767716106186
+2026-05-08 16:53:02,580 - INFO - Epoch 79, Total: 0.014804, Pos: 0.005116, Mass: 0.008401
+2026-05-08 16:53:19,132 - INFO - Epoch 79, Validation loss: 0.014788526786952956
+2026-05-08 16:53:53,045 - INFO - Epoch 80, Total: 0.014763, Pos: 0.005644, Mass: 0.009564
+2026-05-08 16:54:05,582 - INFO - Epoch 80, Validation loss: 0.014795568994540945
+2026-05-08 16:54:39,593 - INFO - Epoch 81, Total: 0.014793, Pos: 0.005535, Mass: 0.008201
+2026-05-08 16:54:53,057 - INFO - Epoch 81, Validation loss: 0.014717094035039091
+2026-05-08 16:55:29,079 - INFO - Epoch 82, Total: 0.014796, Pos: 0.005332, Mass: 0.007565
+2026-05-08 16:55:41,501 - INFO - Epoch 82, Validation loss: 0.014606039326351423
+2026-05-08 16:56:17,424 - INFO - Epoch 83, Total: 0.014790, Pos: 0.005584, Mass: 0.008921
+2026-05-08 16:56:31,924 - INFO - Epoch 83, Validation loss: 0.014659309966696633
+2026-05-08 16:57:05,847 - INFO - Epoch 84, Total: 0.014837, Pos: 0.005290, Mass: 0.009245
+2026-05-08 16:57:19,257 - INFO - Epoch 84, Validation loss: 0.01475564574297422
+2026-05-08 16:57:53,242 - INFO - Epoch 85, Total: 0.014739, Pos: 0.005124, Mass: 0.009563
+2026-05-08 16:58:05,806 - INFO - Epoch 85, Validation loss: 0.01476210990968423
+2026-05-08 16:58:39,684 - INFO - Epoch 86, Total: 0.014791, Pos: 0.005228, Mass: 0.009839
+2026-05-08 16:58:53,969 - INFO - Epoch 86, Validation loss: 0.014630472980057582
+2026-05-08 16:59:28,739 - INFO - Epoch 87, Total: 0.014757, Pos: 0.005070, Mass: 0.008964
+2026-05-08 16:59:53,518 - INFO - Epoch 87, Validation loss: 0.014676286066826591
+2026-05-08 17:00:27,395 - INFO - Epoch 88, Total: 0.014755, Pos: 0.005124, Mass: 0.008917
+2026-05-08 17:00:40,009 - INFO - Epoch 88, Validation loss: 0.014722773940581033
+2026-05-08 17:01:13,738 - INFO - Epoch 89, Total: 0.014791, Pos: 0.005223, Mass: 0.009171
+2026-05-08 17:01:27,923 - INFO - Epoch 89, Validation loss: 0.014700306229229666
+2026-05-08 17:02:01,943 - INFO - Epoch 90, Total: 0.014876, Pos: 0.005222, Mass: 0.010060
+2026-05-08 17:02:15,076 - INFO - Epoch 90, Validation loss: 0.01470420420424551
+2026-05-08 17:02:49,033 - INFO - Epoch 91, Total: 0.014732, Pos: 0.005666, Mass: 0.010172
+2026-05-08 17:03:01,772 - INFO - Epoch 91, Validation loss: 0.014679888199664589
+2026-05-08 17:03:36,545 - INFO - Epoch 92, Total: 0.014740, Pos: 0.005603, Mass: 0.008595
+2026-05-08 17:03:48,894 - INFO - Epoch 92, Validation loss: 0.014722113975156575
+2026-05-08 17:04:22,728 - INFO - Epoch 93, Total: 0.014767, Pos: 0.005287, Mass: 0.010416
+2026-05-08 17:04:35,366 - INFO - Epoch 93, Validation loss: 0.014700337026554804
+2026-05-08 17:05:09,394 - INFO - Epoch 94, Total: 0.014749, Pos: 0.005007, Mass: 0.009902
+2026-05-08 17:05:21,990 - INFO - Epoch 94, Validation loss: 0.014775019194771592
+2026-05-08 17:05:55,882 - INFO - Epoch 95, Total: 0.014742, Pos: 0.005152, Mass: 0.009374
+2026-05-08 17:06:08,479 - INFO - Epoch 95, Validation loss: 0.01459766785080871
+2026-05-08 17:06:42,890 - INFO - Epoch 96, Total: 0.014814, Pos: 0.004925, Mass: 0.011407
+2026-05-08 17:06:56,307 - INFO - Epoch 96, Validation loss: 0.01478888600682601
+2026-05-08 17:07:30,551 - INFO - Epoch 97, Total: 0.014746, Pos: 0.005128, Mass: 0.010555
+2026-05-08 17:07:44,046 - INFO - Epoch 97, Validation loss: 0.014676045745802231
+2026-05-08 17:08:18,550 - INFO - Epoch 98, Total: 0.014746, Pos: 0.005165, Mass: 0.010645
+2026-05-08 17:08:30,961 - INFO - Epoch 98, Validation loss: 0.014727013687101694
+2026-05-08 17:09:10,727 - INFO - Epoch 99, Total: 0.014786, Pos: 0.004884, Mass: 0.010037
+2026-05-08 17:09:23,216 - INFO - Epoch 99, Validation loss: 0.014682570949960977
+2026-05-08 17:09:57,139 - INFO - Epoch 100, Total: 0.014866, Pos: 0.005547, Mass: 0.010600
+2026-05-08 17:10:09,676 - INFO - Epoch 100, Validation loss: 0.014635315387804285
+2026-05-08 17:10:45,736 - INFO - Epoch 101, Total: 0.014762, Pos: 0.005072, Mass: 0.009863
+2026-05-08 17:10:58,567 - INFO - Epoch 101, Validation loss: 0.014662088897938911
+2026-05-08 17:11:32,420 - INFO - Epoch 102, Total: 0.014766, Pos: 0.005295, Mass: 0.009207
+2026-05-08 17:11:45,911 - INFO - Epoch 102, Validation loss: 0.01465731417425932
+2026-05-08 17:12:19,749 - INFO - Epoch 103, Total: 0.014799, Pos: 0.004760, Mass: 0.010036
+2026-05-08 17:12:32,938 - INFO - Epoch 103, Validation loss: 0.014658178648569135
+2026-05-08 17:13:06,934 - INFO - Epoch 104, Total: 0.014815, Pos: 0.006069, Mass: 0.009167
+2026-05-08 17:13:19,665 - INFO - Epoch 104, Validation loss: 0.014777288063723817
+2026-05-08 17:13:53,632 - INFO - Epoch 105, Total: 0.014830, Pos: 0.005435, Mass: 0.007751
+2026-05-08 17:14:08,615 - INFO - Epoch 105, Validation loss: 0.01462906064131321
+2026-05-08 17:14:42,527 - INFO - Epoch 106, Total: 0.014664, Pos: 0.005217, Mass: 0.009422
+2026-05-08 17:14:55,080 - INFO - Epoch 106, Validation loss: 0.014690911198337363
+2026-05-08 17:15:28,980 - INFO - Epoch 107, Total: 0.014865, Pos: 0.005402, Mass: 0.009886
+2026-05-08 17:15:41,486 - INFO - Epoch 107, Validation loss: 0.014689786264147514
+2026-05-08 17:16:15,735 - INFO - Epoch 108, Total: 0.014742, Pos: 0.005193, Mass: 0.010003
+2026-05-08 17:16:29,491 - INFO - Epoch 108, Validation loss: 0.01460561009012481
+2026-05-08 17:17:03,639 - INFO - Epoch 109, Total: 0.014770, Pos: 0.005497, Mass: 0.008837
+2026-05-08 17:17:16,217 - INFO - Epoch 109, Validation loss: 0.014628347765622485
+2026-05-08 17:17:50,224 - INFO - Epoch 110, Total: 0.014665, Pos: 0.005141, Mass: 0.009114
+2026-05-08 17:18:02,911 - INFO - Epoch 110, Validation loss: 0.014625807356439594
+2026-05-08 17:18:38,405 - INFO - Epoch 111, Total: 0.014769, Pos: 0.005097, Mass: 0.009932
+2026-05-08 17:18:52,864 - INFO - Epoch 111, Validation loss: 0.014582693791733338
+2026-05-08 17:19:27,006 - INFO - Epoch 112, Total: 0.014782, Pos: 0.005211, Mass: 0.009078
+2026-05-08 17:19:39,467 - INFO - Epoch 112, Validation loss: 0.014652849421796635
+2026-05-08 17:20:13,435 - INFO - Epoch 113, Total: 0.014823, Pos: 0.005775, Mass: 0.009206
+2026-05-08 17:20:26,484 - INFO - Epoch 113, Validation loss: 0.014548463149903676
+2026-05-08 17:21:00,380 - INFO - Epoch 114, Total: 0.014714, Pos: 0.005237, Mass: 0.008941
+2026-05-08 17:21:12,961 - INFO - Epoch 114, Validation loss: 0.01472539328930215
+2026-05-08 17:21:47,424 - INFO - Epoch 115, Total: 0.014748, Pos: 0.005391, Mass: 0.010020
+2026-05-08 17:22:02,138 - INFO - Epoch 115, Validation loss: 0.014758479677968554
+2026-05-08 17:22:36,044 - INFO - Epoch 116, Total: 0.014813, Pos: 0.005532, Mass: 0.010632
+2026-05-08 17:22:48,605 - INFO - Epoch 116, Validation loss: 0.014571273285481665
+2026-05-08 17:23:22,759 - INFO - Epoch 117, Total: 0.014751, Pos: 0.004994, Mass: 0.008673
+2026-05-08 17:23:35,579 - INFO - Epoch 117, Validation loss: 0.014703911569956532
+2026-05-08 17:24:09,646 - INFO - Epoch 118, Total: 0.014699, Pos: 0.005200, Mass: 0.008699
+2026-05-08 17:24:22,757 - INFO - Epoch 118, Validation loss: 0.01454992400498217
+2026-05-08 17:24:56,361 - INFO - Epoch 119, Total: 0.014700, Pos: 0.005517, Mass: 0.011363
+2026-05-08 17:25:10,969 - INFO - Epoch 119, Validation loss: 0.014651930644216701
+2026-05-08 17:25:47,331 - INFO - Epoch 120, Total: 0.014658, Pos: 0.005156, Mass: 0.011200
+2026-05-08 17:25:59,763 - INFO - Epoch 120, Validation loss: 0.01461891878523633
+2026-05-08 17:26:33,457 - INFO - Epoch 121, Total: 0.014744, Pos: 0.005019, Mass: 0.009563
+2026-05-08 17:26:45,968 - INFO - Epoch 121, Validation loss: 0.01472563091187905
+2026-05-08 17:27:20,075 - INFO - Epoch 122, Total: 0.014806, Pos: 0.005194, Mass: 0.009608
+2026-05-08 17:27:36,391 - INFO - Epoch 122, Validation loss: 0.014706548502366258
+2026-05-08 17:28:10,471 - INFO - Epoch 123, Total: 0.014712, Pos: 0.005020, Mass: 0.009679
+2026-05-08 17:28:23,123 - INFO - Epoch 123, Validation loss: 0.014648766758350225
+2026-05-08 17:28:57,158 - INFO - Epoch 124, Total: 0.014693, Pos: 0.005247, Mass: 0.008456
+2026-05-08 17:29:10,958 - INFO - Epoch 124, Validation loss: 0.01471400093764831
+2026-05-08 17:29:46,122 - INFO - Epoch 125, Total: 0.014682, Pos: 0.005078, Mass: 0.008843
+2026-05-08 17:29:58,454 - INFO - Epoch 125, Validation loss: 0.014689984747296216
+2026-05-08 17:30:32,111 - INFO - Epoch 126, Total: 0.014759, Pos: 0.005674, Mass: 0.010647
+2026-05-08 17:30:44,666 - INFO - Epoch 126, Validation loss: 0.014647722721864015
+2026-05-08 17:31:19,644 - INFO - Epoch 127, Total: 0.014776, Pos: 0.005307, Mass: 0.009750
+2026-05-08 17:31:32,177 - INFO - Epoch 127, Validation loss: 0.014552173825601736
+2026-05-08 17:32:06,074 - INFO - Epoch 128, Total: 0.014795, Pos: 0.005363, Mass: 0.009847
+2026-05-08 17:32:20,054 - INFO - Epoch 128, Validation loss: 0.014668707409475604
+2026-05-08 17:33:02,275 - INFO - Epoch 129, Total: 0.014716, Pos: 0.005469, Mass: 0.008626
+2026-05-08 17:33:14,840 - INFO - Epoch 129, Validation loss: 0.014648411478688065
+2026-05-08 17:33:49,198 - INFO - Epoch 130, Total: 0.014740, Pos: 0.005289, Mass: 0.010543
+2026-05-08 17:34:01,934 - INFO - Epoch 130, Validation loss: 0.014704643048218682
+2026-05-08 17:34:35,830 - INFO - Epoch 131, Total: 0.014638, Pos: 0.005232, Mass: 0.009344
+2026-05-08 17:34:49,414 - INFO - Epoch 131, Validation loss: 0.014611189683469443
+2026-05-08 17:35:24,326 - INFO - Epoch 132, Total: 0.014684, Pos: 0.005394, Mass: 0.009905
+2026-05-08 17:35:36,882 - INFO - Epoch 132, Validation loss: 0.014764042189105963
+2026-05-08 17:36:10,781 - INFO - Epoch 133, Total: 0.014770, Pos: 0.005379, Mass: 0.008294
+2026-05-08 17:36:23,450 - INFO - Epoch 133, Validation loss: 0.014586842626842678
+2026-05-08 17:36:57,948 - INFO - Epoch 134, Total: 0.014714, Pos: 0.005532, Mass: 0.009294
+2026-05-08 17:37:10,374 - INFO - Epoch 134, Validation loss: 0.014653423617983986
+2026-05-08 17:37:49,081 - INFO - Epoch 135, Total: 0.014731, Pos: 0.005443, Mass: 0.009145
+2026-05-08 17:38:01,723 - INFO - Epoch 135, Validation loss: 0.014558672347766722
+2026-05-08 17:38:35,816 - INFO - Epoch 136, Total: 0.014734, Pos: 0.005216, Mass: 0.009785
+2026-05-08 17:38:50,131 - INFO - Epoch 136, Validation loss: 0.014703621602274923
+2026-05-08 17:39:24,106 - INFO - Epoch 137, Total: 0.014718, Pos: 0.005168, Mass: 0.009686
+2026-05-08 17:39:36,667 - INFO - Epoch 137, Validation loss: 0.014577357560141474
+2026-05-08 17:40:10,502 - INFO - Epoch 138, Total: 0.014853, Pos: 0.005347, Mass: 0.010305
+2026-05-08 17:40:23,074 - INFO - Epoch 138, Validation loss: 0.014751229602365922
+2026-05-08 17:40:57,506 - INFO - Epoch 139, Total: 0.014717, Pos: 0.005115, Mass: 0.010620
+2026-05-08 17:41:10,195 - INFO - Epoch 139, Validation loss: 0.014711102820996545
+2026-05-08 17:41:44,175 - INFO - Epoch 140, Total: 0.014772, Pos: 0.005581, Mass: 0.010210
+2026-05-08 17:41:56,820 - INFO - Epoch 140, Validation loss: 0.014639883899153808
+2026-05-08 17:42:33,848 - INFO - Epoch 141, Total: 0.014731, Pos: 0.005586, Mass: 0.009664
+2026-05-08 17:42:46,344 - INFO - Epoch 141, Validation loss: 0.014676000477157088
+2026-05-08 17:43:20,326 - INFO - Epoch 142, Total: 0.014656, Pos: 0.004906, Mass: 0.009498
+2026-05-08 17:43:32,909 - INFO - Epoch 142, Validation loss: 0.014665990248004086
+2026-05-08 17:44:12,030 - INFO - Epoch 143, Total: 0.014751, Pos: 0.005385, Mass: 0.010186
+2026-05-08 17:44:25,735 - INFO - Epoch 143, Validation loss: 0.014660668193211412
+2026-05-08 17:45:00,338 - INFO - Epoch 144, Total: 0.014755, Pos: 0.005252, Mass: 0.009947
+2026-05-08 17:45:13,292 - INFO - Epoch 144, Validation loss: 0.014637069267212834
+2026-05-08 17:45:47,637 - INFO - Epoch 145, Total: 0.014758, Pos: 0.005309, Mass: 0.010019
+2026-05-08 17:46:00,254 - INFO - Epoch 145, Validation loss: 0.014638942865352346
+2026-05-08 17:46:34,116 - INFO - Epoch 146, Total: 0.014797, Pos: 0.005111, Mass: 0.009728
+2026-05-08 17:46:46,669 - INFO - Epoch 146, Validation loss: 0.01456594828548085
+2026-05-08 17:47:20,624 - INFO - Epoch 147, Total: 0.014781, Pos: 0.005200, Mass: 0.009318
+2026-05-08 17:47:33,192 - INFO - Epoch 147, Validation loss: 0.01462891300678508
+2026-05-08 17:48:07,883 - INFO - Epoch 148, Total: 0.014710, Pos: 0.004911, Mass: 0.008942
+2026-05-08 17:48:20,470 - INFO - Epoch 148, Validation loss: 0.014739995838230492
+2026-05-08 17:48:54,808 - INFO - Epoch 149, Total: 0.014678, Pos: 0.005417, Mass: 0.008578
+2026-05-08 17:49:08,200 - INFO - Epoch 149, Validation loss: 0.014669719375033155
+2026-05-08 17:49:42,079 - INFO - Epoch 150, Total: 0.014745, Pos: 0.005453, Mass: 0.010738
+2026-05-08 17:49:58,619 - INFO - Epoch 150, Validation loss: 0.014660325402823778
+2026-05-08 17:50:32,412 - INFO - Epoch 151, Total: 0.014736, Pos: 0.005367, Mass: 0.010018
+2026-05-08 17:50:45,000 - INFO - Epoch 151, Validation loss: 0.014681736134693153
+2026-05-08 17:51:19,343 - INFO - Epoch 152, Total: 0.014781, Pos: 0.005218, Mass: 0.009107
+2026-05-08 17:51:33,535 - INFO - Epoch 152, Validation loss: 0.01451398943288204
+2026-05-08 17:52:10,182 - INFO - Epoch 153, Total: 0.014767, Pos: 0.005629, Mass: 0.008454
+2026-05-08 17:52:22,827 - INFO - Epoch 153, Validation loss: 0.014618054470126955
+2026-05-08 17:52:56,801 - INFO - Epoch 154, Total: 0.014760, Pos: 0.005098, Mass: 0.009292
+2026-05-08 17:53:09,312 - INFO - Epoch 154, Validation loss: 0.014672342855005693
+2026-05-08 17:53:43,203 - INFO - Epoch 155, Total: 0.014750, Pos: 0.005209, Mass: 0.010244
+2026-05-08 17:53:55,819 - INFO - Epoch 155, Validation loss: 0.014607049421303801
+2026-05-08 17:54:29,917 - INFO - Epoch 156, Total: 0.014756, Pos: 0.005760, Mass: 0.008511
+2026-05-08 17:54:42,442 - INFO - Epoch 156, Validation loss: 0.014673283761446802
+2026-05-08 17:55:17,022 - INFO - Epoch 157, Total: 0.014689, Pos: 0.005161, Mass: 0.008156
+2026-05-08 17:55:29,527 - INFO - Epoch 157, Validation loss: 0.014662972627541957
+2026-05-08 17:56:03,358 - INFO - Epoch 158, Total: 0.014649, Pos: 0.005132, Mass: 0.008265
+2026-05-08 17:56:17,892 - INFO - Epoch 158, Validation loss: 0.014601723585500676
+2026-05-08 17:56:51,602 - INFO - Epoch 159, Total: 0.014749, Pos: 0.005332, Mass: 0.007863
+2026-05-08 17:57:04,191 - INFO - Epoch 159, Validation loss: 0.014684338711647905
+2026-05-08 17:57:38,684 - INFO - Epoch 160, Total: 0.014691, Pos: 0.005068, Mass: 0.008771
+2026-05-08 17:57:53,779 - INFO - Epoch 160, Validation loss: 0.014656282555407438
+2026-05-08 17:58:27,457 - INFO - Epoch 161, Total: 0.014689, Pos: 0.005190, Mass: 0.010698
+2026-05-08 17:58:43,770 - INFO - Epoch 161, Validation loss: 0.014545615292830855
+2026-05-08 17:59:18,845 - INFO - Epoch 162, Total: 0.014768, Pos: 0.005236, Mass: 0.008773
+2026-05-08 17:59:31,254 - INFO - Epoch 162, Validation loss: 0.014696716346865537
+2026-05-08 18:00:05,195 - INFO - Epoch 163, Total: 0.014716, Pos: 0.005518, Mass: 0.009010
+2026-05-08 18:00:19,383 - INFO - Epoch 163, Validation loss: 0.014658699058887795
+2026-05-08 18:00:53,384 - INFO - Epoch 164, Total: 0.014703, Pos: 0.005313, Mass: 0.009588
+2026-05-08 18:01:05,996 - INFO - Epoch 164, Validation loss: 0.014653212303279812
+2026-05-08 18:01:39,825 - INFO - Epoch 165, Total: 0.014739, Pos: 0.005446, Mass: 0.008574
+2026-05-08 18:01:54,885 - INFO - Epoch 165, Validation loss: 0.014636354775637643
+2026-05-08 18:02:30,988 - INFO - Epoch 166, Total: 0.014695, Pos: 0.005427, Mass: 0.010232
+2026-05-08 18:02:43,250 - INFO - Epoch 166, Validation loss: 0.014651165797542304
+2026-05-08 18:03:19,088 - INFO - Epoch 167, Total: 0.014650, Pos: 0.005266, Mass: 0.009575
+2026-05-08 18:03:32,277 - INFO - Epoch 167, Validation loss: 0.014582849370363431
+2026-05-08 18:04:06,144 - INFO - Epoch 168, Total: 0.014712, Pos: 0.005066, Mass: 0.009342
+2026-05-08 18:04:18,747 - INFO - Epoch 168, Validation loss: 0.014614346094875254
+2026-05-08 18:04:52,448 - INFO - Epoch 169, Total: 0.014767, Pos: 0.005009, Mass: 0.010960
+2026-05-08 18:05:05,664 - INFO - Epoch 169, Validation loss: 0.014611707045099674
+2026-05-08 18:05:43,447 - INFO - Epoch 170, Total: 0.014790, Pos: 0.005158, Mass: 0.010457
+2026-05-08 18:05:57,308 - INFO - Epoch 170, Validation loss: 0.014590008868875667
+2026-05-08 18:06:31,698 - INFO - Epoch 171, Total: 0.014720, Pos: 0.005233, Mass: 0.007771
+2026-05-08 18:06:44,431 - INFO - Epoch 171, Validation loss: 0.014599307822302366
+2026-05-08 18:07:18,668 - INFO - Epoch 172, Total: 0.014829, Pos: 0.005197, Mass: 0.009763
+2026-05-08 18:07:31,573 - INFO - Epoch 172, Validation loss: 0.014570144904602287
+2026-05-08 18:08:05,426 - INFO - Epoch 173, Total: 0.014823, Pos: 0.005271, Mass: 0.009280
+2026-05-08 18:08:17,988 - INFO - Epoch 173, Validation loss: 0.014639158542148577
+2026-05-08 18:08:51,995 - INFO - Epoch 174, Total: 0.014727, Pos: 0.005342, Mass: 0.009569
+2026-05-08 18:09:04,593 - INFO - Epoch 174, Validation loss: 0.014665836810619913
+2026-05-08 18:09:38,647 - INFO - Epoch 175, Total: 0.014736, Pos: 0.005440, Mass: 0.008406
+2026-05-08 18:09:51,818 - INFO - Epoch 175, Validation loss: 0.014639080955814093
+2026-05-08 18:10:25,878 - INFO - Epoch 176, Total: 0.014768, Pos: 0.005312, Mass: 0.010085
+2026-05-08 18:10:38,482 - INFO - Epoch 176, Validation loss: 0.014606143745920088
+2026-05-08 18:11:12,436 - INFO - Epoch 177, Total: 0.014702, Pos: 0.005386, Mass: 0.009344
+2026-05-08 18:11:24,948 - INFO - Epoch 177, Validation loss: 0.014601993677007336
+2026-05-08 18:11:58,702 - INFO - Epoch 178, Total: 0.014760, Pos: 0.005300, Mass: 0.009203
+2026-05-08 18:12:11,558 - INFO - Epoch 178, Validation loss: 0.014656830101441115
+2026-05-08 18:12:46,184 - INFO - Epoch 179, Total: 0.014707, Pos: 0.005138, Mass: 0.009153
+2026-05-08 18:12:58,813 - INFO - Epoch 179, Validation loss: 0.014436517117751969
+2026-05-08 18:13:32,769 - INFO - Epoch 180, Total: 0.014664, Pos: 0.005321, Mass: 0.009451
+2026-05-08 18:13:45,574 - INFO - Epoch 180, Validation loss: 0.01457491316474401
+2026-05-08 18:14:20,002 - INFO - Epoch 181, Total: 0.014678, Pos: 0.005323, Mass: 0.009185
+2026-05-08 18:14:32,626 - INFO - Epoch 181, Validation loss: 0.014677707137715103
+2026-05-08 18:15:06,544 - INFO - Epoch 182, Total: 0.014723, Pos: 0.004894, Mass: 0.009617
+2026-05-08 18:15:19,373 - INFO - Epoch 182, Validation loss: 0.014672371328004405
+2026-05-08 18:15:55,150 - INFO - Epoch 183, Total: 0.014733, Pos: 0.004821, Mass: 0.010174
+2026-05-08 18:16:07,824 - INFO - Epoch 183, Validation loss: 0.01466524370142028
+2026-05-08 18:16:43,800 - INFO - Epoch 184, Total: 0.014711, Pos: 0.005268, Mass: 0.010283
+2026-05-08 18:16:57,817 - INFO - Epoch 184, Validation loss: 0.014871980533258528
+2026-05-08 18:17:34,385 - INFO - Epoch 185, Total: 0.014746, Pos: 0.005192, Mass: 0.008585
+2026-05-08 18:17:48,452 - INFO - Epoch 185, Validation loss: 0.014670107513666153
+2026-05-08 18:18:22,299 - INFO - Epoch 186, Total: 0.014762, Pos: 0.005216, Mass: 0.011529
+2026-05-08 18:18:34,934 - INFO - Epoch 186, Validation loss: 0.01456552203426249
+2026-05-08 18:19:09,131 - INFO - Epoch 187, Total: 0.014682, Pos: 0.005428, Mass: 0.009529
+2026-05-08 18:19:22,592 - INFO - Epoch 187, Validation loss: 0.014661417064121645
+2026-05-08 18:19:56,438 - INFO - Epoch 188, Total: 0.014729, Pos: 0.005137, Mass: 0.009121
+2026-05-08 18:20:09,067 - INFO - Epoch 188, Validation loss: 0.01467664435537707
+2026-05-08 18:20:42,954 - INFO - Epoch 189, Total: 0.014707, Pos: 0.005681, Mass: 0.010152
+2026-05-08 18:20:55,742 - INFO - Epoch 189, Validation loss: 0.014532454869049227
+2026-05-08 18:21:29,643 - INFO - Epoch 190, Total: 0.014654, Pos: 0.005621, Mass: 0.009639
+2026-05-08 18:21:42,224 - INFO - Epoch 190, Validation loss: 0.014654325910358347
+2026-05-08 18:22:16,523 - INFO - Epoch 191, Total: 0.014734, Pos: 0.005251, Mass: 0.009712
+2026-05-08 18:22:29,112 - INFO - Epoch 191, Validation loss: 0.014663371193803783
+2026-05-08 18:23:03,006 - INFO - Epoch 192, Total: 0.014680, Pos: 0.005193, Mass: 0.010287
+2026-05-08 18:23:15,539 - INFO - Epoch 192, Validation loss: 0.014677583582253538
+2026-05-08 18:23:49,660 - INFO - Epoch 193, Total: 0.014716, Pos: 0.005522, Mass: 0.009600
+2026-05-08 18:24:02,270 - INFO - Epoch 193, Validation loss: 0.014653625078180917
+2026-05-08 18:24:36,388 - INFO - Epoch 194, Total: 0.014662, Pos: 0.005000, Mass: 0.009983
+2026-05-08 18:24:49,135 - INFO - Epoch 194, Validation loss: 0.014603812247514725
+2026-05-08 18:25:22,981 - INFO - Epoch 195, Total: 0.014739, Pos: 0.005410, Mass: 0.008544
+2026-05-08 18:25:35,538 - INFO - Epoch 195, Validation loss: 0.01460907639314731
+2026-05-08 18:26:09,473 - INFO - Epoch 196, Total: 0.014711, Pos: 0.005415, Mass: 0.010121
+2026-05-08 18:26:22,029 - INFO - Epoch 196, Validation loss: 0.014613003597363956
+2026-05-08 18:26:55,999 - INFO - Epoch 197, Total: 0.014768, Pos: 0.005228, Mass: 0.009202
+2026-05-08 18:27:09,801 - INFO - Epoch 197, Validation loss: 0.014654971141782071
+2026-05-08 18:27:44,764 - INFO - Epoch 198, Total: 0.014630, Pos: 0.005052, Mass: 0.010435
+2026-05-08 18:27:57,294 - INFO - Epoch 198, Validation loss: 0.014656988561599173
+2026-05-08 18:28:31,166 - INFO - Epoch 199, Total: 0.014701, Pos: 0.004967, Mass: 0.009574
+2026-05-08 18:28:43,705 - INFO - Epoch 199, Validation loss: 0.01465453051476397
+2026-05-08 18:29:18,156 - INFO - Epoch 200, Total: 0.014792, Pos: 0.005432, Mass: 0.009890
+2026-05-08 18:29:30,735 - INFO - Epoch 200, Validation loss: 0.014636476882375203
+2026-05-08 18:30:04,819 - INFO - Epoch 201, Total: 0.014736, Pos: 0.005188, Mass: 0.009619
+2026-05-08 18:30:18,035 - INFO - Epoch 201, Validation loss: 0.01459231242760379
+2026-05-08 18:30:53,901 - INFO - Epoch 202, Total: 0.014724, Pos: 0.005636, Mass: 0.010401
+2026-05-08 18:31:06,268 - INFO - Epoch 202, Validation loss: 0.014656129157823375
+2026-05-08 18:31:40,203 - INFO - Epoch 203, Total: 0.014764, Pos: 0.005152, Mass: 0.008961
+2026-05-08 18:31:54,944 - INFO - Epoch 203, Validation loss: 0.014595224243453424
+2026-05-08 18:32:33,194 - INFO - Epoch 204, Total: 0.014713, Pos: 0.005577, Mass: 0.009769
+2026-05-08 18:32:46,442 - INFO - Epoch 204, Validation loss: 0.014662243553206451
+2026-05-08 18:33:20,473 - INFO - Epoch 205, Total: 0.014769, Pos: 0.005597, Mass: 0.009290
+2026-05-08 18:33:33,016 - INFO - Epoch 205, Validation loss: 0.014609439975112421
+2026-05-08 18:34:06,839 - INFO - Epoch 206, Total: 0.014651, Pos: 0.005125, Mass: 0.010399
+2026-05-08 18:34:19,435 - INFO - Epoch 206, Validation loss: 0.014581774385311665
+2026-05-08 18:34:53,581 - INFO - Epoch 207, Total: 0.014602, Pos: 0.005244, Mass: 0.010273
+2026-05-08 18:35:07,492 - INFO - Epoch 207, Validation loss: 0.014549229715942826
+2026-05-08 18:35:41,327 - INFO - Epoch 208, Total: 0.014707, Pos: 0.004973, Mass: 0.008751
+2026-05-08 18:35:54,265 - INFO - Epoch 208, Validation loss: 0.014586638149797406
+2026-05-08 18:36:30,143 - INFO - Epoch 209, Total: 0.014701, Pos: 0.005186, Mass: 0.009361
+2026-05-08 18:36:42,749 - INFO - Epoch 209, Validation loss: 0.014558747609774781
+2026-05-08 18:37:17,307 - INFO - Epoch 210, Total: 0.014697, Pos: 0.004913, Mass: 0.009178
+2026-05-08 18:37:29,827 - INFO - Epoch 210, Validation loss: 0.014632331708875986
+2026-05-08 18:38:04,065 - INFO - Epoch 211, Total: 0.014636, Pos: 0.005441, Mass: 0.008259
+2026-05-08 18:38:17,367 - INFO - Epoch 211, Validation loss: 0.014562409124376938
+2026-05-08 18:38:51,320 - INFO - Epoch 212, Total: 0.014699, Pos: 0.005330, Mass: 0.010912
+2026-05-08 18:39:03,939 - INFO - Epoch 212, Validation loss: 0.01463210903522041
+2026-05-08 18:39:37,687 - INFO - Epoch 213, Total: 0.014665, Pos: 0.005185, Mass: 0.009577
+2026-05-08 18:39:53,028 - INFO - Epoch 213, Validation loss: 0.0146226755494618
+2026-05-08 18:40:27,219 - INFO - Epoch 214, Total: 0.014709, Pos: 0.005382, Mass: 0.008953
+2026-05-08 18:40:39,798 - INFO - Epoch 214, Validation loss: 0.014613187792273158
+2026-05-08 18:41:13,764 - INFO - Epoch 215, Total: 0.014678, Pos: 0.005609, Mass: 0.010018
+2026-05-08 18:41:27,063 - INFO - Epoch 215, Validation loss: 0.014640797247998735
+2026-05-08 18:42:01,420 - INFO - Epoch 216, Total: 0.014720, Pos: 0.005166, Mass: 0.009810
+2026-05-08 18:42:14,049 - INFO - Epoch 216, Validation loss: 0.014681107316834804
+2026-05-08 18:42:48,695 - INFO - Epoch 217, Total: 0.014637, Pos: 0.005192, Mass: 0.009697
+2026-05-08 18:43:01,365 - INFO - Epoch 217, Validation loss: 0.014589659869670868
+2026-05-08 18:43:35,218 - INFO - Epoch 218, Total: 0.014698, Pos: 0.005047, Mass: 0.008394
+2026-05-08 18:43:47,733 - INFO - Epoch 218, Validation loss: 0.014630993867977561
+2026-05-08 18:44:21,681 - INFO - Epoch 219, Total: 0.014686, Pos: 0.005290, Mass: 0.008893
+2026-05-08 18:44:34,273 - INFO - Epoch 219, Validation loss: 0.014659582478049984
+2026-05-08 18:45:08,608 - INFO - Epoch 220, Total: 0.014674, Pos: 0.005084, Mass: 0.008408
+2026-05-08 18:45:21,107 - INFO - Epoch 220, Validation loss: 0.01465628538121525
+2026-05-08 18:46:00,086 - INFO - Epoch 221, Total: 0.014704, Pos: 0.005151, Mass: 0.009136
+2026-05-08 18:46:12,829 - INFO - Epoch 221, Validation loss: 0.014553047398216704
+2026-05-08 18:46:47,414 - INFO - Epoch 222, Total: 0.014667, Pos: 0.005247, Mass: 0.010093
+2026-05-08 18:47:00,008 - INFO - Epoch 222, Validation loss: 0.014581811359613879
+2026-05-08 18:47:33,894 - INFO - Epoch 223, Total: 0.014766, Pos: 0.005070, Mass: 0.010648
+2026-05-08 18:47:46,475 - INFO - Epoch 223, Validation loss: 0.014600823991573773
+2026-05-08 18:48:20,521 - INFO - Epoch 224, Total: 0.014640, Pos: 0.005215, Mass: 0.009280
+2026-05-08 18:48:33,092 - INFO - Epoch 224, Validation loss: 0.014663957433504427
+2026-05-08 18:49:07,151 - INFO - Epoch 225, Total: 0.014697, Pos: 0.005125, Mass: 0.009431
+2026-05-08 18:49:19,780 - INFO - Epoch 225, Validation loss: 0.014527399244153092
+2026-05-08 18:49:53,722 - INFO - Epoch 226, Total: 0.014762, Pos: 0.005397, Mass: 0.008420
+2026-05-08 18:50:06,253 - INFO - Epoch 226, Validation loss: 0.014647653597032921
+2026-05-08 18:50:40,155 - INFO - Epoch 227, Total: 0.014614, Pos: 0.005658, Mass: 0.010720
+2026-05-08 18:50:52,828 - INFO - Epoch 227, Validation loss: 0.014575697815953156
+2026-05-08 18:51:26,672 - INFO - Epoch 228, Total: 0.014641, Pos: 0.005074, Mass: 0.008960
+2026-05-08 18:51:39,704 - INFO - Epoch 228, Validation loss: 0.014735989495475069
+2026-05-08 18:52:14,915 - INFO - Epoch 229, Total: 0.014607, Pos: 0.005140, Mass: 0.008351
+2026-05-08 18:52:35,988 - INFO - Epoch 229, Validation loss: 0.0146364260576347
+2026-05-08 18:53:10,161 - INFO - Epoch 230, Total: 0.014612, Pos: 0.005317, Mass: 0.009863
+2026-05-08 18:53:22,742 - INFO - Epoch 230, Validation loss: 0.014662684729466071
+2026-05-08 18:53:56,753 - INFO - Epoch 231, Total: 0.014699, Pos: 0.005144, Mass: 0.009664
+2026-05-08 18:54:09,392 - INFO - Epoch 231, Validation loss: 0.014490372135152673
+2026-05-08 18:54:43,304 - INFO - Epoch 232, Total: 0.014686, Pos: 0.004767, Mass: 0.011625
+2026-05-08 18:54:55,882 - INFO - Epoch 232, Validation loss: 0.014617915822463667
+2026-05-08 18:55:29,705 - INFO - Epoch 233, Total: 0.014687, Pos: 0.005412, Mass: 0.009163
+2026-05-08 18:55:44,134 - INFO - Epoch 233, Validation loss: 0.014565268412041359
+2026-05-08 18:56:21,483 - INFO - Epoch 234, Total: 0.014726, Pos: 0.005069, Mass: 0.009629
+2026-05-08 18:56:37,171 - INFO - Epoch 234, Validation loss: 0.014573706592568476
+2026-05-08 18:57:11,274 - INFO - Epoch 235, Total: 0.014697, Pos: 0.005502, Mass: 0.010408
+2026-05-08 18:57:24,403 - INFO - Epoch 235, Validation loss: 0.014671129190450551
+2026-05-08 18:57:58,510 - INFO - Epoch 236, Total: 0.014662, Pos: 0.005639, Mass: 0.008332
+2026-05-08 18:58:11,204 - INFO - Epoch 236, Validation loss: 0.014544816114581548
+2026-05-08 18:58:45,424 - INFO - Epoch 237, Total: 0.014728, Pos: 0.005369, Mass: 0.008829
+2026-05-08 18:58:57,945 - INFO - Epoch 237, Validation loss: 0.01464764656037347
+2026-05-08 18:59:31,914 - INFO - Epoch 238, Total: 0.014714, Pos: 0.005178, Mass: 0.008558
+2026-05-08 18:59:44,595 - INFO - Epoch 238, Validation loss: 0.014613247054636989
+2026-05-08 19:00:19,172 - INFO - Epoch 239, Total: 0.014653, Pos: 0.005266, Mass: 0.009980
+2026-05-08 19:00:31,696 - INFO - Epoch 239, Validation loss: 0.014525337948694698
+2026-05-08 19:01:05,649 - INFO - Epoch 240, Total: 0.014681, Pos: 0.005445, Mass: 0.011037
+2026-05-08 19:01:19,221 - INFO - Epoch 240, Validation loss: 0.014528028913733795
+2026-05-08 19:01:53,026 - INFO - Epoch 241, Total: 0.014695, Pos: 0.005234, Mass: 0.009480
+2026-05-08 19:02:05,633 - INFO - Epoch 241, Validation loss: 0.014568091370165348
+2026-05-08 19:02:39,679 - INFO - Epoch 242, Total: 0.014696, Pos: 0.005025, Mass: 0.009410
+2026-05-08 19:02:52,367 - INFO - Epoch 242, Validation loss: 0.014635299658800801
+2026-05-08 19:03:26,380 - INFO - Epoch 243, Total: 0.014679, Pos: 0.005082, Mass: 0.009541
+2026-05-08 19:03:39,024 - INFO - Epoch 243, Validation loss: 0.014621000394670881
+2026-05-08 19:04:21,460 - INFO - Epoch 244, Total: 0.014688, Pos: 0.004887, Mass: 0.008890
+2026-05-08 19:04:34,057 - INFO - Epoch 244, Validation loss: 0.01467683537202513
+2026-05-08 19:05:07,938 - INFO - Epoch 245, Total: 0.014766, Pos: 0.005014, Mass: 0.009577
+2026-05-08 19:05:22,136 - INFO - Epoch 245, Validation loss: 0.014674674202170637
+2026-05-08 19:05:58,993 - INFO - Epoch 246, Total: 0.014648, Pos: 0.005334, Mass: 0.010050
+2026-05-08 19:06:11,776 - INFO - Epoch 246, Validation loss: 0.014600879186366359
+2026-05-08 19:06:46,272 - INFO - Epoch 247, Total: 0.014715, Pos: 0.005066, Mass: 0.009388
+2026-05-08 19:07:01,406 - INFO - Epoch 247, Validation loss: 0.014683805971255159
+2026-05-08 19:07:37,727 - INFO - Epoch 248, Total: 0.014681, Pos: 0.005445, Mass: 0.009487
+2026-05-08 19:07:50,304 - INFO - Epoch 248, Validation loss: 0.01464947224714053
+2026-05-08 19:08:24,300 - INFO - Epoch 249, Total: 0.014666, Pos: 0.005030, Mass: 0.008566
+2026-05-08 19:08:37,247 - INFO - Epoch 249, Validation loss: 0.014579245422640417
+2026-05-08 19:09:11,165 - INFO - Epoch 250, Total: 0.014633, Pos: 0.004917, Mass: 0.009302
+2026-05-08 19:09:23,818 - INFO - Epoch 250, Validation loss: 0.014589836733399803
+2026-05-08 19:09:57,631 - INFO - Epoch 251, Total: 0.014632, Pos: 0.005408, Mass: 0.010239
+2026-05-08 19:10:10,937 - INFO - Epoch 251, Validation loss: 0.014553900067813886
+2026-05-08 19:10:45,537 - INFO - Epoch 252, Total: 0.014748, Pos: 0.005314, Mass: 0.011035
+2026-05-08 19:10:58,162 - INFO - Epoch 252, Validation loss: 0.014672734026407074
+2026-05-08 19:11:32,186 - INFO - Epoch 253, Total: 0.014762, Pos: 0.005514, Mass: 0.009300
+2026-05-08 19:11:44,871 - INFO - Epoch 253, Validation loss: 0.014685735878590336
+2026-05-08 19:12:19,326 - INFO - Epoch 254, Total: 0.014731, Pos: 0.005028, Mass: 0.009978
+2026-05-08 19:12:32,202 - INFO - Epoch 254, Validation loss: 0.014661579074449519
+2026-05-08 19:13:06,158 - INFO - Epoch 255, Total: 0.014601, Pos: 0.005365, Mass: 0.008896
+2026-05-08 19:13:18,739 - INFO - Epoch 255, Validation loss: 0.014592281526798366
+2026-05-08 19:13:52,754 - INFO - Epoch 256, Total: 0.014761, Pos: 0.006097, Mass: 0.009504
+2026-05-08 19:14:05,484 - INFO - Epoch 256, Validation loss: 0.014649607185433563
+2026-05-08 19:14:39,539 - INFO - Epoch 257, Total: 0.014673, Pos: 0.005120, Mass: 0.009734
+2026-05-08 19:14:52,087 - INFO - Epoch 257, Validation loss: 0.014617748996322481
+2026-05-08 19:15:25,844 - INFO - Epoch 258, Total: 0.014718, Pos: 0.005333, Mass: 0.009517
+2026-05-08 19:15:38,357 - INFO - Epoch 258, Validation loss: 0.014580945110219156
+2026-05-08 19:16:12,172 - INFO - Epoch 259, Total: 0.014607, Pos: 0.005132, Mass: 0.008926
+2026-05-08 19:16:25,415 - INFO - Epoch 259, Validation loss: 0.01464135792806872
+2026-05-08 19:17:00,740 - INFO - Epoch 260, Total: 0.014690, Pos: 0.005374, Mass: 0.009104
+2026-05-08 19:17:13,267 - INFO - Epoch 260, Validation loss: 0.01451963344668476
+2026-05-08 19:17:47,884 - INFO - Epoch 261, Total: 0.014708, Pos: 0.005144, Mass: 0.009998
+2026-05-08 19:18:00,489 - INFO - Epoch 261, Validation loss: 0.01467719671722406
+2026-05-08 19:18:34,385 - INFO - Epoch 262, Total: 0.014746, Pos: 0.005262, Mass: 0.010197
+2026-05-08 19:18:47,009 - INFO - Epoch 262, Validation loss: 0.014579159573803091
+2026-05-08 19:19:20,914 - INFO - Epoch 263, Total: 0.014703, Pos: 0.005278, Mass: 0.009045
+2026-05-08 19:19:34,025 - INFO - Epoch 263, Validation loss: 0.014701248234153813
+2026-05-08 19:20:09,260 - INFO - Epoch 264, Total: 0.014666, Pos: 0.005171, Mass: 0.010758
+2026-05-08 19:20:23,881 - INFO - Epoch 264, Validation loss: 0.014645425499313407
+2026-05-08 19:20:58,093 - INFO - Epoch 265, Total: 0.014763, Pos: 0.005005, Mass: 0.009786
+2026-05-08 19:21:10,723 - INFO - Epoch 265, Validation loss: 0.014587605316351112
+2026-05-08 19:21:44,830 - INFO - Epoch 266, Total: 0.014711, Pos: 0.005230, Mass: 0.010843
+2026-05-08 19:21:57,441 - INFO - Epoch 266, Validation loss: 0.014611288276301999
+2026-05-08 19:22:31,424 - INFO - Epoch 267, Total: 0.014668, Pos: 0.005183, Mass: 0.010870
+2026-05-08 19:22:44,341 - INFO - Epoch 267, Validation loss: 0.014476293865113687
+2026-05-08 19:23:18,869 - INFO - Epoch 268, Total: 0.014622, Pos: 0.005261, Mass: 0.008910
+2026-05-08 19:23:31,475 - INFO - Epoch 268, Validation loss: 0.014661220913259393
+2026-05-08 19:24:05,469 - INFO - Epoch 269, Total: 0.014674, Pos: 0.005514, Mass: 0.009277
+2026-05-08 19:24:18,018 - INFO - Epoch 269, Validation loss: 0.014616639711535893
+2026-05-08 19:24:52,327 - INFO - Epoch 270, Total: 0.014651, Pos: 0.005179, Mass: 0.009772
+2026-05-08 19:25:04,912 - INFO - Epoch 270, Validation loss: 0.014621172299306108
+2026-05-08 19:25:38,801 - INFO - Epoch 271, Total: 0.014757, Pos: 0.005335, Mass: 0.009725
+2026-05-08 19:25:51,337 - INFO - Epoch 271, Validation loss: 0.014678928611051833
+2026-05-08 19:26:25,346 - INFO - Epoch 272, Total: 0.014697, Pos: 0.005547, Mass: 0.008993
+2026-05-08 19:26:37,998 - INFO - Epoch 272, Validation loss: 0.014680099681529224
+2026-05-08 19:27:12,575 - INFO - Epoch 273, Total: 0.014613, Pos: 0.005220, Mass: 0.009825
+2026-05-08 19:27:25,101 - INFO - Epoch 273, Validation loss: 0.014697214429322472
+2026-05-08 19:27:59,309 - INFO - Epoch 274, Total: 0.014638, Pos: 0.005331, Mass: 0.008582
+2026-05-08 19:28:11,951 - INFO - Epoch 274, Validation loss: 0.01470204777060411
+2026-05-08 19:28:46,748 - INFO - Epoch 275, Total: 0.014731, Pos: 0.005627, Mass: 0.009337
+2026-05-08 19:28:59,297 - INFO - Epoch 275, Validation loss: 0.014529856089024972
+2026-05-08 19:29:33,055 - INFO - Epoch 276, Total: 0.014683, Pos: 0.005354, Mass: 0.010486
+2026-05-08 19:29:45,643 - INFO - Epoch 276, Validation loss: 0.014655146341866408
+2026-05-08 19:30:19,828 - INFO - Epoch 277, Total: 0.014735, Pos: 0.004992, Mass: 0.008784
+2026-05-08 19:30:32,479 - INFO - Epoch 277, Validation loss: 0.014704282674142439
+2026-05-08 19:31:06,307 - INFO - Epoch 278, Total: 0.014764, Pos: 0.005638, Mass: 0.009496
+2026-05-08 19:31:19,004 - INFO - Epoch 278, Validation loss: 0.014644235253143005
+2026-05-08 19:31:53,077 - INFO - Epoch 279, Total: 0.014694, Pos: 0.005202, Mass: 0.009356
+2026-05-08 19:32:05,594 - INFO - Epoch 279, Validation loss: 0.014581530617597776
+2026-05-08 19:32:39,512 - INFO - Epoch 280, Total: 0.014698, Pos: 0.004836, Mass: 0.009964
+2026-05-08 19:32:52,084 - INFO - Epoch 280, Validation loss: 0.014627738211017389
+2026-05-08 19:33:25,757 - INFO - Epoch 281, Total: 0.014686, Pos: 0.005001, Mass: 0.009245
+2026-05-08 19:33:38,227 - INFO - Epoch 281, Validation loss: 0.0146858712626446
+2026-05-08 19:34:12,025 - INFO - Epoch 282, Total: 0.014702, Pos: 0.005468, Mass: 0.008184
+2026-05-08 19:34:26,373 - INFO - Epoch 282, Validation loss: 0.014613358152664116
+2026-05-08 19:35:01,881 - INFO - Epoch 283, Total: 0.014768, Pos: 0.005313, Mass: 0.008935
+2026-05-08 19:35:17,184 - INFO - Epoch 283, Validation loss: 0.014659247496443937
+2026-05-08 19:35:51,200 - INFO - Epoch 284, Total: 0.014638, Pos: 0.005113, Mass: 0.010065
+2026-05-08 19:36:03,790 - INFO - Epoch 284, Validation loss: 0.014684213747262444
+2026-05-08 19:36:37,697 - INFO - Epoch 285, Total: 0.014639, Pos: 0.005384, Mass: 0.009507
+2026-05-08 19:36:50,212 - INFO - Epoch 285, Validation loss: 0.01454689014607515
+2026-05-08 19:37:24,117 - INFO - Epoch 286, Total: 0.014678, Pos: 0.004752, Mass: 0.010210
+2026-05-08 19:37:36,723 - INFO - Epoch 286, Validation loss: 0.014553272985240333
+2026-05-08 19:38:10,601 - INFO - Epoch 287, Total: 0.014678, Pos: 0.004922, Mass: 0.008641
+2026-05-08 19:38:23,380 - INFO - Epoch 287, Validation loss: 0.01461358384316803
+2026-05-08 19:38:57,246 - INFO - Epoch 288, Total: 0.014718, Pos: 0.005999, Mass: 0.009301
+2026-05-08 19:39:09,829 - INFO - Epoch 288, Validation loss: 0.014529399175801847
+2026-05-08 19:39:43,740 - INFO - Epoch 289, Total: 0.014605, Pos: 0.005469, Mass: 0.008461
+2026-05-08 19:39:59,860 - INFO - Epoch 289, Validation loss: 0.014653875508433225
+2026-05-08 19:40:34,592 - INFO - Epoch 290, Total: 0.014602, Pos: 0.005077, Mass: 0.009235
+2026-05-08 19:40:47,118 - INFO - Epoch 290, Validation loss: 0.014651937991317011
+2026-05-08 19:41:22,114 - INFO - Epoch 291, Total: 0.014732, Pos: 0.004972, Mass: 0.007681
+2026-05-08 19:41:37,280 - INFO - Epoch 291, Validation loss: 0.014588526967498992
+2026-05-08 19:42:11,454 - INFO - Epoch 292, Total: 0.014754, Pos: 0.004958, Mass: 0.009019
+2026-05-08 19:42:26,088 - INFO - Epoch 292, Validation loss: 0.014533343486105785
+2026-05-08 19:43:00,123 - INFO - Epoch 293, Total: 0.014694, Pos: 0.005616, Mass: 0.008415
+2026-05-08 19:43:12,748 - INFO - Epoch 293, Validation loss: 0.01464659934783848
+2026-05-08 19:43:47,363 - INFO - Epoch 294, Total: 0.014673, Pos: 0.004956, Mass: 0.011140
+2026-05-08 19:43:59,929 - INFO - Epoch 294, Validation loss: 0.014600326927999655
+2026-05-08 19:44:33,966 - INFO - Epoch 295, Total: 0.014661, Pos: 0.004860, Mass: 0.009442
+2026-05-08 19:44:46,608 - INFO - Epoch 295, Validation loss: 0.014685326789179418
+2026-05-08 19:45:20,656 - INFO - Epoch 296, Total: 0.014690, Pos: 0.005124, Mass: 0.009626
+2026-05-08 19:45:33,272 - INFO - Epoch 296, Validation loss: 0.014483516884601524
+2026-05-08 19:46:07,224 - INFO - Epoch 297, Total: 0.014686, Pos: 0.004916, Mass: 0.010753
+2026-05-08 19:46:19,820 - INFO - Epoch 297, Validation loss: 0.014657799146560013
+2026-05-08 19:46:53,729 - INFO - Epoch 298, Total: 0.014713, Pos: 0.005645, Mass: 0.009485
+2026-05-08 19:47:07,179 - INFO - Epoch 298, Validation loss: 0.01458272908647091
+2026-05-08 19:47:41,492 - INFO - Epoch 299, Total: 0.014768, Pos: 0.005394, Mass: 0.010487
+2026-05-08 19:47:54,134 - INFO - Epoch 299, Validation loss: 0.014691720127613626
+2026-05-08 19:48:28,118 - INFO - Epoch 300, Total: 0.014654, Pos: 0.005120, Mass: 0.009583
+2026-05-08 19:48:40,864 - INFO - Epoch 300, Validation loss: 0.014578620154951882
+2026-05-08 19:49:15,342 - INFO - Epoch 301, Total: 0.014698, Pos: 0.005392, Mass: 0.009496
+2026-05-08 19:49:29,707 - INFO - Epoch 301, Validation loss: 0.014592197357525682
+2026-05-08 19:50:04,327 - INFO - Epoch 302, Total: 0.014648, Pos: 0.004820, Mass: 0.010051
+2026-05-08 19:50:16,877 - INFO - Epoch 302, Validation loss: 0.014571109595589148
+2026-05-08 19:50:50,876 - INFO - Epoch 303, Total: 0.014650, Pos: 0.005073, Mass: 0.009977
+2026-05-08 19:51:03,443 - INFO - Epoch 303, Validation loss: 0.014518581442216523
+2026-05-08 19:51:37,506 - INFO - Epoch 304, Total: 0.014689, Pos: 0.004949, Mass: 0.010889
+2026-05-08 19:51:50,133 - INFO - Epoch 304, Validation loss: 0.014511734613368655
+2026-05-08 19:52:24,227 - INFO - Epoch 305, Total: 0.014731, Pos: 0.005456, Mass: 0.010007
+2026-05-08 19:52:37,479 - INFO - Epoch 305, Validation loss: 0.014690232343780689
+2026-05-08 19:53:11,463 - INFO - Epoch 306, Total: 0.014654, Pos: 0.004988, Mass: 0.010080
+2026-05-08 19:53:25,394 - INFO - Epoch 306, Validation loss: 0.014565160665183496
+2026-05-08 19:53:59,480 - INFO - Epoch 307, Total: 0.014647, Pos: 0.005376, Mass: 0.009173
+2026-05-08 19:54:11,990 - INFO - Epoch 307, Validation loss: 0.014693103109796843
+2026-05-08 19:54:48,738 - INFO - Epoch 308, Total: 0.014679, Pos: 0.005128, Mass: 0.010233
+2026-05-08 19:55:01,287 - INFO - Epoch 308, Validation loss: 0.014596375413875803
+2026-05-08 19:55:35,115 - INFO - Epoch 309, Total: 0.014693, Pos: 0.005244, Mass: 0.008629
+2026-05-08 19:55:47,825 - INFO - Epoch 309, Validation loss: 0.014509267842349334
+2026-05-08 19:56:21,923 - INFO - Epoch 310, Total: 0.014666, Pos: 0.005154, Mass: 0.009888
+2026-05-08 19:56:34,519 - INFO - Epoch 310, Validation loss: 0.014519124299797237
+2026-05-08 19:57:08,469 - INFO - Epoch 311, Total: 0.014663, Pos: 0.005232, Mass: 0.008924
+2026-05-08 19:57:22,705 - INFO - Epoch 311, Validation loss: 0.014601014283859832
+2026-05-08 19:57:56,889 - INFO - Epoch 312, Total: 0.014622, Pos: 0.005571, Mass: 0.008952
+2026-05-08 19:58:09,448 - INFO - Epoch 312, Validation loss: 0.014507681648764346
+2026-05-08 19:58:46,188 - INFO - Epoch 313, Total: 0.014625, Pos: 0.005262, Mass: 0.009396
+2026-05-08 19:58:59,631 - INFO - Epoch 313, Validation loss: 0.014671763039042806
+2026-05-08 19:59:33,886 - INFO - Epoch 314, Total: 0.014733, Pos: 0.005499, Mass: 0.009027
+2026-05-08 19:59:46,473 - INFO - Epoch 314, Validation loss: 0.014651753891928073
+2026-05-08 20:00:20,455 - INFO - Epoch 315, Total: 0.014708, Pos: 0.005510, Mass: 0.009047
+2026-05-08 20:00:33,018 - INFO - Epoch 315, Validation loss: 0.014623003351127999
+2026-05-08 20:01:06,914 - INFO - Epoch 316, Total: 0.014720, Pos: 0.005311, Mass: 0.008896
+2026-05-08 20:01:21,471 - INFO - Epoch 316, Validation loss: 0.01475976432999994
+2026-05-08 20:01:55,510 - INFO - Epoch 317, Total: 0.014617, Pos: 0.004951, Mass: 0.009396
+2026-05-08 20:02:08,075 - INFO - Epoch 317, Validation loss: 0.014579441350622054
+2026-05-08 20:02:42,004 - INFO - Epoch 318, Total: 0.014639, Pos: 0.004785, Mass: 0.008521
+2026-05-08 20:02:54,754 - INFO - Epoch 318, Validation loss: 0.014673787169158459
+2026-05-08 20:03:28,558 - INFO - Epoch 319, Total: 0.014674, Pos: 0.004992, Mass: 0.009192
+2026-05-08 20:03:41,136 - INFO - Epoch 319, Validation loss: 0.01472445845635783
+2026-05-08 20:04:15,339 - INFO - Epoch 320, Total: 0.014754, Pos: 0.005031, Mass: 0.009144
+2026-05-08 20:04:28,761 - INFO - Epoch 320, Validation loss: 0.014625229641922519
+2026-05-08 20:05:02,780 - INFO - Epoch 321, Total: 0.014701, Pos: 0.005025, Mass: 0.008738
+2026-05-08 20:05:15,273 - INFO - Epoch 321, Validation loss: 0.014658709502436666
+2026-05-08 20:05:49,502 - INFO - Epoch 322, Total: 0.014740, Pos: 0.004978, Mass: 0.011263
+2026-05-08 20:06:13,117 - INFO - Epoch 322, Validation loss: 0.014571463744928185
+2026-05-08 20:06:47,627 - INFO - Epoch 323, Total: 0.014563, Pos: 0.005365, Mass: 0.008316
+2026-05-08 20:07:00,405 - INFO - Epoch 323, Validation loss: 0.014548716652724478
+2026-05-08 20:07:36,947 - INFO - Epoch 324, Total: 0.014725, Pos: 0.004935, Mass: 0.008550
+2026-05-08 20:07:49,450 - INFO - Epoch 324, Validation loss: 0.014577872350684598
+2026-05-08 20:08:23,444 - INFO - Epoch 325, Total: 0.014696, Pos: 0.004898, Mass: 0.009342
+2026-05-08 20:08:36,211 - INFO - Epoch 325, Validation loss: 0.014650043410559496
+2026-05-08 20:09:09,982 - INFO - Epoch 326, Total: 0.014614, Pos: 0.005602, Mass: 0.008359
+2026-05-08 20:09:32,391 - INFO - Epoch 326, Validation loss: 0.014578890103178147
+2026-05-08 20:10:06,447 - INFO - Epoch 327, Total: 0.014604, Pos: 0.005098, Mass: 0.009306
+2026-05-08 20:10:19,209 - INFO - Epoch 327, Validation loss: 0.014554866231404819
+2026-05-08 20:10:53,137 - INFO - Epoch 328, Total: 0.014679, Pos: 0.005314, Mass: 0.009504
+2026-05-08 20:11:06,022 - INFO - Epoch 328, Validation loss: 0.014655853581861554
+2026-05-08 20:11:41,490 - INFO - Epoch 329, Total: 0.014628, Pos: 0.005349, Mass: 0.009464
+2026-05-08 20:11:53,941 - INFO - Epoch 329, Validation loss: 0.014553069845478758
+2026-05-08 20:12:27,806 - INFO - Epoch 330, Total: 0.014644, Pos: 0.005391, Mass: 0.009515
+2026-05-08 20:12:40,430 - INFO - Epoch 330, Validation loss: 0.014567064774087351
+2026-05-08 20:13:14,412 - INFO - Epoch 331, Total: 0.014658, Pos: 0.004988, Mass: 0.009196
+2026-05-08 20:13:26,979 - INFO - Epoch 331, Validation loss: 0.014555275495936219
+2026-05-08 20:14:01,066 - INFO - Epoch 332, Total: 0.014741, Pos: 0.005534, Mass: 0.009328
+2026-05-08 20:14:13,630 - INFO - Epoch 332, Validation loss: 0.014562104987856159
+2026-05-08 20:14:48,767 - INFO - Epoch 333, Total: 0.014628, Pos: 0.005113, Mass: 0.009539
+2026-05-08 20:15:01,070 - INFO - Epoch 333, Validation loss: 0.014566165458761219
+2026-05-08 20:15:34,963 - INFO - Epoch 334, Total: 0.014682, Pos: 0.004904, Mass: 0.008636
+2026-05-08 20:15:48,798 - INFO - Epoch 334, Validation loss: 0.014582190797942826
+2026-05-08 20:16:22,615 - INFO - Epoch 335, Total: 0.014640, Pos: 0.005256, Mass: 0.009762
+2026-05-08 20:16:36,545 - INFO - Epoch 335, Validation loss: 0.014510175658978967
+2026-05-08 20:17:10,934 - INFO - Epoch 336, Total: 0.014614, Pos: 0.005308, Mass: 0.009052
+2026-05-08 20:17:23,443 - INFO - Epoch 336, Validation loss: 0.014594420002630124
+2026-05-08 20:17:57,531 - INFO - Epoch 337, Total: 0.014674, Pos: 0.005713, Mass: 0.007143
+2026-05-08 20:18:10,100 - INFO - Epoch 337, Validation loss: 0.014601068650810128
+2026-05-08 20:18:49,143 - INFO - Epoch 338, Total: 0.014739, Pos: 0.005062, Mass: 0.009495
+2026-05-08 20:19:01,406 - INFO - Epoch 338, Validation loss: 0.014656348066388542
+2026-05-08 20:19:35,531 - INFO - Epoch 339, Total: 0.014630, Pos: 0.004864, Mass: 0.008355
+2026-05-08 20:19:49,412 - INFO - Epoch 339, Validation loss: 0.014623527072815813
+2026-05-08 20:20:26,610 - INFO - Epoch 340, Total: 0.014676, Pos: 0.005463, Mass: 0.008971
+2026-05-08 20:20:39,181 - INFO - Epoch 340, Validation loss: 0.014687093754864147
+2026-05-08 20:21:13,117 - INFO - Epoch 341, Total: 0.014642, Pos: 0.005514, Mass: 0.009049
+2026-05-08 20:21:25,769 - INFO - Epoch 341, Validation loss: 0.014585136061804926
+2026-05-08 20:21:59,713 - INFO - Epoch 342, Total: 0.014669, Pos: 0.005244, Mass: 0.009730
+2026-05-08 20:22:12,352 - INFO - Epoch 342, Validation loss: 0.014611455643724682
+2026-05-08 20:22:46,778 - INFO - Epoch 343, Total: 0.014647, Pos: 0.005396, Mass: 0.008674
+2026-05-08 20:22:59,534 - INFO - Epoch 343, Validation loss: 0.014745721505938942
+2026-05-08 20:23:34,307 - INFO - Epoch 344, Total: 0.014723, Pos: 0.005013, Mass: 0.010343
+2026-05-08 20:23:46,650 - INFO - Epoch 344, Validation loss: 0.014487424546964148
+2026-05-08 20:24:20,483 - INFO - Epoch 345, Total: 0.014622, Pos: 0.005044, Mass: 0.009224
+2026-05-08 20:24:33,255 - INFO - Epoch 345, Validation loss: 0.014645951187126657
+2026-05-08 20:25:08,317 - INFO - Epoch 346, Total: 0.014669, Pos: 0.005125, Mass: 0.008368
+2026-05-08 20:25:20,733 - INFO - Epoch 346, Validation loss: 0.014600616879761219
+2026-05-08 20:25:54,590 - INFO - Epoch 347, Total: 0.014648, Pos: 0.005233, Mass: 0.010314
+2026-05-08 20:26:07,158 - INFO - Epoch 347, Validation loss: 0.014575001505068224
+2026-05-08 20:26:44,575 - INFO - Epoch 348, Total: 0.014534, Pos: 0.005264, Mass: 0.011081
+2026-05-08 20:26:57,937 - INFO - Epoch 348, Validation loss: 0.014623100439516397
+2026-05-08 20:27:31,675 - INFO - Epoch 349, Total: 0.014620, Pos: 0.005116, Mass: 0.009691
+2026-05-08 20:27:44,236 - INFO - Epoch 349, Validation loss: 0.014539885191390147
+2026-05-08 20:28:18,810 - INFO - Epoch 350, Total: 0.014698, Pos: 0.004939, Mass: 0.009948
+2026-05-08 20:28:32,354 - INFO - Epoch 350, Validation loss: 0.014564388304248325
+2026-05-08 20:29:18,996 - INFO - Epoch 351, Total: 0.014663, Pos: 0.005055, Mass: 0.009232
+2026-05-08 20:29:31,605 - INFO - Epoch 351, Validation loss: 0.014662093912752775
+2026-05-08 20:30:06,640 - INFO - Epoch 352, Total: 0.014709, Pos: 0.005451, Mass: 0.009431
+2026-05-08 20:30:19,457 - INFO - Epoch 352, Validation loss: 0.014540427674849829
+2026-05-08 20:30:57,347 - INFO - Epoch 353, Total: 0.014747, Pos: 0.005225, Mass: 0.008759
+2026-05-08 20:31:10,062 - INFO - Epoch 353, Validation loss: 0.01456625739701538
+2026-05-08 20:31:43,969 - INFO - Epoch 354, Total: 0.014658, Pos: 0.004834, Mass: 0.009516
+2026-05-08 20:31:56,500 - INFO - Epoch 354, Validation loss: 0.014614606745795816
+2026-05-08 20:32:30,474 - INFO - Epoch 355, Total: 0.014657, Pos: 0.005406, Mass: 0.009955
+2026-05-08 20:32:43,108 - INFO - Epoch 355, Validation loss: 0.014731393068328373
+2026-05-08 20:33:17,459 - INFO - Epoch 356, Total: 0.014607, Pos: 0.005179, Mass: 0.008453
+2026-05-08 20:33:30,023 - INFO - Epoch 356, Validation loss: 0.014568078936610976
+2026-05-08 20:34:03,920 - INFO - Epoch 357, Total: 0.014621, Pos: 0.004947, Mass: 0.009434
+2026-05-08 20:34:16,538 - INFO - Epoch 357, Validation loss: 0.014624448206562262
+2026-05-08 20:34:52,630 - INFO - Epoch 358, Total: 0.014672, Pos: 0.005595, Mass: 0.009424
+2026-05-08 20:35:05,146 - INFO - Epoch 358, Validation loss: 0.014602846099843836
+2026-05-08 20:35:39,073 - INFO - Epoch 359, Total: 0.014650, Pos: 0.005194, Mass: 0.008707
+2026-05-08 20:35:51,619 - INFO - Epoch 359, Validation loss: 0.014436449775965804
+2026-05-08 20:36:25,593 - INFO - Epoch 360, Total: 0.014644, Pos: 0.005077, Mass: 0.009279
+2026-05-08 20:36:38,114 - INFO - Epoch 360, Validation loss: 0.014588669818053897
+2026-05-08 20:37:11,833 - INFO - Epoch 361, Total: 0.014707, Pos: 0.005584, Mass: 0.009177
+2026-05-08 20:37:24,492 - INFO - Epoch 361, Validation loss: 0.014616645355191495
+2026-05-08 20:37:58,374 - INFO - Epoch 362, Total: 0.014611, Pos: 0.005870, Mass: 0.010036
+2026-05-08 20:38:10,945 - INFO - Epoch 362, Validation loss: 0.014668045637126152
+2026-05-08 20:38:45,261 - INFO - Epoch 363, Total: 0.014623, Pos: 0.005101, Mass: 0.009253
+2026-05-08 20:38:57,885 - INFO - Epoch 363, Validation loss: 0.014548585654642338
+2026-05-08 20:39:32,249 - INFO - Epoch 364, Total: 0.014702, Pos: 0.005560, Mass: 0.009565
+2026-05-08 20:39:50,892 - INFO - Epoch 364, Validation loss: 0.014475479140941404
+2026-05-08 20:40:25,296 - INFO - Epoch 365, Total: 0.014641, Pos: 0.005378, Mass: 0.009315
+2026-05-08 20:40:37,794 - INFO - Epoch 365, Validation loss: 0.01466448285863695
+2026-05-08 20:41:11,506 - INFO - Epoch 366, Total: 0.014665, Pos: 0.005018, Mass: 0.009872
+2026-05-08 20:41:24,141 - INFO - Epoch 366, Validation loss: 0.014502520450096354
+2026-05-08 20:42:00,158 - INFO - Epoch 367, Total: 0.014727, Pos: 0.005518, Mass: 0.009453
+2026-05-08 20:42:13,815 - INFO - Epoch 367, Validation loss: 0.014698881711651627
+2026-05-08 20:42:48,271 - INFO - Epoch 368, Total: 0.014572, Pos: 0.005781, Mass: 0.009203
+2026-05-08 20:43:00,691 - INFO - Epoch 368, Validation loss: 0.014577440766251495
+2026-05-08 20:43:34,571 - INFO - Epoch 369, Total: 0.014642, Pos: 0.005619, Mass: 0.008945
+2026-05-08 20:43:47,335 - INFO - Epoch 369, Validation loss: 0.014424841707715621
+2026-05-08 20:44:21,450 - INFO - Epoch 370, Total: 0.014588, Pos: 0.005127, Mass: 0.009175
+2026-05-08 20:44:35,999 - INFO - Epoch 370, Validation loss: 0.014579280351216976
+2026-05-08 20:45:09,884 - INFO - Epoch 371, Total: 0.014701, Pos: 0.005805, Mass: 0.009593
+2026-05-08 20:45:22,536 - INFO - Epoch 371, Validation loss: 0.014551414463382501
+2026-05-08 20:45:56,755 - INFO - Epoch 372, Total: 0.014626, Pos: 0.004840, Mass: 0.010371
+2026-05-08 20:46:10,315 - INFO - Epoch 372, Validation loss: 0.014570306827369919
+2026-05-08 20:46:44,440 - INFO - Epoch 373, Total: 0.014736, Pos: 0.004873, Mass: 0.008854
+2026-05-08 20:46:57,022 - INFO - Epoch 373, Validation loss: 0.014531461211542288
+2026-05-08 20:47:31,062 - INFO - Epoch 374, Total: 0.014708, Pos: 0.005052, Mass: 0.010390
+2026-05-08 20:47:43,651 - INFO - Epoch 374, Validation loss: 0.014616105498539077
+2026-05-08 20:48:18,117 - INFO - Epoch 375, Total: 0.014656, Pos: 0.004877, Mass: 0.010042
+2026-05-08 20:48:30,699 - INFO - Epoch 375, Validation loss: 0.014541818967296017
+2026-05-08 20:49:04,708 - INFO - Epoch 376, Total: 0.014632, Pos: 0.005241, Mass: 0.009458
+2026-05-08 20:49:24,390 - INFO - Epoch 376, Validation loss: 0.014623671841736022
+2026-05-08 20:49:58,650 - INFO - Epoch 377, Total: 0.014625, Pos: 0.004984, Mass: 0.008305
+2026-05-08 20:50:11,442 - INFO - Epoch 377, Validation loss: 0.014634929334697051
+2026-05-08 20:50:45,965 - INFO - Epoch 378, Total: 0.014710, Pos: 0.004951, Mass: 0.010485
+2026-05-08 20:50:58,503 - INFO - Epoch 378, Validation loss: 0.014564925756974097
+2026-05-08 20:51:32,395 - INFO - Epoch 379, Total: 0.014695, Pos: 0.005035, Mass: 0.009773
+2026-05-08 20:51:45,688 - INFO - Epoch 379, Validation loss: 0.014586387345424065
+2026-05-08 20:52:19,673 - INFO - Epoch 380, Total: 0.014641, Pos: 0.005088, Mass: 0.009403
+2026-05-08 20:52:32,268 - INFO - Epoch 380, Validation loss: 0.01459163112136034
+2026-05-08 20:53:06,175 - INFO - Epoch 381, Total: 0.014669, Pos: 0.005036, Mass: 0.009156
+2026-05-08 20:53:18,800 - INFO - Epoch 381, Validation loss: 0.01451870409023558
+2026-05-08 20:53:52,836 - INFO - Epoch 382, Total: 0.014665, Pos: 0.005306, Mass: 0.009369
+2026-05-08 20:54:05,549 - INFO - Epoch 382, Validation loss: 0.014581698008900525
+2026-05-08 20:54:39,559 - INFO - Epoch 383, Total: 0.014712, Pos: 0.005371, Mass: 0.009093
+2026-05-08 20:54:52,233 - INFO - Epoch 383, Validation loss: 0.01465275242096848
+2026-05-08 20:55:26,142 - INFO - Epoch 384, Total: 0.014633, Pos: 0.005731, Mass: 0.009342
+2026-05-08 20:55:38,702 - INFO - Epoch 384, Validation loss: 0.014499089815932462
+2026-05-08 20:56:15,815 - INFO - Epoch 385, Total: 0.014683, Pos: 0.005480, Mass: 0.009141
+2026-05-08 20:56:29,029 - INFO - Epoch 385, Validation loss: 0.014609853331095133
+2026-05-08 20:57:02,801 - INFO - Epoch 386, Total: 0.014628, Pos: 0.005353, Mass: 0.009484
+2026-05-08 20:57:15,514 - INFO - Epoch 386, Validation loss: 0.014517919797227424
+2026-05-08 20:57:49,811 - INFO - Epoch 387, Total: 0.014743, Pos: 0.005152, Mass: 0.009597
+2026-05-08 20:58:02,415 - INFO - Epoch 387, Validation loss: 0.014594965869099157
+2026-05-08 20:58:36,319 - INFO - Epoch 388, Total: 0.014696, Pos: 0.005192, Mass: 0.009391
+2026-05-08 20:58:48,940 - INFO - Epoch 388, Validation loss: 0.014556172646136366
+2026-05-08 20:59:22,977 - INFO - Epoch 389, Total: 0.014651, Pos: 0.004982, Mass: 0.009968
+2026-05-08 20:59:36,066 - INFO - Epoch 389, Validation loss: 0.014644017283860436
+2026-05-08 21:00:10,269 - INFO - Epoch 390, Total: 0.014628, Pos: 0.005268, Mass: 0.009542
+2026-05-08 21:00:22,899 - INFO - Epoch 390, Validation loss: 0.014575655810917035
+2026-05-08 21:00:56,822 - INFO - Epoch 391, Total: 0.014561, Pos: 0.005358, Mass: 0.008779
+2026-05-08 21:01:09,614 - INFO - Epoch 391, Validation loss: 0.014615819001427064
+2026-05-08 21:01:43,386 - INFO - Epoch 392, Total: 0.014706, Pos: 0.005337, Mass: 0.010031
+2026-05-08 21:01:55,971 - INFO - Epoch 392, Validation loss: 0.014484925967696896
+2026-05-08 21:02:29,731 - INFO - Epoch 393, Total: 0.014610, Pos: 0.005093, Mass: 0.009828
+2026-05-08 21:02:42,331 - INFO - Epoch 393, Validation loss: 0.014665314370495642
+2026-05-08 21:03:17,135 - INFO - Epoch 394, Total: 0.014717, Pos: 0.005268, Mass: 0.009900
+2026-05-08 21:03:29,729 - INFO - Epoch 394, Validation loss: 0.014504608172827806
+2026-05-08 21:04:03,708 - INFO - Epoch 395, Total: 0.014736, Pos: 0.005182, Mass: 0.008695
+2026-05-08 21:04:16,406 - INFO - Epoch 395, Validation loss: 0.01448273514676043
+2026-05-08 21:04:50,695 - INFO - Epoch 396, Total: 0.014570, Pos: 0.004980, Mass: 0.009430
+2026-05-08 21:05:03,307 - INFO - Epoch 396, Validation loss: 0.014536558515113642
+2026-05-08 21:05:38,739 - INFO - Epoch 397, Total: 0.014737, Pos: 0.005385, Mass: 0.010399
+2026-05-08 21:05:51,424 - INFO - Epoch 397, Validation loss: 0.014533159307116626
+2026-05-08 21:06:25,409 - INFO - Epoch 398, Total: 0.014674, Pos: 0.005016, Mass: 0.008610
+2026-05-08 21:06:38,041 - INFO - Epoch 398, Validation loss: 0.014483802943912327
+2026-05-08 21:07:13,082 - INFO - Epoch 399, Total: 0.014647, Pos: 0.005634, Mass: 0.009125
+2026-05-08 21:07:25,633 - INFO - Epoch 399, Validation loss: 0.014531538232715212
+2026-05-08 21:07:59,565 - INFO - Epoch 400, Total: 0.014667, Pos: 0.005120, Mass: 0.009690
+2026-05-08 21:08:12,668 - INFO - Epoch 400, Validation loss: 0.014538479125143116
+2026-05-08 21:08:47,670 - INFO - Epoch 401, Total: 0.014678, Pos: 0.005461, Mass: 0.009569
+2026-05-08 21:09:00,224 - INFO - Epoch 401, Validation loss: 0.014633631063068015
+2026-05-08 21:09:34,272 - INFO - Epoch 402, Total: 0.014667, Pos: 0.005347, Mass: 0.010293
+2026-05-08 21:09:47,593 - INFO - Epoch 402, Validation loss: 0.014545544464555051
+2026-05-08 21:10:21,480 - INFO - Epoch 403, Total: 0.014603, Pos: 0.005045, Mass: 0.008969
+2026-05-08 21:10:34,034 - INFO - Epoch 403, Validation loss: 0.014645650576895628
+2026-05-08 21:11:07,928 - INFO - Epoch 404, Total: 0.014655, Pos: 0.005165, Mass: 0.009272
+2026-05-08 21:11:20,514 - INFO - Epoch 404, Validation loss: 0.01455704489738768
+2026-05-08 21:11:54,822 - INFO - Epoch 405, Total: 0.014638, Pos: 0.004950, Mass: 0.009591
+2026-05-08 21:12:08,520 - INFO - Epoch 405, Validation loss: 0.014605442046100257
+2026-05-08 21:12:43,970 - INFO - Epoch 406, Total: 0.014668, Pos: 0.004814, Mass: 0.009464
+2026-05-08 21:12:56,523 - INFO - Epoch 406, Validation loss: 0.014574835260008644
+2026-05-08 21:13:30,441 - INFO - Epoch 407, Total: 0.014699, Pos: 0.005302, Mass: 0.010202
+2026-05-08 21:13:43,088 - INFO - Epoch 407, Validation loss: 0.014644959440025
+2026-05-08 21:14:17,668 - INFO - Epoch 408, Total: 0.014568, Pos: 0.005167, Mass: 0.008027
+2026-05-08 21:14:30,243 - INFO - Epoch 408, Validation loss: 0.014597119389372503
+2026-05-08 21:15:04,287 - INFO - Epoch 409, Total: 0.014656, Pos: 0.005539, Mass: 0.009627
+2026-05-08 21:15:16,868 - INFO - Epoch 409, Validation loss: 0.014588822411675738
+2026-05-08 21:15:51,189 - INFO - Epoch 410, Total: 0.014635, Pos: 0.005389, Mass: 0.009835
+2026-05-08 21:16:03,683 - INFO - Epoch 410, Validation loss: 0.014584584878041195
+2026-05-08 21:16:37,475 - INFO - Epoch 411, Total: 0.014744, Pos: 0.005554, Mass: 0.008089
+2026-05-08 21:16:50,760 - INFO - Epoch 411, Validation loss: 0.014634766361206515
+2026-05-08 21:17:24,569 - INFO - Epoch 412, Total: 0.014671, Pos: 0.005018, Mass: 0.009595
+2026-05-08 21:17:37,152 - INFO - Epoch 412, Validation loss: 0.014538765033213502
+2026-05-08 21:18:11,026 - INFO - Epoch 413, Total: 0.014600, Pos: 0.005472, Mass: 0.008977
+2026-05-08 21:18:23,703 - INFO - Epoch 413, Validation loss: 0.014622291884361168
+2026-05-08 21:19:00,488 - INFO - Epoch 414, Total: 0.014579, Pos: 0.004720, Mass: 0.009824
+2026-05-08 21:19:24,445 - INFO - Epoch 414, Validation loss: 0.014644680680054376
+2026-05-08 21:19:58,333 - INFO - Epoch 415, Total: 0.014676, Pos: 0.005009, Mass: 0.009192
+2026-05-08 21:20:10,866 - INFO - Epoch 415, Validation loss: 0.01469140361325863
+2026-05-08 21:20:45,233 - INFO - Epoch 416, Total: 0.014673, Pos: 0.004837, Mass: 0.008190
+2026-05-08 21:20:58,421 - INFO - Epoch 416, Validation loss: 0.014658727643326817
+2026-05-08 21:21:33,623 - INFO - Epoch 417, Total: 0.014727, Pos: 0.004984, Mass: 0.009647
+2026-05-08 21:21:46,181 - INFO - Epoch 417, Validation loss: 0.014618206283666639
+2026-05-08 21:22:20,282 - INFO - Epoch 418, Total: 0.014659, Pos: 0.004755, Mass: 0.010405
+2026-05-08 21:22:32,835 - INFO - Epoch 418, Validation loss: 0.01457682054521691
+2026-05-08 21:23:07,254 - INFO - Epoch 419, Total: 0.014620, Pos: 0.005223, Mass: 0.009724
+2026-05-08 21:23:21,370 - INFO - Epoch 419, Validation loss: 0.014705195075744746
+2026-05-08 21:23:56,978 - INFO - Epoch 420, Total: 0.014682, Pos: 0.005427, Mass: 0.009191
+2026-05-08 21:24:09,622 - INFO - Epoch 420, Validation loss: 0.014457001478180416
+2026-05-08 21:24:43,473 - INFO - Epoch 421, Total: 0.014659, Pos: 0.004980, Mass: 0.010420
+2026-05-08 21:24:56,060 - INFO - Epoch 421, Validation loss: 0.014679563661607413
+2026-05-08 21:25:31,236 - INFO - Epoch 422, Total: 0.014718, Pos: 0.005427, Mass: 0.009077
+2026-05-08 21:25:44,693 - INFO - Epoch 422, Validation loss: 0.014624408048251245
+2026-05-08 21:26:18,977 - INFO - Epoch 423, Total: 0.014689, Pos: 0.005123, Mass: 0.010247
+2026-05-08 21:26:31,562 - INFO - Epoch 423, Validation loss: 0.014623433152516173
+2026-05-08 21:27:05,725 - INFO - Epoch 424, Total: 0.014710, Pos: 0.005215, Mass: 0.009104
+2026-05-08 21:27:18,319 - INFO - Epoch 424, Validation loss: 0.014600863123041952
+2026-05-08 21:27:52,146 - INFO - Epoch 425, Total: 0.014682, Pos: 0.005404, Mass: 0.008694
+2026-05-08 21:28:05,027 - INFO - Epoch 425, Validation loss: 0.014515182894901333
+2026-05-08 21:28:41,524 - INFO - Epoch 426, Total: 0.014687, Pos: 0.005056, Mass: 0.009427
+2026-05-08 21:28:54,089 - INFO - Epoch 426, Validation loss: 0.01458507252490928
+2026-05-08 21:29:28,025 - INFO - Epoch 427, Total: 0.014633, Pos: 0.005136, Mass: 0.008922
+2026-05-08 21:29:41,161 - INFO - Epoch 427, Validation loss: 0.014654421756983314
+2026-05-08 21:30:15,724 - INFO - Epoch 428, Total: 0.014608, Pos: 0.005303, Mass: 0.009413
+2026-05-08 21:30:29,865 - INFO - Epoch 428, Validation loss: 0.014566133252512187
+2026-05-08 21:31:06,879 - INFO - Epoch 429, Total: 0.014630, Pos: 0.004905, Mass: 0.010834
+2026-05-08 21:31:19,435 - INFO - Epoch 429, Validation loss: 0.01448789395742182
+2026-05-08 21:31:53,410 - INFO - Epoch 430, Total: 0.014725, Pos: 0.005070, Mass: 0.008852
+2026-05-08 21:32:06,106 - INFO - Epoch 430, Validation loss: 0.01461254520357674
+2026-05-08 21:32:40,016 - INFO - Epoch 431, Total: 0.014601, Pos: 0.005524, Mass: 0.008907
+2026-05-08 21:32:52,567 - INFO - Epoch 431, Validation loss: 0.014510836102004744
+2026-05-08 21:33:26,377 - INFO - Epoch 432, Total: 0.014752, Pos: 0.005149, Mass: 0.009798
+2026-05-08 21:33:38,924 - INFO - Epoch 432, Validation loss: 0.014617374596687464
+2026-05-08 21:34:13,583 - INFO - Epoch 433, Total: 0.014661, Pos: 0.005105, Mass: 0.009364
+2026-05-08 21:34:26,701 - INFO - Epoch 433, Validation loss: 0.014628399083884353
+2026-05-08 21:35:00,622 - INFO - Epoch 434, Total: 0.014682, Pos: 0.004799, Mass: 0.009997
+2026-05-08 21:35:13,228 - INFO - Epoch 434, Validation loss: 0.014646902521196594
+2026-05-08 21:35:47,649 - INFO - Epoch 435, Total: 0.014646, Pos: 0.005551, Mass: 0.010575
+2026-05-08 21:36:00,287 - INFO - Epoch 435, Validation loss: 0.014617624995099682
+2026-05-08 21:36:34,184 - INFO - Epoch 436, Total: 0.014740, Pos: 0.005215, Mass: 0.011199
+2026-05-08 21:36:46,876 - INFO - Epoch 436, Validation loss: 0.014601280092874654
+2026-05-08 21:37:21,325 - INFO - Epoch 437, Total: 0.014565, Pos: 0.005064, Mass: 0.009384
+2026-05-08 21:37:34,937 - INFO - Epoch 437, Validation loss: 0.014639162920160681
+2026-05-08 21:38:08,841 - INFO - Epoch 438, Total: 0.014724, Pos: 0.005138, Mass: 0.009360
+2026-05-08 21:38:21,485 - INFO - Epoch 438, Validation loss: 0.014632295259935224
+2026-05-08 21:38:55,412 - INFO - Epoch 439, Total: 0.014659, Pos: 0.005262, Mass: 0.008499
+2026-05-08 21:39:07,950 - INFO - Epoch 439, Validation loss: 0.014647280303840963
+2026-05-08 21:39:41,962 - INFO - Epoch 440, Total: 0.014664, Pos: 0.004853, Mass: 0.009153
+2026-05-08 21:39:54,488 - INFO - Epoch 440, Validation loss: 0.014575574507252274
+2026-05-08 21:40:28,394 - INFO - Epoch 441, Total: 0.014734, Pos: 0.005802, Mass: 0.010564
+2026-05-08 21:40:41,089 - INFO - Epoch 441, Validation loss: 0.014507029866242511
+2026-05-08 21:41:14,950 - INFO - Epoch 442, Total: 0.014678, Pos: 0.005504, Mass: 0.010461
+2026-05-08 21:41:27,550 - INFO - Epoch 442, Validation loss: 0.014567238605047902
+2026-05-08 21:42:01,417 - INFO - Epoch 443, Total: 0.014669, Pos: 0.004780, Mass: 0.008796
+2026-05-08 21:42:16,185 - INFO - Epoch 443, Validation loss: 0.014536635576086676
+2026-05-08 21:42:50,295 - INFO - Epoch 444, Total: 0.014612, Pos: 0.005304, Mass: 0.009003
+2026-05-08 21:43:03,149 - INFO - Epoch 444, Validation loss: 0.014567977454290431
+2026-05-08 21:43:37,131 - INFO - Epoch 445, Total: 0.014643, Pos: 0.005553, Mass: 0.008209
+2026-05-08 21:43:53,138 - INFO - Epoch 445, Validation loss: 0.014525545378908133
+2026-05-08 21:44:28,320 - INFO - Epoch 446, Total: 0.014637, Pos: 0.005206, Mass: 0.009788
+2026-05-08 21:44:40,750 - INFO - Epoch 446, Validation loss: 0.014558177552798875
+2026-05-08 21:45:15,064 - INFO - Epoch 447, Total: 0.014591, Pos: 0.005328, Mass: 0.009463
+2026-05-08 21:45:29,168 - INFO - Epoch 447, Validation loss: 0.014722165436698841
+2026-05-08 21:46:03,210 - INFO - Epoch 448, Total: 0.014603, Pos: 0.005350, Mass: 0.008465
+2026-05-08 21:46:15,482 - INFO - Epoch 448, Validation loss: 0.014604593109753396
+2026-05-08 21:46:53,287 - INFO - Epoch 449, Total: 0.014658, Pos: 0.005424, Mass: 0.008925
+2026-05-08 21:47:05,818 - INFO - Epoch 449, Validation loss: 0.014703834166702552
+2026-05-08 21:47:39,643 - INFO - Epoch 450, Total: 0.014593, Pos: 0.005321, Mass: 0.010096
+2026-05-08 21:47:52,788 - INFO - Epoch 450, Validation loss: 0.014579811292644749
+2026-05-08 21:48:27,545 - INFO - Epoch 451, Total: 0.014667, Pos: 0.005398, Mass: 0.008477
+2026-05-08 21:48:40,784 - INFO - Epoch 451, Validation loss: 0.014507610995609026
+2026-05-08 21:49:15,129 - INFO - Epoch 452, Total: 0.014639, Pos: 0.005350, Mass: 0.009960
+2026-05-08 21:49:30,103 - INFO - Epoch 452, Validation loss: 0.014584184043173097
+2026-05-08 21:50:14,027 - INFO - Epoch 453, Total: 0.014631, Pos: 0.005129, Mass: 0.009285
+2026-05-08 21:50:27,962 - INFO - Epoch 453, Validation loss: 0.014577239266254453
+2026-05-08 21:51:02,119 - INFO - Epoch 454, Total: 0.014625, Pos: 0.004953, Mass: 0.011675
+2026-05-08 21:51:14,698 - INFO - Epoch 454, Validation loss: 0.014524464575080281
+2026-05-08 21:51:49,120 - INFO - Epoch 455, Total: 0.014614, Pos: 0.005132, Mass: 0.009195
+2026-05-08 21:52:01,853 - INFO - Epoch 455, Validation loss: 0.014629365534036078
+2026-05-08 21:52:35,816 - INFO - Epoch 456, Total: 0.014694, Pos: 0.005362, Mass: 0.008953
+2026-05-08 21:52:48,358 - INFO - Epoch 456, Validation loss: 0.014654218251060726
+2026-05-08 21:53:22,374 - INFO - Epoch 457, Total: 0.014606, Pos: 0.005313, Mass: 0.008452
+2026-05-08 21:53:34,979 - INFO - Epoch 457, Validation loss: 0.014583458391647054
+2026-05-08 21:54:08,858 - INFO - Epoch 458, Total: 0.014629, Pos: 0.004991, Mass: 0.009358
+2026-05-08 21:54:21,641 - INFO - Epoch 458, Validation loss: 0.014623723159997892
+2026-05-08 21:54:55,570 - INFO - Epoch 459, Total: 0.014653, Pos: 0.005322, Mass: 0.009791
+2026-05-08 21:55:08,657 - INFO - Epoch 459, Validation loss: 0.014519658289913438
+2026-05-08 21:55:42,955 - INFO - Epoch 460, Total: 0.014625, Pos: 0.005356, Mass: 0.008823
+2026-05-08 21:55:55,929 - INFO - Epoch 460, Validation loss: 0.01461156737855357
+2026-05-08 21:56:29,921 - INFO - Epoch 461, Total: 0.014575, Pos: 0.004756, Mass: 0.010718
+2026-05-08 21:56:42,547 - INFO - Epoch 461, Validation loss: 0.014551481064886618
+2026-05-08 21:57:16,747 - INFO - Epoch 462, Total: 0.014662, Pos: 0.005355, Mass: 0.009328
+2026-05-08 21:57:32,720 - INFO - Epoch 462, Validation loss: 0.01460428059928947
+2026-05-08 21:58:06,594 - INFO - Epoch 463, Total: 0.014734, Pos: 0.005691, Mass: 0.008749
+2026-05-08 21:58:19,298 - INFO - Epoch 463, Validation loss: 0.014559107530129772
+2026-05-08 21:58:57,925 - INFO - Epoch 464, Total: 0.014690, Pos: 0.005350, Mass: 0.009288
+2026-05-08 21:59:10,359 - INFO - Epoch 464, Validation loss: 0.014602652607628932
+2026-05-08 21:59:44,316 - INFO - Epoch 465, Total: 0.014729, Pos: 0.005125, Mass: 0.009824
+2026-05-08 22:00:00,669 - INFO - Epoch 465, Validation loss: 0.014562459399875922
+2026-05-08 22:00:34,735 - INFO - Epoch 466, Total: 0.014634, Pos: 0.005252, Mass: 0.009752
+2026-05-08 22:00:47,373 - INFO - Epoch 466, Validation loss: 0.01454781743291861
+2026-05-08 22:01:21,344 - INFO - Epoch 467, Total: 0.014667, Pos: 0.005287, Mass: 0.009776
+2026-05-08 22:01:33,849 - INFO - Epoch 467, Validation loss: 0.014517871607254203
+2026-05-08 22:02:07,615 - INFO - Epoch 468, Total: 0.014675, Pos: 0.005490, Mass: 0.010179
+2026-05-08 22:02:20,153 - INFO - Epoch 468, Validation loss: 0.014583751105536252
+2026-05-08 22:02:54,472 - INFO - Epoch 469, Total: 0.014637, Pos: 0.005319, Mass: 0.009300
+2026-05-08 22:03:07,167 - INFO - Epoch 469, Validation loss: 0.014608541726429239
+2026-05-08 22:03:41,134 - INFO - Epoch 470, Total: 0.014654, Pos: 0.005156, Mass: 0.010433
+2026-05-08 22:03:53,811 - INFO - Epoch 470, Validation loss: 0.014563043983891988
+2026-05-08 22:04:27,684 - INFO - Epoch 471, Total: 0.014666, Pos: 0.005034, Mass: 0.010164
+2026-05-08 22:04:40,303 - INFO - Epoch 471, Validation loss: 0.01458567033848192
+2026-05-08 22:05:14,415 - INFO - Epoch 472, Total: 0.014641, Pos: 0.004723, Mass: 0.010024
+2026-05-08 22:05:26,972 - INFO - Epoch 472, Validation loss: 0.01451522488401741
+2026-05-08 22:06:01,561 - INFO - Epoch 473, Total: 0.014679, Pos: 0.004961, Mass: 0.009596
+2026-05-08 22:06:14,248 - INFO - Epoch 473, Validation loss: 0.014593733952213556
+2026-05-08 22:06:48,603 - INFO - Epoch 474, Total: 0.014703, Pos: 0.005145, Mass: 0.010169
+2026-05-08 22:07:01,942 - INFO - Epoch 474, Validation loss: 0.014487229757265657
+2026-05-08 22:07:35,874 - INFO - Epoch 475, Total: 0.014681, Pos: 0.005234, Mass: 0.009218
+2026-05-08 22:07:48,438 - INFO - Epoch 475, Validation loss: 0.014586896810712468
+2026-05-08 22:08:22,271 - INFO - Epoch 476, Total: 0.014610, Pos: 0.005053, Mass: 0.008615
+2026-05-08 22:08:34,776 - INFO - Epoch 476, Validation loss: 0.014567645378092416
+2026-05-08 22:09:08,913 - INFO - Epoch 477, Total: 0.014720, Pos: 0.005420, Mass: 0.009708
+2026-05-08 22:09:21,687 - INFO - Epoch 477, Validation loss: 0.01459410515987975
+2026-05-08 22:09:55,564 - INFO - Epoch 478, Total: 0.014655, Pos: 0.005000, Mass: 0.009748
+2026-05-08 22:10:08,284 - INFO - Epoch 478, Validation loss: 0.014536500136312256
+2026-05-08 22:10:42,397 - INFO - Epoch 479, Total: 0.014616, Pos: 0.004689, Mass: 0.010208
+2026-05-08 22:10:54,907 - INFO - Epoch 479, Validation loss: 0.014564750095208486
+2026-05-08 22:11:29,160 - INFO - Epoch 480, Total: 0.014565, Pos: 0.005000, Mass: 0.010550
+2026-05-08 22:11:41,836 - INFO - Epoch 480, Validation loss: 0.014612113937544517
+2026-05-08 22:12:16,241 - INFO - Epoch 481, Total: 0.014640, Pos: 0.005278, Mass: 0.008923
+2026-05-08 22:12:29,641 - INFO - Epoch 481, Validation loss: 0.014487107562967855
+2026-05-08 22:13:13,500 - INFO - Epoch 482, Total: 0.014674, Pos: 0.005141, Mass: 0.009965
+2026-05-08 22:13:26,007 - INFO - Epoch 482, Validation loss: 0.014624883189924762
+2026-05-08 22:13:59,996 - INFO - Epoch 483, Total: 0.014671, Pos: 0.005445, Mass: 0.010002
+2026-05-08 22:14:12,648 - INFO - Epoch 483, Validation loss: 0.014585189895433748
+2026-05-08 22:14:47,908 - INFO - Epoch 484, Total: 0.014613, Pos: 0.004960, Mass: 0.009820
+2026-05-08 22:15:00,462 - INFO - Epoch 484, Validation loss: 0.014650009469025664
+2026-05-08 22:15:34,776 - INFO - Epoch 485, Total: 0.014583, Pos: 0.005330, Mass: 0.010014
+2026-05-08 22:15:47,352 - INFO - Epoch 485, Validation loss: 0.014631321359202903
+2026-05-08 22:16:21,479 - INFO - Epoch 486, Total: 0.014602, Pos: 0.005109, Mass: 0.009715
+2026-05-08 22:16:36,524 - INFO - Epoch 486, Validation loss: 0.014452616684138775
+2026-05-08 22:17:13,814 - INFO - Epoch 487, Total: 0.014704, Pos: 0.005020, Mass: 0.010772
+2026-05-08 22:17:26,512 - INFO - Epoch 487, Validation loss: 0.014649456796737818
+2026-05-08 22:18:00,382 - INFO - Epoch 488, Total: 0.014715, Pos: 0.005266, Mass: 0.010266
+2026-05-08 22:18:13,114 - INFO - Epoch 488, Validation loss: 0.0146860098784678
+2026-05-08 22:18:47,451 - INFO - Epoch 489, Total: 0.014715, Pos: 0.004980, Mass: 0.009992
+2026-05-08 22:19:00,014 - INFO - Epoch 489, Validation loss: 0.014593488433294825
+2026-05-08 22:19:34,127 - INFO - Epoch 490, Total: 0.014662, Pos: 0.005094, Mass: 0.010120
+2026-05-08 22:19:46,704 - INFO - Epoch 490, Validation loss: 0.01468764871167831
+2026-05-08 22:20:20,587 - INFO - Epoch 491, Total: 0.014611, Pos: 0.005315, Mass: 0.009180
+2026-05-08 22:20:33,353 - INFO - Epoch 491, Validation loss: 0.014538755226466391
+2026-05-08 22:21:07,068 - INFO - Epoch 492, Total: 0.014674, Pos: 0.005093, Mass: 0.009693
+2026-05-08 22:21:19,615 - INFO - Epoch 492, Validation loss: 0.014577996829508716
+2026-05-08 22:21:53,313 - INFO - Epoch 493, Total: 0.014672, Pos: 0.005370, Mass: 0.009469
+2026-05-08 22:22:29,142 - INFO - Epoch 493, Validation loss: 0.014657818449613376
+2026-05-08 22:23:03,074 - INFO - Epoch 494, Total: 0.014618, Pos: 0.005347, Mass: 0.009901
+2026-05-08 22:23:15,662 - INFO - Epoch 494, Validation loss: 0.014571211690831387
+2026-05-08 22:23:49,753 - INFO - Epoch 495, Total: 0.014630, Pos: 0.005487, Mass: 0.009713
+2026-05-08 22:24:02,360 - INFO - Epoch 495, Validation loss: 0.014554779889046127
+2026-05-08 22:24:36,341 - INFO - Epoch 496, Total: 0.014654, Pos: 0.005084, Mass: 0.010196
+2026-05-08 22:24:48,876 - INFO - Epoch 496, Validation loss: 0.014580691750678752
+2026-05-08 22:25:22,856 - INFO - Epoch 497, Total: 0.014689, Pos: 0.005397, Mass: 0.009721
+2026-05-08 22:25:35,571 - INFO - Epoch 497, Validation loss: 0.014536865087401154
+2026-05-08 22:26:09,547 - INFO - Epoch 498, Total: 0.014654, Pos: 0.005207, Mass: 0.008603
+2026-05-08 22:26:22,096 - INFO - Epoch 498, Validation loss: 0.014544321765374934
+2026-05-08 22:26:56,248 - INFO - Epoch 499, Total: 0.014646, Pos: 0.005154, Mass: 0.009266
+2026-05-08 22:27:08,804 - INFO - Epoch 499, Validation loss: 0.014558639456955796
+2026-05-08 22:27:43,470 - INFO - Epoch 500, Total: 0.014687, Pos: 0.005157, Mass: 0.009744
+2026-05-08 22:27:56,085 - INFO - Epoch 500, Validation loss: 0.014582322408946661
+2026-05-08 22:28:31,274 - INFO - Epoch 501, Total: 0.014674, Pos: 0.004936, Mass: 0.009385
+2026-05-08 22:28:43,663 - INFO - Epoch 501, Validation loss: 0.014537881733451644
+2026-05-08 22:29:18,161 - INFO - Epoch 502, Total: 0.014572, Pos: 0.005025, Mass: 0.009390
+2026-05-08 22:29:31,489 - INFO - Epoch 502, Validation loss: 0.014645160932062019
+2026-05-08 22:30:05,380 - INFO - Epoch 503, Total: 0.014752, Pos: 0.005398, Mass: 0.009248
+2026-05-08 22:30:17,947 - INFO - Epoch 503, Validation loss: 0.014551271660587726
+2026-05-08 22:30:51,917 - INFO - Epoch 504, Total: 0.014633, Pos: 0.005067, Mass: 0.008817
+2026-05-08 22:31:06,635 - INFO - Epoch 504, Validation loss: 0.014499482133577013
+2026-05-08 22:31:40,650 - INFO - Epoch 505, Total: 0.014601, Pos: 0.005531, Mass: 0.007696
+2026-05-08 22:31:53,245 - INFO - Epoch 505, Validation loss: 0.014618554924670448
+2026-05-08 22:32:27,224 - INFO - Epoch 506, Total: 0.014770, Pos: 0.005364, Mass: 0.008705
+2026-05-08 22:32:39,835 - INFO - Epoch 506, Validation loss: 0.014592175093344133
+2026-05-08 22:33:15,465 - INFO - Epoch 507, Total: 0.014665, Pos: 0.005178, Mass: 0.009298
+2026-05-08 22:33:27,949 - INFO - Epoch 507, Validation loss: 0.014511074234023053
+2026-05-08 22:34:01,859 - INFO - Epoch 508, Total: 0.014675, Pos: 0.005163, Mass: 0.009252
+2026-05-08 22:34:14,661 - INFO - Epoch 508, Validation loss: 0.014552231026319867
+2026-05-08 22:34:52,519 - INFO - Epoch 509, Total: 0.014651, Pos: 0.005151, Mass: 0.009087
+2026-05-08 22:35:07,936 - INFO - Epoch 509, Validation loss: 0.014545980172279553
+2026-05-08 22:35:41,789 - INFO - Epoch 510, Total: 0.014664, Pos: 0.004584, Mass: 0.009844
+2026-05-08 22:35:54,385 - INFO - Epoch 510, Validation loss: 0.01450085579457446
+2026-05-08 22:36:28,430 - INFO - Epoch 511, Total: 0.014660, Pos: 0.005329, Mass: 0.009141
+2026-05-08 22:36:41,066 - INFO - Epoch 511, Validation loss: 0.014624686370420659
+2026-05-08 22:37:15,507 - INFO - Epoch 512, Total: 0.014679, Pos: 0.005528, Mass: 0.009136
+2026-05-08 22:37:28,125 - INFO - Epoch 512, Validation loss: 0.014578297049698666
+2026-05-08 22:38:02,029 - INFO - Epoch 513, Total: 0.014596, Pos: 0.005042, Mass: 0.009496
+2026-05-08 22:38:14,818 - INFO - Epoch 513, Validation loss: 0.014611426247363416
+2026-05-08 22:38:49,555 - INFO - Epoch 514, Total: 0.014705, Pos: 0.005541, Mass: 0.008121
+2026-05-08 22:39:02,106 - INFO - Epoch 514, Validation loss: 0.014591528556476802
+2026-05-08 22:39:35,845 - INFO - Epoch 515, Total: 0.014593, Pos: 0.004972, Mass: 0.010298
+2026-05-08 22:39:48,435 - INFO - Epoch 515, Validation loss: 0.01455348550190783
+2026-05-08 22:40:22,508 - INFO - Epoch 516, Total: 0.014661, Pos: 0.005219, Mass: 0.009470
+2026-05-08 22:40:34,930 - INFO - Epoch 516, Validation loss: 0.014536203370771857
+2026-05-08 22:41:08,797 - INFO - Epoch 517, Total: 0.014588, Pos: 0.004904, Mass: 0.009763
+2026-05-08 22:41:22,292 - INFO - Epoch 517, Validation loss: 0.01450498970464254
+2026-05-08 22:42:00,512 - INFO - Epoch 518, Total: 0.014672, Pos: 0.005238, Mass: 0.009831
+2026-05-08 22:42:14,252 - INFO - Epoch 518, Validation loss: 0.014560878244984863
+2026-05-08 22:42:48,888 - INFO - Epoch 519, Total: 0.014760, Pos: 0.005564, Mass: 0.008898
+2026-05-08 22:43:01,428 - INFO - Epoch 519, Validation loss: 0.014649014999596482
+2026-05-08 22:43:35,493 - INFO - Epoch 520, Total: 0.014618, Pos: 0.005299, Mass: 0.009862
+2026-05-08 22:43:48,026 - INFO - Epoch 520, Validation loss: 0.014563390085648777
+2026-05-08 22:44:22,000 - INFO - Epoch 521, Total: 0.014642, Pos: 0.005060, Mass: 0.010967
+2026-05-08 22:44:35,294 - INFO - Epoch 521, Validation loss: 0.014536157131004028
+2026-05-08 22:45:09,186 - INFO - Epoch 522, Total: 0.014745, Pos: 0.005136, Mass: 0.008954
+2026-05-08 22:45:21,829 - INFO - Epoch 522, Validation loss: 0.014681372608448196
+2026-05-08 22:45:55,906 - INFO - Epoch 523, Total: 0.014658, Pos: 0.005047, Mass: 0.009686
+2026-05-08 22:46:08,477 - INFO - Epoch 523, Validation loss: 0.014607452723778721
+2026-05-08 22:46:42,684 - INFO - Epoch 524, Total: 0.014657, Pos: 0.005046, Mass: 0.009044
+2026-05-08 22:46:55,584 - INFO - Epoch 524, Validation loss: 0.014567162945038743
+2026-05-08 22:47:29,665 - INFO - Epoch 525, Total: 0.014723, Pos: 0.005304, Mass: 0.009752
+2026-05-08 22:47:42,185 - INFO - Epoch 525, Validation loss: 0.014612097890140155
+2026-05-08 22:48:20,678 - INFO - Epoch 526, Total: 0.014717, Pos: 0.005719, Mass: 0.010222
+2026-05-08 22:48:33,292 - INFO - Epoch 526, Validation loss: 0.014544349840372546
+2026-05-08 22:49:07,326 - INFO - Epoch 527, Total: 0.014529, Pos: 0.005432, Mass: 0.010499
+2026-05-08 22:49:20,107 - INFO - Epoch 527, Validation loss: 0.01455452568574339
+2026-05-08 22:49:54,290 - INFO - Epoch 528, Total: 0.014698, Pos: 0.005069, Mass: 0.009114
+2026-05-08 22:50:08,329 - INFO - Epoch 528, Validation loss: 0.014632042847637437
+2026-05-08 22:50:42,215 - INFO - Epoch 529, Total: 0.014713, Pos: 0.004664, Mass: 0.010037
+2026-05-08 22:50:54,791 - INFO - Epoch 529, Validation loss: 0.014618361902096842
+2026-05-08 22:51:28,841 - INFO - Epoch 530, Total: 0.014661, Pos: 0.005126, Mass: 0.009151
+2026-05-08 22:51:41,320 - INFO - Epoch 530, Validation loss: 0.014604683766444014
+2026-05-08 22:52:15,640 - INFO - Epoch 531, Total: 0.014680, Pos: 0.005177, Mass: 0.010614
+2026-05-08 22:52:29,158 - INFO - Epoch 531, Validation loss: 0.01456769390238656
+2026-05-08 22:53:03,428 - INFO - Epoch 532, Total: 0.014605, Pos: 0.005389, Mass: 0.008836
+2026-05-08 22:53:15,811 - INFO - Epoch 532, Validation loss: 0.014611746678049238
+2026-05-08 22:53:49,765 - INFO - Epoch 533, Total: 0.014652, Pos: 0.005521, Mass: 0.008405
+2026-05-08 22:54:02,381 - INFO - Epoch 533, Validation loss: 0.014662563609771239
+2026-05-08 22:54:36,833 - INFO - Epoch 534, Total: 0.014632, Pos: 0.005317, Mass: 0.008006
+2026-05-08 22:54:49,282 - INFO - Epoch 534, Validation loss: 0.014568431167584708
+2026-05-08 22:55:23,123 - INFO - Epoch 535, Total: 0.014629, Pos: 0.005357, Mass: 0.009942
+2026-05-08 22:55:35,869 - INFO - Epoch 535, Validation loss: 0.014546648296726566
+2026-05-08 22:56:09,483 - INFO - Epoch 536, Total: 0.014576, Pos: 0.004964, Mass: 0.008054
+2026-05-08 22:56:22,264 - INFO - Epoch 536, Validation loss: 0.01456988114131312
+2026-05-08 22:56:56,178 - INFO - Epoch 537, Total: 0.014639, Pos: 0.005213, Mass: 0.008149
+2026-05-08 22:57:08,772 - INFO - Epoch 537, Validation loss: 0.014669225447707705
+2026-05-08 22:57:43,015 - INFO - Epoch 538, Total: 0.014655, Pos: 0.005351, Mass: 0.010838
+2026-05-08 22:57:55,522 - INFO - Epoch 538, Validation loss: 0.014707537678380808
+2026-05-08 22:58:29,516 - INFO - Epoch 539, Total: 0.014591, Pos: 0.004869, Mass: 0.010686
+2026-05-08 22:58:42,052 - INFO - Epoch 539, Validation loss: 0.01457244941057303
+2026-05-08 22:59:16,548 - INFO - Epoch 540, Total: 0.014711, Pos: 0.005091, Mass: 0.009200
+2026-05-08 22:59:28,799 - INFO - Epoch 540, Validation loss: 0.014614152379779734
+2026-05-08 23:00:02,662 - INFO - Epoch 541, Total: 0.014583, Pos: 0.005275, Mass: 0.008784
+2026-05-08 23:00:16,351 - INFO - Epoch 541, Validation loss: 0.014606608356484491
+2026-05-08 23:00:51,502 - INFO - Epoch 542, Total: 0.014656, Pos: 0.004687, Mass: 0.010097
+2026-05-08 23:01:06,389 - INFO - Epoch 542, Validation loss: 0.014542935631023003
+2026-05-08 23:01:40,320 - INFO - Epoch 543, Total: 0.014657, Pos: 0.005482, Mass: 0.009534
+2026-05-08 23:01:52,868 - INFO - Epoch 543, Validation loss: 0.014543882141319605
+2026-05-08 23:02:26,747 - INFO - Epoch 544, Total: 0.014707, Pos: 0.005260, Mass: 0.007778
+2026-05-08 23:02:39,353 - INFO - Epoch 544, Validation loss: 0.01458664320441138
+2026-05-08 23:03:14,834 - INFO - Epoch 545, Total: 0.014650, Pos: 0.005176, Mass: 0.009572
+2026-05-08 23:03:28,284 - INFO - Epoch 545, Validation loss: 0.014623469314896144
+2026-05-08 23:04:02,483 - INFO - Epoch 546, Total: 0.014591, Pos: 0.005445, Mass: 0.008206
+2026-05-08 23:04:15,262 - INFO - Epoch 546, Validation loss: 0.014625162427496707
+2026-05-08 23:04:49,505 - INFO - Epoch 547, Total: 0.014639, Pos: 0.005108, Mass: 0.009756
+2026-05-08 23:05:02,121 - INFO - Epoch 547, Validation loss: 0.014605786627492843
+2026-05-08 23:05:35,909 - INFO - Epoch 548, Total: 0.014744, Pos: 0.005242, Mass: 0.009665
+2026-05-08 23:05:48,542 - INFO - Epoch 548, Validation loss: 0.014527935630235916
+2026-05-08 23:06:22,527 - INFO - Epoch 549, Total: 0.014665, Pos: 0.005380, Mass: 0.009774
+2026-05-08 23:06:35,059 - INFO - Epoch 549, Validation loss: 0.014646155934812676
+2026-05-08 23:07:09,002 - INFO - Epoch 550, Total: 0.014629, Pos: 0.005211, Mass: 0.009857
+2026-05-08 23:07:21,815 - INFO - Epoch 550, Validation loss: 0.014489210433621183
+2026-05-08 23:07:55,603 - INFO - Epoch 551, Total: 0.014792, Pos: 0.005185, Mass: 0.009614
+2026-05-08 23:08:08,115 - INFO - Epoch 551, Validation loss: 0.014607324957465515
+2026-05-08 23:08:42,087 - INFO - Epoch 552, Total: 0.014603, Pos: 0.005125, Mass: 0.009498
+2026-05-08 23:08:56,781 - INFO - Epoch 552, Validation loss: 0.014723173597365873
+2026-05-08 23:09:30,975 - INFO - Epoch 553, Total: 0.014558, Pos: 0.005415, Mass: 0.008493
+2026-05-08 23:09:43,609 - INFO - Epoch 553, Validation loss: 0.014641077862654487
+2026-05-08 23:10:19,320 - INFO - Epoch 554, Total: 0.014602, Pos: 0.005239, Mass: 0.008678
+2026-05-08 23:10:31,882 - INFO - Epoch 554, Validation loss: 0.014659954195157586
+2026-05-08 23:11:05,882 - INFO - Epoch 555, Total: 0.014623, Pos: 0.005319, Mass: 0.009392
+2026-05-08 23:11:18,576 - INFO - Epoch 555, Validation loss: 0.014577849481541377
+2026-05-08 23:11:52,489 - INFO - Epoch 556, Total: 0.014617, Pos: 0.005300, Mass: 0.008437
+2026-05-08 23:12:04,996 - INFO - Epoch 556, Validation loss: 0.01450962596373935
+2026-05-08 23:12:38,829 - INFO - Epoch 557, Total: 0.014638, Pos: 0.005443, Mass: 0.008275
+2026-05-08 23:12:51,370 - INFO - Epoch 557, Validation loss: 0.01459568632273083
+2026-05-08 23:13:29,959 - INFO - Epoch 558, Total: 0.014741, Pos: 0.005083, Mass: 0.010177
+2026-05-08 23:13:42,469 - INFO - Epoch 558, Validation loss: 0.014547798878107315
+2026-05-08 23:14:16,817 - INFO - Epoch 559, Total: 0.014564, Pos: 0.005207, Mass: 0.008743
+2026-05-08 23:14:31,070 - INFO - Epoch 559, Validation loss: 0.014567107193044618
+2026-05-08 23:15:09,962 - INFO - Epoch 560, Total: 0.014678, Pos: 0.005027, Mass: 0.009030
+2026-05-08 23:15:24,809 - INFO - Epoch 560, Validation loss: 0.014513625222075189
+2026-05-08 23:15:59,286 - INFO - Epoch 561, Total: 0.014660, Pos: 0.005364, Mass: 0.009420
+2026-05-08 23:16:12,864 - INFO - Epoch 561, Validation loss: 0.014601710602704786
+2026-05-08 23:16:46,932 - INFO - Epoch 562, Total: 0.014707, Pos: 0.004889, Mass: 0.008321
+2026-05-08 23:17:04,966 - INFO - Epoch 562, Validation loss: 0.014676861687857881
+2026-05-08 23:17:39,717 - INFO - Epoch 563, Total: 0.014715, Pos: 0.005367, Mass: 0.008761
+2026-05-08 23:17:53,566 - INFO - Epoch 563, Validation loss: 0.014644103076977607
+2026-05-08 23:18:29,015 - INFO - Epoch 564, Total: 0.014684, Pos: 0.004760, Mass: 0.010283
+2026-05-08 23:18:41,813 - INFO - Epoch 564, Validation loss: 0.014565833016402192
+2026-05-08 23:19:16,412 - INFO - Epoch 565, Total: 0.014622, Pos: 0.005240, Mass: 0.009910
+2026-05-08 23:19:28,985 - INFO - Epoch 565, Validation loss: 0.01463310340912933
+2026-05-08 23:20:03,935 - INFO - Epoch 566, Total: 0.014778, Pos: 0.005312, Mass: 0.009110
+2026-05-08 23:20:16,541 - INFO - Epoch 566, Validation loss: 0.014568621324550392
+2026-05-08 23:20:50,565 - INFO - Epoch 567, Total: 0.014631, Pos: 0.005077, Mass: 0.010317
+2026-05-08 23:21:05,217 - INFO - Epoch 567, Validation loss: 0.014610456438082406
+2026-05-08 23:21:39,056 - INFO - Epoch 568, Total: 0.014607, Pos: 0.005157, Mass: 0.009024
+2026-05-08 23:21:51,724 - INFO - Epoch 568, Validation loss: 0.014547403161533369
+2026-05-08 23:22:25,570 - INFO - Epoch 569, Total: 0.014650, Pos: 0.005063, Mass: 0.009690
+2026-05-08 23:22:38,171 - INFO - Epoch 569, Validation loss: 0.014426163708170256
+2026-05-08 23:23:12,242 - INFO - Epoch 570, Total: 0.014693, Pos: 0.005365, Mass: 0.008866
+2026-05-08 23:23:24,839 - INFO - Epoch 570, Validation loss: 0.01456763713946964
+2026-05-08 23:23:58,937 - INFO - Epoch 571, Total: 0.014698, Pos: 0.005501, Mass: 0.009559
+2026-05-08 23:24:12,895 - INFO - Epoch 571, Validation loss: 0.01463529465194696
+2026-05-08 23:24:47,844 - INFO - Epoch 572, Total: 0.014667, Pos: 0.005136, Mass: 0.008321
+2026-05-08 23:25:00,359 - INFO - Epoch 572, Validation loss: 0.014585234296436492
+2026-05-08 23:25:34,188 - INFO - Epoch 573, Total: 0.014597, Pos: 0.005271, Mass: 0.009483
+2026-05-08 23:25:46,689 - INFO - Epoch 573, Validation loss: 0.01462263168178053
+2026-05-08 23:26:21,277 - INFO - Epoch 574, Total: 0.014646, Pos: 0.005472, Mass: 0.008506
+2026-05-08 23:26:36,094 - INFO - Epoch 574, Validation loss: 0.014558135125881586
+2026-05-08 23:27:09,943 - INFO - Epoch 575, Total: 0.014638, Pos: 0.005244, Mass: 0.009676
+2026-05-08 23:27:22,532 - INFO - Epoch 575, Validation loss: 0.014570483834379248
+2026-05-08 23:27:56,323 - INFO - Epoch 576, Total: 0.014663, Pos: 0.005196, Mass: 0.009498
+2026-05-08 23:28:08,946 - INFO - Epoch 576, Validation loss: 0.014593106869640004
+2026-05-08 23:28:43,302 - INFO - Epoch 577, Total: 0.014697, Pos: 0.005116, Mass: 0.011180
+2026-05-08 23:28:56,699 - INFO - Epoch 577, Validation loss: 0.014600169208123643
+2026-05-08 23:29:30,825 - INFO - Epoch 578, Total: 0.014653, Pos: 0.005177, Mass: 0.010287
+2026-05-08 23:29:43,714 - INFO - Epoch 578, Validation loss: 0.014557938863579025
+2026-05-08 23:30:18,146 - INFO - Epoch 579, Total: 0.014605, Pos: 0.005484, Mass: 0.009821
+2026-05-08 23:30:30,679 - INFO - Epoch 579, Validation loss: 0.014602436286070917
+2026-05-08 23:31:04,656 - INFO - Epoch 580, Total: 0.014568, Pos: 0.005174, Mass: 0.009090
+2026-05-08 23:31:17,716 - INFO - Epoch 580, Validation loss: 0.01458955960523369
+2026-05-08 23:31:51,647 - INFO - Epoch 581, Total: 0.014632, Pos: 0.005185, Mass: 0.008683
+2026-05-08 23:32:04,239 - INFO - Epoch 581, Validation loss: 0.014633810139683068
+2026-05-08 23:32:38,142 - INFO - Epoch 582, Total: 0.014618, Pos: 0.005428, Mass: 0.008954
+2026-05-08 23:32:50,871 - INFO - Epoch 582, Validation loss: 0.014540717801731875
+2026-05-08 23:33:24,890 - INFO - Epoch 583, Total: 0.014700, Pos: 0.004975, Mass: 0.010239
+2026-05-08 23:33:37,459 - INFO - Epoch 583, Validation loss: 0.014564402043246306
+2026-05-08 23:34:11,260 - INFO - Epoch 584, Total: 0.014620, Pos: 0.005180, Mass: 0.009329
+2026-05-08 23:34:23,887 - INFO - Epoch 584, Validation loss: 0.014586471944537938
+2026-05-08 23:34:59,405 - INFO - Epoch 585, Total: 0.014599, Pos: 0.005232, Mass: 0.008546
+2026-05-08 23:35:11,579 - INFO - Epoch 585, Validation loss: 0.014501717578396838
+2026-05-08 23:35:45,778 - INFO - Epoch 586, Total: 0.014665, Pos: 0.004997, Mass: 0.009209
+2026-05-08 23:35:58,411 - INFO - Epoch 586, Validation loss: 0.014544562460520329
+2026-05-08 23:36:32,522 - INFO - Epoch 587, Total: 0.014631, Pos: 0.005134, Mass: 0.008350
+2026-05-08 23:36:45,104 - INFO - Epoch 587, Validation loss: 0.014505988464523584
+2026-05-08 23:37:19,283 - INFO - Epoch 588, Total: 0.014638, Pos: 0.005495, Mass: 0.009577
+2026-05-08 23:37:32,820 - INFO - Epoch 588, Validation loss: 0.014562539278696746
+2026-05-08 23:38:08,636 - INFO - Epoch 589, Total: 0.014623, Pos: 0.005075, Mass: 0.009156
+2026-05-08 23:38:24,499 - INFO - Epoch 589, Validation loss: 0.014598527135184178
+2026-05-08 23:38:58,561 - INFO - Epoch 590, Total: 0.014690, Pos: 0.005049, Mass: 0.008866
+2026-05-08 23:39:11,681 - INFO - Epoch 590, Validation loss: 0.014531973582238723
+2026-05-08 23:39:45,988 - INFO - Epoch 591, Total: 0.014619, Pos: 0.005580, Mass: 0.009946
+2026-05-08 23:39:58,683 - INFO - Epoch 591, Validation loss: 0.014645740915185366
+2026-05-08 23:40:33,734 - INFO - Epoch 592, Total: 0.014654, Pos: 0.005703, Mass: 0.009958
+2026-05-08 23:40:46,269 - INFO - Epoch 592, Validation loss: 0.014624783777209938
+2026-05-08 23:41:20,317 - INFO - Epoch 593, Total: 0.014566, Pos: 0.004915, Mass: 0.009150
+2026-05-08 23:41:32,894 - INFO - Epoch 593, Validation loss: 0.014564744061511805
+2026-05-08 23:42:06,786 - INFO - Epoch 594, Total: 0.014686, Pos: 0.005273, Mass: 0.008317
+2026-05-08 23:42:19,288 - INFO - Epoch 594, Validation loss: 0.014437372079835488
+2026-05-08 23:42:53,236 - INFO - Epoch 595, Total: 0.014644, Pos: 0.005055, Mass: 0.009867
+2026-05-08 23:43:05,801 - INFO - Epoch 595, Validation loss: 0.0146326972808466
+2026-05-08 23:43:39,839 - INFO - Epoch 596, Total: 0.014672, Pos: 0.005189, Mass: 0.009391
+2026-05-08 23:43:52,475 - INFO - Epoch 596, Validation loss: 0.014551807481508989
+2026-05-08 23:44:26,506 - INFO - Epoch 597, Total: 0.014610, Pos: 0.005622, Mass: 0.010246
+2026-05-08 23:44:41,014 - INFO - Epoch 597, Validation loss: 0.01458952963575084
+2026-05-08 23:45:15,411 - INFO - Epoch 598, Total: 0.014625, Pos: 0.005419, Mass: 0.010251
+2026-05-08 23:45:27,973 - INFO - Epoch 598, Validation loss: 0.014571538879575893
+2026-05-08 23:46:01,956 - INFO - Epoch 599, Total: 0.014674, Pos: 0.005245, Mass: 0.009866
+2026-05-08 23:46:14,499 - INFO - Epoch 599, Validation loss: 0.014556822462532764
+2026-05-08 23:46:49,366 - INFO - Epoch 600, Total: 0.014638, Pos: 0.005460, Mass: 0.008637
+2026-05-08 23:47:01,886 - INFO - Epoch 600, Validation loss: 0.01458327839962947
+2026-05-08 23:47:37,767 - INFO - Epoch 601, Total: 0.014621, Pos: 0.005543, Mass: 0.008198
+2026-05-08 23:48:01,635 - INFO - Epoch 601, Validation loss: 0.014519470624434642
+2026-05-08 23:48:38,641 - INFO - Epoch 602, Total: 0.014698, Pos: 0.004895, Mass: 0.008789
+2026-05-08 23:48:51,302 - INFO - Epoch 602, Validation loss: 0.014581601589153975
+2026-05-08 23:49:25,872 - INFO - Epoch 603, Total: 0.014619, Pos: 0.005305, Mass: 0.007972
+2026-05-08 23:49:39,842 - INFO - Epoch 603, Validation loss: 0.014564996633010033
+2026-05-08 23:50:13,943 - INFO - Epoch 604, Total: 0.014669, Pos: 0.005356, Mass: 0.009969
+2026-05-08 23:50:27,362 - INFO - Epoch 604, Validation loss: 0.014650998215199027
+2026-05-08 23:51:01,543 - INFO - Epoch 605, Total: 0.014601, Pos: 0.004939, Mass: 0.008557
+2026-05-08 23:51:14,130 - INFO - Epoch 605, Validation loss: 0.014617497411866983
+2026-05-08 23:51:48,954 - INFO - Epoch 606, Total: 0.014657, Pos: 0.005601, Mass: 0.007969
+2026-05-08 23:52:04,370 - INFO - Epoch 606, Validation loss: 0.014422583672353346
+2026-05-08 23:52:38,345 - INFO - Epoch 607, Total: 0.014631, Pos: 0.005507, Mass: 0.010262
+2026-05-08 23:52:51,931 - INFO - Epoch 607, Validation loss: 0.01453347966616225
+2026-05-08 23:53:27,635 - INFO - Epoch 608, Total: 0.014609, Pos: 0.005145, Mass: 0.008031
+2026-05-08 23:53:44,722 - INFO - Epoch 608, Validation loss: 0.014537583869428206
+2026-05-08 23:54:18,735 - INFO - Epoch 609, Total: 0.014650, Pos: 0.005390, Mass: 0.009559
+2026-05-08 23:54:31,579 - INFO - Epoch 609, Validation loss: 0.014530744857321948
+2026-05-08 23:55:05,560 - INFO - Epoch 610, Total: 0.014641, Pos: 0.005312, Mass: 0.008491
+2026-05-08 23:55:18,155 - INFO - Epoch 610, Validation loss: 0.014542618400266027
+2026-05-08 23:55:54,425 - INFO - Epoch 611, Total: 0.014626, Pos: 0.005393, Mass: 0.009258
+2026-05-08 23:56:07,034 - INFO - Epoch 611, Validation loss: 0.014605839967600301
+2026-05-08 23:56:46,592 - INFO - Epoch 612, Total: 0.014666, Pos: 0.005117, Mass: 0.009206
+2026-05-08 23:56:59,177 - INFO - Epoch 612, Validation loss: 0.01462579026627235
+2026-05-08 23:57:33,537 - INFO - Epoch 613, Total: 0.014657, Pos: 0.005243, Mass: 0.010032
+2026-05-08 23:57:52,324 - INFO - Epoch 613, Validation loss: 0.014540670447560966
+2026-05-08 23:58:26,700 - INFO - Epoch 614, Total: 0.014630, Pos: 0.005133, Mass: 0.008624
+2026-05-08 23:58:39,424 - INFO - Epoch 614, Validation loss: 0.014513319199029198
+2026-05-08 23:59:13,488 - INFO - Epoch 615, Total: 0.014634, Pos: 0.005703, Mass: 0.009151
+2026-05-08 23:59:26,252 - INFO - Epoch 615, Validation loss: 0.014577116960516343
+2026-05-09 00:00:00,260 - INFO - Epoch 616, Total: 0.014584, Pos: 0.005214, Mass: 0.009467
+2026-05-09 00:00:13,000 - INFO - Epoch 616, Validation loss: 0.01454785125505211
+2026-05-09 00:00:47,618 - INFO - Epoch 617, Total: 0.014630, Pos: 0.005245, Mass: 0.009974
+2026-05-09 00:01:03,749 - INFO - Epoch 617, Validation loss: 0.014493917624474082
+2026-05-09 00:01:37,676 - INFO - Epoch 618, Total: 0.014637, Pos: 0.005335, Mass: 0.009921
+2026-05-09 00:01:50,210 - INFO - Epoch 618, Validation loss: 0.014493510031547302
+2026-05-09 00:02:24,161 - INFO - Epoch 619, Total: 0.014594, Pos: 0.005094, Mass: 0.008882
+2026-05-09 00:02:36,757 - INFO - Epoch 619, Validation loss: 0.014559758429089163
+2026-05-09 00:03:12,025 - INFO - Epoch 620, Total: 0.014671, Pos: 0.005511, Mass: 0.008781
+2026-05-09 00:03:24,571 - INFO - Epoch 620, Validation loss: 0.014555575381805245
+2026-05-09 00:03:58,770 - INFO - Epoch 621, Total: 0.014568, Pos: 0.005264, Mass: 0.010102
+2026-05-09 00:04:12,450 - INFO - Epoch 621, Validation loss: 0.014543122484579556
+2026-05-09 00:04:49,261 - INFO - Epoch 622, Total: 0.014664, Pos: 0.005530, Mass: 0.009345
+2026-05-09 00:05:01,802 - INFO - Epoch 622, Validation loss: 0.014608414923278695
+2026-05-09 00:05:35,708 - INFO - Epoch 623, Total: 0.014702, Pos: 0.005668, Mass: 0.009549
+2026-05-09 00:05:48,456 - INFO - Epoch 623, Validation loss: 0.014628668291828571
+2026-05-09 00:06:22,390 - INFO - Epoch 624, Total: 0.014673, Pos: 0.005217, Mass: 0.010709
+2026-05-09 00:06:36,335 - INFO - Epoch 624, Validation loss: 0.014606466365611961
+2026-05-09 00:07:10,277 - INFO - Epoch 625, Total: 0.014663, Pos: 0.005291, Mass: 0.007658
+2026-05-09 00:07:22,945 - INFO - Epoch 625, Validation loss: 0.014641455318937954
+2026-05-09 00:07:56,840 - INFO - Epoch 626, Total: 0.014660, Pos: 0.005034, Mass: 0.009443
+2026-05-09 00:08:11,902 - INFO - Epoch 626, Validation loss: 0.014567913431833442
+2026-05-09 00:08:46,435 - INFO - Epoch 627, Total: 0.014666, Pos: 0.005093, Mass: 0.009913
+2026-05-09 00:08:58,978 - INFO - Epoch 627, Validation loss: 0.01457171606966573
+2026-05-09 00:09:33,293 - INFO - Epoch 628, Total: 0.014617, Pos: 0.005200, Mass: 0.010397
+2026-05-09 00:10:11,419 - INFO - Epoch 628, Validation loss: 0.014531489374100143
+2026-05-09 00:10:45,867 - INFO - Epoch 629, Total: 0.014635, Pos: 0.005024, Mass: 0.011574
+2026-05-09 00:10:58,428 - INFO - Epoch 629, Validation loss: 0.01457478566111153
+2026-05-09 00:11:32,312 - INFO - Epoch 630, Total: 0.014681, Pos: 0.004965, Mass: 0.008436
+2026-05-09 00:11:46,058 - INFO - Epoch 630, Validation loss: 0.014687714604740469
+2026-05-09 00:12:21,318 - INFO - Epoch 631, Total: 0.014595, Pos: 0.005487, Mass: 0.010197
+2026-05-09 00:12:33,935 - INFO - Epoch 631, Validation loss: 0.01461130241330108
+2026-05-09 00:13:11,882 - INFO - Epoch 632, Total: 0.014540, Pos: 0.005175, Mass: 0.008787
+2026-05-09 00:13:27,279 - INFO - Epoch 632, Validation loss: 0.014536277279576175
+2026-05-09 00:14:01,281 - INFO - Epoch 633, Total: 0.014597, Pos: 0.005620, Mass: 0.007989
+2026-05-09 00:14:13,990 - INFO - Epoch 633, Validation loss: 0.014534199236231482
+2026-05-09 00:14:48,852 - INFO - Epoch 634, Total: 0.014672, Pos: 0.004962, Mass: 0.009263
+2026-05-09 00:15:01,332 - INFO - Epoch 634, Validation loss: 0.014533430457306214
+2026-05-09 00:15:34,964 - INFO - Epoch 635, Total: 0.014671, Pos: 0.005177, Mass: 0.009712
+2026-05-09 00:15:50,384 - INFO - Epoch 635, Validation loss: 0.01458237488141172
+2026-05-09 00:16:25,197 - INFO - Epoch 636, Total: 0.014591, Pos: 0.004882, Mass: 0.010574
+2026-05-09 00:16:37,795 - INFO - Epoch 636, Validation loss: 0.014570227314710107
+2026-05-09 00:17:11,620 - INFO - Epoch 637, Total: 0.014515, Pos: 0.004973, Mass: 0.008286
+2026-05-09 00:17:24,314 - INFO - Epoch 637, Validation loss: 0.014586556615292007
+2026-05-09 00:17:58,278 - INFO - Epoch 638, Total: 0.014646, Pos: 0.004983, Mass: 0.009707
+2026-05-09 00:18:10,905 - INFO - Epoch 638, Validation loss: 0.014474643322710808
+2026-05-09 00:18:45,280 - INFO - Epoch 639, Total: 0.014656, Pos: 0.004978, Mass: 0.009579
+2026-05-09 00:18:57,888 - INFO - Epoch 639, Validation loss: 0.014559708694871673
+2026-05-09 00:19:31,781 - INFO - Epoch 640, Total: 0.014675, Pos: 0.005503, Mass: 0.008665
+2026-05-09 00:19:44,355 - INFO - Epoch 640, Validation loss: 0.014510990080670414
+2026-05-09 00:20:18,666 - INFO - Epoch 641, Total: 0.014661, Pos: 0.004721, Mass: 0.010821
+2026-05-09 00:20:31,382 - INFO - Epoch 641, Validation loss: 0.01453327562691819
+2026-05-09 00:21:05,552 - INFO - Epoch 642, Total: 0.014654, Pos: 0.005656, Mass: 0.008997
+2026-05-09 00:21:18,042 - INFO - Epoch 642, Validation loss: 0.014626706791166058
+2026-05-09 00:21:52,081 - INFO - Epoch 643, Total: 0.014585, Pos: 0.005654, Mass: 0.009706
+2026-05-09 00:22:04,668 - INFO - Epoch 643, Validation loss: 0.014563874795268744
+2026-05-09 00:22:38,586 - INFO - Epoch 644, Total: 0.014586, Pos: 0.005230, Mass: 0.007365
+2026-05-09 00:22:51,173 - INFO - Epoch 644, Validation loss: 0.014497318129954685
+2026-05-09 00:23:25,286 - INFO - Epoch 645, Total: 0.014644, Pos: 0.005317, Mass: 0.010756
+2026-05-09 00:23:37,851 - INFO - Epoch 645, Validation loss: 0.014669881051040104
+2026-05-09 00:24:11,858 - INFO - Epoch 646, Total: 0.014629, Pos: 0.004799, Mass: 0.008560
+2026-05-09 00:24:24,424 - INFO - Epoch 646, Validation loss: 0.014611021926005682
+2026-05-09 00:24:58,431 - INFO - Epoch 647, Total: 0.014625, Pos: 0.005179, Mass: 0.009067
+2026-05-09 00:25:11,085 - INFO - Epoch 647, Validation loss: 0.014584126619574351
+2026-05-09 00:25:48,187 - INFO - Epoch 648, Total: 0.014667, Pos: 0.005114, Mass: 0.009362
+2026-05-09 00:26:03,068 - INFO - Epoch 648, Validation loss: 0.014479018182644987
+2026-05-09 00:26:37,951 - INFO - Epoch 649, Total: 0.014716, Pos: 0.005013, Mass: 0.010149
+2026-05-09 00:26:50,499 - INFO - Epoch 649, Validation loss: 0.0146686088723632
+2026-05-09 00:27:24,389 - INFO - Epoch 650, Total: 0.014691, Pos: 0.005311, Mass: 0.009856
+2026-05-09 00:27:37,313 - INFO - Epoch 650, Validation loss: 0.014546476877652682
+2026-05-09 00:28:11,081 - INFO - Epoch 651, Total: 0.014664, Pos: 0.005108, Mass: 0.007813
+2026-05-09 00:28:23,671 - INFO - Epoch 651, Validation loss: 0.014589091380819296
+2026-05-09 00:28:57,585 - INFO - Epoch 652, Total: 0.014692, Pos: 0.005310, Mass: 0.008752
+2026-05-09 00:29:11,588 - INFO - Epoch 652, Validation loss: 0.01455446844522515
+2026-05-09 00:29:45,857 - INFO - Epoch 653, Total: 0.014569, Pos: 0.005426, Mass: 0.007957
+2026-05-09 00:29:58,461 - INFO - Epoch 653, Validation loss: 0.014497091794688987
+2026-05-09 00:30:33,783 - INFO - Epoch 654, Total: 0.014586, Pos: 0.005569, Mass: 0.009022
+2026-05-09 00:30:46,363 - INFO - Epoch 654, Validation loss: 0.014477761701131478
+2026-05-09 00:31:21,711 - INFO - Epoch 655, Total: 0.014682, Pos: 0.005104, Mass: 0.008771
+2026-05-09 00:31:38,348 - INFO - Epoch 655, Validation loss: 0.014567904707649324
+2026-05-09 00:32:12,322 - INFO - Epoch 656, Total: 0.014711, Pos: 0.005461, Mass: 0.009967
+2026-05-09 00:32:25,839 - INFO - Epoch 656, Validation loss: 0.014584819316609293
+2026-05-09 00:32:59,797 - INFO - Epoch 657, Total: 0.014645, Pos: 0.004784, Mass: 0.010421
+2026-05-09 00:33:12,386 - INFO - Epoch 657, Validation loss: 0.014567898140631171
+2026-05-09 00:33:46,853 - INFO - Epoch 658, Total: 0.014639, Pos: 0.005062, Mass: 0.008211
+2026-05-09 00:33:59,470 - INFO - Epoch 658, Validation loss: 0.014539640866474718
+2026-05-09 00:34:33,582 - INFO - Epoch 659, Total: 0.014651, Pos: 0.005185, Mass: 0.008679
+2026-05-09 00:34:46,181 - INFO - Epoch 659, Validation loss: 0.014531838460865185
+2026-05-09 00:35:20,590 - INFO - Epoch 660, Total: 0.014698, Pos: 0.005002, Mass: 0.008762
+2026-05-09 00:35:33,161 - INFO - Epoch 660, Validation loss: 0.014495162731116144
+2026-05-09 00:36:07,079 - INFO - Epoch 661, Total: 0.014583, Pos: 0.005127, Mass: 0.009724
+2026-05-09 00:36:19,692 - INFO - Epoch 661, Validation loss: 0.014505489761184933
+2026-05-09 00:36:53,935 - INFO - Epoch 662, Total: 0.014631, Pos: 0.004982, Mass: 0.008908
+2026-05-09 00:37:06,561 - INFO - Epoch 662, Validation loss: 0.014518287112442857
+2026-05-09 00:37:40,578 - INFO - Epoch 663, Total: 0.014708, Pos: 0.004971, Mass: 0.009935
+2026-05-09 00:37:53,444 - INFO - Epoch 663, Validation loss: 0.014542237115211977
+2026-05-09 00:38:28,398 - INFO - Epoch 664, Total: 0.014584, Pos: 0.004973, Mass: 0.009363
+2026-05-09 00:38:40,954 - INFO - Epoch 664, Validation loss: 0.014551083509547588
+2026-05-09 00:39:15,282 - INFO - Epoch 665, Total: 0.014687, Pos: 0.005565, Mass: 0.009701
+2026-05-09 00:39:29,185 - INFO - Epoch 665, Validation loss: 0.014615160842927603
+2026-05-09 00:40:08,482 - INFO - Epoch 666, Total: 0.014775, Pos: 0.005616, Mass: 0.009964
+2026-05-09 00:40:25,971 - INFO - Epoch 666, Validation loss: 0.014601763043329757
+2026-05-09 00:41:00,070 - INFO - Epoch 667, Total: 0.014583, Pos: 0.005239, Mass: 0.009400
+2026-05-09 00:41:12,534 - INFO - Epoch 667, Validation loss: 0.014645189970222294
+2026-05-09 00:41:47,193 - INFO - Epoch 668, Total: 0.014649, Pos: 0.005410, Mass: 0.008869
+2026-05-09 00:41:59,713 - INFO - Epoch 668, Validation loss: 0.014571029820248611
+2026-05-09 00:42:34,117 - INFO - Epoch 669, Total: 0.014652, Pos: 0.005703, Mass: 0.008870
+2026-05-09 00:42:46,618 - INFO - Epoch 669, Validation loss: 0.014489341654583938
+2026-05-09 00:43:20,840 - INFO - Epoch 670, Total: 0.014661, Pos: 0.005275, Mass: 0.009179
+2026-05-09 00:43:33,299 - INFO - Epoch 670, Validation loss: 0.014613114838671481
+2026-05-09 00:44:06,949 - INFO - Epoch 671, Total: 0.014689, Pos: 0.005330, Mass: 0.008597
+2026-05-09 00:44:19,498 - INFO - Epoch 671, Validation loss: 0.014462409652451165
+2026-05-09 00:44:53,633 - INFO - Epoch 672, Total: 0.014624, Pos: 0.005138, Mass: 0.009410
+2026-05-09 00:45:06,199 - INFO - Epoch 672, Validation loss: 0.014570886539852517
+2026-05-09 00:45:40,128 - INFO - Epoch 673, Total: 0.014732, Pos: 0.005186, Mass: 0.010660
+2026-05-09 00:45:52,697 - INFO - Epoch 673, Validation loss: 0.014566165371200977
+2026-05-09 00:46:26,557 - INFO - Epoch 674, Total: 0.014641, Pos: 0.005304, Mass: 0.009788
+2026-05-09 00:46:39,103 - INFO - Epoch 674, Validation loss: 0.014569552774485359
+2026-05-09 00:47:12,939 - INFO - Epoch 675, Total: 0.014667, Pos: 0.005045, Mass: 0.009557
+2026-05-09 00:47:25,655 - INFO - Epoch 675, Validation loss: 0.014526086429563852
+2026-05-09 00:47:59,646 - INFO - Epoch 676, Total: 0.014708, Pos: 0.005319, Mass: 0.008153
+2026-05-09 00:48:12,297 - INFO - Epoch 676, Validation loss: 0.014729903748211188
+2026-05-09 00:48:47,124 - INFO - Epoch 677, Total: 0.014577, Pos: 0.005277, Mass: 0.009359
+2026-05-09 00:48:59,681 - INFO - Epoch 677, Validation loss: 0.014702515461697029
+2026-05-09 00:49:33,611 - INFO - Epoch 678, Total: 0.014727, Pos: 0.005462, Mass: 0.010888
+2026-05-09 00:49:46,172 - INFO - Epoch 678, Validation loss: 0.014553392648251139
+2026-05-09 00:50:20,537 - INFO - Epoch 679, Total: 0.014661, Pos: 0.004795, Mass: 0.009933
+2026-05-09 00:50:32,980 - INFO - Epoch 679, Validation loss: 0.014550253844414001
+2026-05-09 00:51:06,938 - INFO - Epoch 680, Total: 0.014631, Pos: 0.005377, Mass: 0.009815
+2026-05-09 00:51:19,423 - INFO - Epoch 680, Validation loss: 0.014578356065301813
+2026-05-09 00:51:53,489 - INFO - Epoch 681, Total: 0.014582, Pos: 0.005156, Mass: 0.009749
+2026-05-09 00:52:07,590 - INFO - Epoch 681, Validation loss: 0.01452673202714859
+2026-05-09 00:52:41,505 - INFO - Epoch 682, Total: 0.014609, Pos: 0.005178, Mass: 0.009471
+2026-05-09 00:52:54,216 - INFO - Epoch 682, Validation loss: 0.01465639593000086
+2026-05-09 00:53:28,762 - INFO - Epoch 683, Total: 0.014635, Pos: 0.005170, Mass: 0.009857
+2026-05-09 00:53:41,287 - INFO - Epoch 683, Validation loss: 0.014632397721338475
+2026-05-09 00:54:15,560 - INFO - Epoch 684, Total: 0.014628, Pos: 0.004633, Mass: 0.010074
+2026-05-09 00:54:29,918 - INFO - Epoch 684, Validation loss: 0.014565789260161228
+2026-05-09 00:55:04,239 - INFO - Epoch 685, Total: 0.014664, Pos: 0.004956, Mass: 0.009157
+2026-05-09 00:55:20,045 - INFO - Epoch 685, Validation loss: 0.014541562391906722
+2026-05-09 00:55:54,194 - INFO - Epoch 686, Total: 0.014656, Pos: 0.004840, Mass: 0.010490
+2026-05-09 00:56:06,868 - INFO - Epoch 686, Validation loss: 0.0146086274797463
+2026-05-09 00:56:41,019 - INFO - Epoch 687, Total: 0.014697, Pos: 0.005289, Mass: 0.009675
+2026-05-09 00:56:53,988 - INFO - Epoch 687, Validation loss: 0.01461490856595019
+2026-05-09 00:57:29,161 - INFO - Epoch 688, Total: 0.014651, Pos: 0.005309, Mass: 0.009285
+2026-05-09 00:57:43,766 - INFO - Epoch 688, Validation loss: 0.014581957203137059
+2026-05-09 00:58:18,303 - INFO - Epoch 689, Total: 0.014585, Pos: 0.005125, Mass: 0.008434
+2026-05-09 00:58:31,547 - INFO - Epoch 689, Validation loss: 0.014560994413546007
+2026-05-09 00:59:05,927 - INFO - Epoch 690, Total: 0.014613, Pos: 0.004896, Mass: 0.009375
+2026-05-09 00:59:32,703 - INFO - Epoch 690, Validation loss: 0.014598460008318607
+2026-05-09 01:00:06,638 - INFO - Epoch 691, Total: 0.014672, Pos: 0.005292, Mass: 0.010124
+2026-05-09 01:00:19,228 - INFO - Epoch 691, Validation loss: 0.014523566111476503
+2026-05-09 01:00:53,164 - INFO - Epoch 692, Total: 0.014647, Pos: 0.005245, Mass: 0.010478
+2026-05-09 01:01:05,681 - INFO - Epoch 692, Validation loss: 0.014577644089093575
+2026-05-09 01:01:40,487 - INFO - Epoch 693, Total: 0.014643, Pos: 0.005118, Mass: 0.010169
+2026-05-09 01:01:52,902 - INFO - Epoch 693, Validation loss: 0.014661212618916463
+2026-05-09 01:02:26,873 - INFO - Epoch 694, Total: 0.014636, Pos: 0.004801, Mass: 0.009264
+2026-05-09 01:02:40,129 - INFO - Epoch 694, Validation loss: 0.014557973800115606
+2026-05-09 01:03:15,780 - INFO - Epoch 695, Total: 0.014676, Pos: 0.005193, Mass: 0.010218
+2026-05-09 01:03:28,319 - INFO - Epoch 695, Validation loss: 0.014614319062640524
+2026-05-09 01:04:02,366 - INFO - Epoch 696, Total: 0.014593, Pos: 0.005619, Mass: 0.009650
+2026-05-09 01:04:14,927 - INFO - Epoch 696, Validation loss: 0.014518446113882411
+2026-05-09 01:04:50,365 - INFO - Epoch 697, Total: 0.014594, Pos: 0.005283, Mass: 0.009940
+2026-05-09 01:05:02,862 - INFO - Epoch 697, Validation loss: 0.014663643705157133
+2026-05-09 01:05:36,715 - INFO - Epoch 698, Total: 0.014693, Pos: 0.005274, Mass: 0.008768
+2026-05-09 01:05:50,818 - INFO - Epoch 698, Validation loss: 0.014556928975587217
+2026-05-09 01:06:32,251 - INFO - Epoch 699, Total: 0.014660, Pos: 0.005222, Mass: 0.009217
+2026-05-09 01:06:46,356 - INFO - Epoch 699, Validation loss: 0.0145609608779733
+2026-05-09 01:07:20,329 - INFO - Epoch 700, Total: 0.014612, Pos: 0.005420, Mass: 0.008832
+2026-05-09 01:07:32,968 - INFO - Epoch 700, Validation loss: 0.014599087425213084
+2026-05-09 01:08:07,127 - INFO - Epoch 701, Total: 0.014659, Pos: 0.005060, Mass: 0.007922
+2026-05-09 01:08:19,686 - INFO - Epoch 701, Validation loss: 0.01465049754573494
+2026-05-09 01:08:53,685 - INFO - Epoch 702, Total: 0.014623, Pos: 0.005216, Mass: 0.009690
+2026-05-09 01:09:06,340 - INFO - Epoch 702, Validation loss: 0.014525587853585552
+2026-05-09 01:09:40,259 - INFO - Epoch 703, Total: 0.014614, Pos: 0.005352, Mass: 0.009511
+2026-05-09 01:09:55,089 - INFO - Epoch 703, Validation loss: 0.01468369954576095
+2026-05-09 01:10:29,427 - INFO - Epoch 704, Total: 0.014639, Pos: 0.005180, Mass: 0.009267
+2026-05-09 01:10:42,004 - INFO - Epoch 704, Validation loss: 0.01452444793863429
+2026-05-09 01:11:16,381 - INFO - Epoch 705, Total: 0.014783, Pos: 0.005416, Mass: 0.009428
+2026-05-09 01:11:29,991 - INFO - Epoch 705, Validation loss: 0.01450087107781671
+2026-05-09 01:12:04,076 - INFO - Epoch 706, Total: 0.014625, Pos: 0.005335, Mass: 0.008499
+2026-05-09 01:12:16,652 - INFO - Epoch 706, Validation loss: 0.01440050395635458
+2026-05-09 01:12:50,691 - INFO - Epoch 707, Total: 0.014627, Pos: 0.005400, Mass: 0.009349
+2026-05-09 01:13:04,043 - INFO - Epoch 707, Validation loss: 0.014568353119568948
+2026-05-09 01:13:38,183 - INFO - Epoch 708, Total: 0.014674, Pos: 0.005581, Mass: 0.011799
+2026-05-09 01:13:50,715 - INFO - Epoch 708, Validation loss: 0.01455394403101542
+2026-05-09 01:14:24,617 - INFO - Epoch 709, Total: 0.014670, Pos: 0.005210, Mass: 0.010504
+2026-05-09 01:14:37,198 - INFO - Epoch 709, Validation loss: 0.01451388372378981
+2026-05-09 01:15:11,110 - INFO - Epoch 710, Total: 0.014657, Pos: 0.005578, Mass: 0.009717
+2026-05-09 01:15:23,748 - INFO - Epoch 710, Validation loss: 0.014514982366026977
+2026-05-09 01:15:57,665 - INFO - Epoch 711, Total: 0.014712, Pos: 0.005181, Mass: 0.008312
+2026-05-09 01:16:11,117 - INFO - Epoch 711, Validation loss: 0.014549070332422216
+2026-05-09 01:16:45,741 - INFO - Epoch 712, Total: 0.014643, Pos: 0.005268, Mass: 0.008751
+2026-05-09 01:16:59,737 - INFO - Epoch 712, Validation loss: 0.014513005040840715
+2026-05-09 01:17:33,697 - INFO - Epoch 713, Total: 0.014658, Pos: 0.005062, Mass: 0.008330
+2026-05-09 01:17:46,373 - INFO - Epoch 713, Validation loss: 0.014603655586321639
+2026-05-09 01:18:21,278 - INFO - Epoch 714, Total: 0.014562, Pos: 0.005796, Mass: 0.010501
+2026-05-09 01:18:33,896 - INFO - Epoch 714, Validation loss: 0.014527717366432533
+2026-05-09 01:19:08,089 - INFO - Epoch 715, Total: 0.014686, Pos: 0.005308, Mass: 0.008004
+2026-05-09 01:19:23,410 - INFO - Epoch 715, Validation loss: 0.01450724680072222
+2026-05-09 01:19:57,361 - INFO - Epoch 716, Total: 0.014655, Pos: 0.005375, Mass: 0.010286
+2026-05-09 01:20:09,974 - INFO - Epoch 716, Validation loss: 0.014508036076704152
+2026-05-09 01:20:44,114 - INFO - Epoch 717, Total: 0.014697, Pos: 0.005626, Mass: 0.008125
+2026-05-09 01:20:57,106 - INFO - Epoch 717, Validation loss: 0.014571733796634736
+2026-05-09 01:21:30,918 - INFO - Epoch 718, Total: 0.014662, Pos: 0.005148, Mass: 0.010366
+2026-05-09 01:21:43,492 - INFO - Epoch 718, Validation loss: 0.014556580637064245
+2026-05-09 01:22:17,801 - INFO - Epoch 719, Total: 0.014598, Pos: 0.005767, Mass: 0.009472
+2026-05-09 01:22:30,423 - INFO - Epoch 719, Validation loss: 0.014549383025966648
+2026-05-09 01:23:04,524 - INFO - Epoch 720, Total: 0.014690, Pos: 0.005008, Mass: 0.009263
+2026-05-09 01:23:17,079 - INFO - Epoch 720, Validation loss: 0.01449578744956316
+2026-05-09 01:23:50,991 - INFO - Epoch 721, Total: 0.014649, Pos: 0.004857, Mass: 0.008766
+2026-05-09 01:24:03,728 - INFO - Epoch 721, Validation loss: 0.014554293762542244
+2026-05-09 01:24:37,673 - INFO - Epoch 722, Total: 0.014665, Pos: 0.005101, Mass: 0.008548
+2026-05-09 01:24:53,972 - INFO - Epoch 722, Validation loss: 0.014570481406572537
+2026-05-09 01:25:28,352 - INFO - Epoch 723, Total: 0.014700, Pos: 0.004694, Mass: 0.009108
+2026-05-09 01:25:41,813 - INFO - Epoch 723, Validation loss: 0.014631890198295442
+2026-05-09 01:26:16,123 - INFO - Epoch 724, Total: 0.014725, Pos: 0.004968, Mass: 0.009771
+2026-05-09 01:26:28,751 - INFO - Epoch 724, Validation loss: 0.014571630857630163
+2026-05-09 01:27:02,524 - INFO - Epoch 725, Total: 0.014617, Pos: 0.005715, Mass: 0.008122
+2026-05-09 01:27:15,130 - INFO - Epoch 725, Validation loss: 0.014451247042952439
+2026-05-09 01:27:49,832 - INFO - Epoch 726, Total: 0.014688, Pos: 0.005018, Mass: 0.010132
+2026-05-09 01:28:04,393 - INFO - Epoch 726, Validation loss: 0.01462853435649831
+2026-05-09 01:28:38,369 - INFO - Epoch 727, Total: 0.014647, Pos: 0.005135, Mass: 0.009660
+2026-05-09 01:28:50,963 - INFO - Epoch 727, Validation loss: 0.01456094440868777
+2026-05-09 01:29:24,788 - INFO - Epoch 728, Total: 0.014578, Pos: 0.005138, Mass: 0.009511
+2026-05-09 01:29:37,407 - INFO - Epoch 728, Validation loss: 0.014606954513961433
+2026-05-09 01:30:11,736 - INFO - Epoch 729, Total: 0.014616, Pos: 0.005139, Mass: 0.008339
+2026-05-09 01:30:24,273 - INFO - Epoch 729, Validation loss: 0.01455617969075584
+2026-05-09 01:30:58,059 - INFO - Epoch 730, Total: 0.014664, Pos: 0.005326, Mass: 0.010332
+2026-05-09 01:31:10,672 - INFO - Epoch 730, Validation loss: 0.01459698603512385
+2026-05-09 01:31:44,752 - INFO - Epoch 731, Total: 0.014705, Pos: 0.005364, Mass: 0.008278
+2026-05-09 01:31:57,750 - INFO - Epoch 731, Validation loss: 0.01464762500463388
+2026-05-09 01:32:31,816 - INFO - Epoch 732, Total: 0.014618, Pos: 0.005205, Mass: 0.009511
+2026-05-09 01:32:44,438 - INFO - Epoch 732, Validation loss: 0.014616719025195155
+2026-05-09 01:33:21,374 - INFO - Epoch 733, Total: 0.014659, Pos: 0.005537, Mass: 0.008333
+2026-05-09 01:33:33,983 - INFO - Epoch 733, Validation loss: 0.014545334375694267
+2026-05-09 01:34:08,007 - INFO - Epoch 734, Total: 0.014621, Pos: 0.005607, Mass: 0.008027
+2026-05-09 01:34:20,550 - INFO - Epoch 734, Validation loss: 0.014618844183910096
+2026-05-09 01:34:54,490 - INFO - Epoch 735, Total: 0.014637, Pos: 0.005390, Mass: 0.009851
+2026-05-09 01:35:07,212 - INFO - Epoch 735, Validation loss: 0.014568730965893492
+2026-05-09 01:35:41,098 - INFO - Epoch 736, Total: 0.014645, Pos: 0.004840, Mass: 0.010094
+2026-05-09 01:35:53,799 - INFO - Epoch 736, Validation loss: 0.014612177729160868
+2026-05-09 01:36:27,742 - INFO - Epoch 737, Total: 0.014592, Pos: 0.005442, Mass: 0.009255
+2026-05-09 01:36:40,424 - INFO - Epoch 737, Validation loss: 0.014525689495106539
+2026-05-09 01:37:14,399 - INFO - Epoch 738, Total: 0.014650, Pos: 0.005047, Mass: 0.008414
+2026-05-09 01:37:27,001 - INFO - Epoch 738, Validation loss: 0.014532033385884048
+2026-05-09 01:38:00,897 - INFO - Epoch 739, Total: 0.014656, Pos: 0.004920, Mass: 0.010029
+2026-05-09 01:38:13,465 - INFO - Epoch 739, Validation loss: 0.014491853742008535
+2026-05-09 01:38:48,505 - INFO - Epoch 740, Total: 0.014678, Pos: 0.005194, Mass: 0.008758
+2026-05-09 01:39:01,467 - INFO - Epoch 740, Validation loss: 0.014449346603618728
+2026-05-09 01:39:35,403 - INFO - Epoch 741, Total: 0.014674, Pos: 0.005452, Mass: 0.009154
+2026-05-09 01:39:48,034 - INFO - Epoch 741, Validation loss: 0.01446667830977175
+2026-05-09 01:40:21,963 - INFO - Epoch 742, Total: 0.014596, Pos: 0.005152, Mass: 0.008240
+2026-05-09 01:40:34,543 - INFO - Epoch 742, Validation loss: 0.014513852011062141
+2026-05-09 01:41:08,329 - INFO - Epoch 743, Total: 0.014674, Pos: 0.005485, Mass: 0.009232
+2026-05-09 01:41:20,912 - INFO - Epoch 743, Validation loss: 0.014581788681511186
+2026-05-09 01:41:55,487 - INFO - Epoch 744, Total: 0.014618, Pos: 0.005339, Mass: 0.010594
+2026-05-09 01:42:08,086 - INFO - Epoch 744, Validation loss: 0.01450933519209552
+2026-05-09 01:42:42,057 - INFO - Epoch 745, Total: 0.014682, Pos: 0.005065, Mass: 0.010756
+2026-05-09 01:42:55,994 - INFO - Epoch 745, Validation loss: 0.014800285824980492
+2026-05-09 01:43:30,049 - INFO - Epoch 746, Total: 0.014602, Pos: 0.004700, Mass: 0.009873
+2026-05-09 01:43:45,434 - INFO - Epoch 746, Validation loss: 0.014625682224893672
+2026-05-09 01:44:28,090 - INFO - Epoch 747, Total: 0.014607, Pos: 0.005051, Mass: 0.009276
+2026-05-09 01:44:40,609 - INFO - Epoch 747, Validation loss: 0.014507207438413404
+2026-05-09 01:45:14,513 - INFO - Epoch 748, Total: 0.014645, Pos: 0.004842, Mass: 0.010535
+2026-05-09 01:45:27,081 - INFO - Epoch 748, Validation loss: 0.014461426971814571
+2026-05-09 01:46:01,258 - INFO - Epoch 749, Total: 0.014634, Pos: 0.005157, Mass: 0.008994
+2026-05-09 01:46:13,849 - INFO - Epoch 749, Validation loss: 0.014615716794744516
+2026-05-09 01:46:48,197 - INFO - Epoch 750, Total: 0.014677, Pos: 0.004945, Mass: 0.009559
+2026-05-09 01:47:00,798 - INFO - Epoch 750, Validation loss: 0.014614258900794208
+2026-05-09 01:47:37,539 - INFO - Epoch 751, Total: 0.014639, Pos: 0.005531, Mass: 0.010368
+2026-05-09 01:47:50,161 - INFO - Epoch 751, Validation loss: 0.014597069503914597
+2026-05-09 01:48:24,183 - INFO - Epoch 752, Total: 0.014641, Pos: 0.005353, Mass: 0.009380
+2026-05-09 01:48:37,829 - INFO - Epoch 752, Validation loss: 0.014602957038670523
+2026-05-09 01:49:11,793 - INFO - Epoch 753, Total: 0.014620, Pos: 0.005157, Mass: 0.008499
+2026-05-09 01:49:26,564 - INFO - Epoch 753, Validation loss: 0.014614692308072351
+2026-05-09 01:50:00,481 - INFO - Epoch 754, Total: 0.014619, Pos: 0.005684, Mass: 0.008421
+2026-05-09 01:50:13,073 - INFO - Epoch 754, Validation loss: 0.014564018975147325
+2026-05-09 01:50:47,246 - INFO - Epoch 755, Total: 0.014644, Pos: 0.005291, Mass: 0.009359
+2026-05-09 01:50:59,825 - INFO - Epoch 755, Validation loss: 0.014698038490600565
+2026-05-09 01:51:33,653 - INFO - Epoch 756, Total: 0.014708, Pos: 0.005390, Mass: 0.009664
+2026-05-09 01:51:46,256 - INFO - Epoch 756, Validation loss: 0.014605569844253553
+2026-05-09 01:52:20,184 - INFO - Epoch 757, Total: 0.014685, Pos: 0.005122, Mass: 0.009269
+2026-05-09 01:52:34,573 - INFO - Epoch 757, Validation loss: 0.014526722188561391
+2026-05-09 01:53:08,539 - INFO - Epoch 758, Total: 0.014600, Pos: 0.005159, Mass: 0.008607
+2026-05-09 01:53:21,135 - INFO - Epoch 758, Validation loss: 0.014567457258892365
+2026-05-09 01:53:55,227 - INFO - Epoch 759, Total: 0.014585, Pos: 0.005223, Mass: 0.007886
+2026-05-09 01:54:08,174 - INFO - Epoch 759, Validation loss: 0.014572407286136579
+2026-05-09 01:54:43,770 - INFO - Epoch 760, Total: 0.014699, Pos: 0.005415, Mass: 0.008943
+2026-05-09 01:54:56,285 - INFO - Epoch 760, Validation loss: 0.014584779588139465
+2026-05-09 01:55:33,478 - INFO - Epoch 761, Total: 0.014550, Pos: 0.005528, Mass: 0.009297
+2026-05-09 01:55:46,113 - INFO - Epoch 761, Validation loss: 0.014366127168520903
+2026-05-09 01:56:20,161 - INFO - Epoch 762, Total: 0.014577, Pos: 0.005500, Mass: 0.007533
+2026-05-09 01:56:37,067 - INFO - Epoch 762, Validation loss: 0.014553513919186389
+2026-05-09 01:57:14,810 - INFO - Epoch 763, Total: 0.014541, Pos: 0.005454, Mass: 0.009413
+2026-05-09 01:57:27,537 - INFO - Epoch 763, Validation loss: 0.014463588205349242
+2026-05-09 01:58:01,491 - INFO - Epoch 764, Total: 0.014673, Pos: 0.005432, Mass: 0.011005
+2026-05-09 01:58:16,076 - INFO - Epoch 764, Validation loss: 0.014638263039672986
+2026-05-09 01:58:50,264 - INFO - Epoch 765, Total: 0.014650, Pos: 0.005254, Mass: 0.008582
+2026-05-09 01:59:02,791 - INFO - Epoch 765, Validation loss: 0.014556854111580258
+2026-05-09 01:59:36,551 - INFO - Epoch 766, Total: 0.014599, Pos: 0.005146, Mass: 0.009463
+2026-05-09 01:59:50,574 - INFO - Epoch 766, Validation loss: 0.014646722521218989
+2026-05-09 02:00:31,098 - INFO - Epoch 767, Total: 0.014675, Pos: 0.004951, Mass: 0.008452
+2026-05-09 02:00:43,664 - INFO - Epoch 767, Validation loss: 0.014701247971473087
+2026-05-09 02:01:17,954 - INFO - Epoch 768, Total: 0.014712, Pos: 0.005019, Mass: 0.009629
+2026-05-09 02:01:30,564 - INFO - Epoch 768, Validation loss: 0.014443463478714991
+2026-05-09 02:02:06,391 - INFO - Epoch 769, Total: 0.014664, Pos: 0.004802, Mass: 0.008727
+2026-05-09 02:02:22,520 - INFO - Epoch 769, Validation loss: 0.014645009166282466
+2026-05-09 02:03:02,178 - INFO - Epoch 770, Total: 0.014610, Pos: 0.005233, Mass: 0.008926
+2026-05-09 02:03:14,830 - INFO - Epoch 770, Validation loss: 0.014532836154103279
+2026-05-09 02:03:49,209 - INFO - Epoch 771, Total: 0.014649, Pos: 0.005143, Mass: 0.008649
+2026-05-09 02:04:02,095 - INFO - Epoch 771, Validation loss: 0.01459117307781409
+2026-05-09 02:04:35,967 - INFO - Epoch 772, Total: 0.014629, Pos: 0.005256, Mass: 0.009700
+2026-05-09 02:04:48,373 - INFO - Epoch 772, Validation loss: 0.014623021635298546
+2026-05-09 02:05:22,343 - INFO - Epoch 773, Total: 0.014584, Pos: 0.005183, Mass: 0.010369
+2026-05-09 02:05:46,450 - INFO - Epoch 773, Validation loss: 0.014582981872889731
+2026-05-09 02:06:20,576 - INFO - Epoch 774, Total: 0.014631, Pos: 0.004980, Mass: 0.009941
+2026-05-09 02:06:33,192 - INFO - Epoch 774, Validation loss: 0.014540948841370579
+2026-05-09 02:07:07,079 - INFO - Epoch 775, Total: 0.014635, Pos: 0.005286, Mass: 0.010227
+2026-05-09 02:07:19,691 - INFO - Epoch 775, Validation loss: 0.01457520790843882
+2026-05-09 02:07:53,884 - INFO - Epoch 776, Total: 0.014656, Pos: 0.004940, Mass: 0.009340
+2026-05-09 02:08:06,386 - INFO - Epoch 776, Validation loss: 0.014498330405953094
+2026-05-09 02:08:40,569 - INFO - Epoch 777, Total: 0.014688, Pos: 0.005117, Mass: 0.009164
+2026-05-09 02:08:54,888 - INFO - Epoch 777, Validation loss: 0.014522268389088985
+2026-05-09 02:09:28,868 - INFO - Epoch 778, Total: 0.014604, Pos: 0.004865, Mass: 0.010259
+2026-05-09 02:09:41,444 - INFO - Epoch 778, Validation loss: 0.014608850105641743
+2026-05-09 02:10:15,843 - INFO - Epoch 779, Total: 0.014639, Pos: 0.004813, Mass: 0.010512
+2026-05-09 02:10:33,493 - INFO - Epoch 779, Validation loss: 0.014617923838205827
+2026-05-09 02:11:07,356 - INFO - Epoch 780, Total: 0.014606, Pos: 0.005117, Mass: 0.009951
+2026-05-09 02:11:20,387 - INFO - Epoch 780, Validation loss: 0.014637465779788984
+2026-05-09 02:11:55,302 - INFO - Epoch 781, Total: 0.014670, Pos: 0.005229, Mass: 0.008693
+2026-05-09 02:12:07,895 - INFO - Epoch 781, Validation loss: 0.014620009021690259
+2026-05-09 02:12:43,131 - INFO - Epoch 782, Total: 0.014614, Pos: 0.005209, Mass: 0.009728
+2026-05-09 02:12:57,782 - INFO - Epoch 782, Validation loss: 0.01458679841688046
+2026-05-09 02:13:33,895 - INFO - Epoch 783, Total: 0.014645, Pos: 0.004998, Mass: 0.010641
+2026-05-09 02:13:46,044 - INFO - Epoch 783, Validation loss: 0.014605887536691804
+2026-05-09 02:14:19,734 - INFO - Epoch 784, Total: 0.014727, Pos: 0.004933, Mass: 0.010414
+2026-05-09 02:14:32,804 - INFO - Epoch 784, Validation loss: 0.014564075268422946
+2026-05-09 02:15:06,861 - INFO - Epoch 785, Total: 0.014662, Pos: 0.005543, Mass: 0.007398
+2026-05-09 02:15:19,453 - INFO - Epoch 785, Validation loss: 0.01454885269746057
+2026-05-09 02:15:53,363 - INFO - Epoch 786, Total: 0.014612, Pos: 0.005451, Mass: 0.008283
+2026-05-09 02:16:05,961 - INFO - Epoch 786, Validation loss: 0.014555377503618216
+2026-05-09 02:16:39,960 - INFO - Epoch 787, Total: 0.014655, Pos: 0.004990, Mass: 0.009891
+2026-05-09 02:16:52,936 - INFO - Epoch 787, Validation loss: 0.014624429229869802
+2026-05-09 02:17:26,891 - INFO - Epoch 788, Total: 0.014642, Pos: 0.004700, Mass: 0.009186
+2026-05-09 02:17:41,415 - INFO - Epoch 788, Validation loss: 0.01455563415064771
+2026-05-09 02:18:15,886 - INFO - Epoch 789, Total: 0.014700, Pos: 0.005211, Mass: 0.008619
+2026-05-09 02:18:28,502 - INFO - Epoch 789, Validation loss: 0.014607313733834486
+2026-05-09 02:19:02,558 - INFO - Epoch 790, Total: 0.014663, Pos: 0.005229, Mass: 0.009562
+2026-05-09 02:19:15,401 - INFO - Epoch 790, Validation loss: 0.014643701294866892
+2026-05-09 02:19:50,069 - INFO - Epoch 791, Total: 0.014645, Pos: 0.005148, Mass: 0.010100
+2026-05-09 02:20:02,679 - INFO - Epoch 791, Validation loss: 0.014484865161088796
+2026-05-09 02:20:36,673 - INFO - Epoch 792, Total: 0.014593, Pos: 0.005237, Mass: 0.009423
+2026-05-09 02:20:49,506 - INFO - Epoch 792, Validation loss: 0.014462310462616958
+2026-05-09 02:21:25,132 - INFO - Epoch 793, Total: 0.014617, Pos: 0.005083, Mass: 0.008773
+2026-05-09 02:21:38,955 - INFO - Epoch 793, Validation loss: 0.01454150652847229
+2026-05-09 02:22:13,593 - INFO - Epoch 794, Total: 0.014586, Pos: 0.005741, Mass: 0.009422
+2026-05-09 02:22:39,124 - INFO - Epoch 794, Validation loss: 0.014528863744921664
+2026-05-09 02:23:13,327 - INFO - Epoch 795, Total: 0.014689, Pos: 0.005210, Mass: 0.009473
+2026-05-09 02:23:25,861 - INFO - Epoch 795, Validation loss: 0.014595921565261152
+2026-05-09 02:23:59,783 - INFO - Epoch 796, Total: 0.014726, Pos: 0.006145, Mass: 0.009434
+2026-05-09 02:24:12,927 - INFO - Epoch 796, Validation loss: 0.014556425623595715
+2026-05-09 02:24:47,436 - INFO - Epoch 797, Total: 0.014762, Pos: 0.005380, Mass: 0.009295
+2026-05-09 02:25:02,386 - INFO - Epoch 797, Validation loss: 0.014538395266311292
+2026-05-09 02:25:36,610 - INFO - Epoch 798, Total: 0.014667, Pos: 0.004966, Mass: 0.010348
+2026-05-09 02:25:49,435 - INFO - Epoch 798, Validation loss: 0.014752383853316817
+2026-05-09 02:26:23,804 - INFO - Epoch 799, Total: 0.014628, Pos: 0.005116, Mass: 0.009494
+2026-05-09 02:26:36,334 - INFO - Epoch 799, Validation loss: 0.014562400304672554
+2026-05-09 02:27:10,346 - INFO - Epoch 800, Total: 0.014601, Pos: 0.005037, Mass: 0.009896
+2026-05-09 02:27:23,133 - INFO - Epoch 800, Validation loss: 0.01447870638858304
+2026-05-09 02:27:57,362 - INFO - Epoch 801, Total: 0.014595, Pos: 0.005497, Mass: 0.006952
+2026-05-09 02:28:10,744 - INFO - Epoch 801, Validation loss: 0.014569255204982737
+2026-05-09 02:28:44,939 - INFO - Epoch 802, Total: 0.014564, Pos: 0.005480, Mass: 0.008817
+2026-05-09 02:28:57,589 - INFO - Epoch 802, Validation loss: 0.014585260373468582
+2026-05-09 02:29:31,834 - INFO - Epoch 803, Total: 0.014657, Pos: 0.005099, Mass: 0.009465
+2026-05-09 02:29:44,260 - INFO - Epoch 803, Validation loss: 0.01458568066263046
+2026-05-09 02:30:18,633 - INFO - Epoch 804, Total: 0.014649, Pos: 0.005145, Mass: 0.009203
+2026-05-09 02:30:31,146 - INFO - Epoch 804, Validation loss: 0.014569479542282911
+2026-05-09 02:31:08,110 - INFO - Epoch 805, Total: 0.014661, Pos: 0.005001, Mass: 0.009262
+2026-05-09 02:31:23,330 - INFO - Epoch 805, Validation loss: 0.014500365703979619
+2026-05-09 02:31:57,454 - INFO - Epoch 806, Total: 0.014627, Pos: 0.005271, Mass: 0.010095
+2026-05-09 02:32:09,893 - INFO - Epoch 806, Validation loss: 0.014605045231043274
+2026-05-09 02:32:44,070 - INFO - Epoch 807, Total: 0.014651, Pos: 0.005099, Mass: 0.008366
+2026-05-09 02:32:56,617 - INFO - Epoch 807, Validation loss: 0.014616317473925076
+2026-05-09 02:33:30,893 - INFO - Epoch 808, Total: 0.014561, Pos: 0.005201, Mass: 0.009322
+2026-05-09 02:33:43,561 - INFO - Epoch 808, Validation loss: 0.014548975066878857
+2026-05-09 02:34:18,027 - INFO - Epoch 809, Total: 0.014636, Pos: 0.005141, Mass: 0.008717
+2026-05-09 02:34:30,614 - INFO - Epoch 809, Validation loss: 0.014422353683437547
+2026-05-09 02:35:04,564 - INFO - Epoch 810, Total: 0.014663, Pos: 0.005320, Mass: 0.008774
+2026-05-09 02:35:18,518 - INFO - Epoch 810, Validation loss: 0.014690285047086386
+2026-05-09 02:35:52,441 - INFO - Epoch 811, Total: 0.014698, Pos: 0.005278, Mass: 0.009979
+2026-05-09 02:36:05,501 - INFO - Epoch 811, Validation loss: 0.014577350555322109
+2026-05-09 02:36:40,318 - INFO - Epoch 812, Total: 0.014669, Pos: 0.005270, Mass: 0.009092
+2026-05-09 02:36:52,910 - INFO - Epoch 812, Validation loss: 0.014606668088489618
+2026-05-09 02:37:30,931 - INFO - Epoch 813, Total: 0.014641, Pos: 0.005201, Mass: 0.011027
+2026-05-09 02:37:43,653 - INFO - Epoch 813, Validation loss: 0.014603382485926662
+2026-05-09 02:38:18,074 - INFO - Epoch 814, Total: 0.014613, Pos: 0.005086, Mass: 0.008754
+2026-05-09 02:38:30,679 - INFO - Epoch 814, Validation loss: 0.014523358673303045
+2026-05-09 02:39:05,055 - INFO - Epoch 815, Total: 0.014588, Pos: 0.004939, Mass: 0.009403
+2026-05-09 02:39:18,213 - INFO - Epoch 815, Validation loss: 0.014587895976554634
+2026-05-09 02:39:52,225 - INFO - Epoch 816, Total: 0.014599, Pos: 0.005113, Mass: 0.008833
+2026-05-09 02:40:05,688 - INFO - Epoch 816, Validation loss: 0.014560605550551007
+2026-05-09 02:40:41,606 - INFO - Epoch 817, Total: 0.014694, Pos: 0.005336, Mass: 0.008624
+2026-05-09 02:40:54,056 - INFO - Epoch 817, Validation loss: 0.014589663069599714
+2026-05-09 02:41:27,999 - INFO - Epoch 818, Total: 0.014692, Pos: 0.005134, Mass: 0.009219
+2026-05-09 02:41:40,546 - INFO - Epoch 818, Validation loss: 0.014612373887983143
+2026-05-09 02:42:14,531 - INFO - Epoch 819, Total: 0.014622, Pos: 0.005525, Mass: 0.009102
+2026-05-09 02:42:28,272 - INFO - Epoch 819, Validation loss: 0.014634052625833413
+2026-05-09 02:43:02,337 - INFO - Epoch 820, Total: 0.014574, Pos: 0.005092, Mass: 0.009463
+2026-05-09 02:43:15,158 - INFO - Epoch 820, Validation loss: 0.0144995062206036
+2026-05-09 02:43:49,317 - INFO - Epoch 821, Total: 0.014661, Pos: 0.005230, Mass: 0.009742
+2026-05-09 02:44:18,222 - INFO - Epoch 821, Validation loss: 0.014670877271674128
+2026-05-09 02:44:53,327 - INFO - Epoch 822, Total: 0.014582, Pos: 0.004991, Mass: 0.009599
+2026-05-09 02:45:05,705 - INFO - Epoch 822, Validation loss: 0.014590203682454223
+2026-05-09 02:45:39,718 - INFO - Epoch 823, Total: 0.014643, Pos: 0.005038, Mass: 0.008585
+2026-05-09 02:45:53,515 - INFO - Epoch 823, Validation loss: 0.01448798537031453
+2026-05-09 02:46:27,336 - INFO - Epoch 824, Total: 0.014591, Pos: 0.005233, Mass: 0.011650
+2026-05-09 02:46:39,920 - INFO - Epoch 824, Validation loss: 0.01453893675476822
+2026-05-09 02:47:14,113 - INFO - Epoch 825, Total: 0.014620, Pos: 0.005004, Mass: 0.008342
+2026-05-09 02:47:26,796 - INFO - Epoch 825, Validation loss: 0.014593496608237425
+2026-05-09 02:48:00,784 - INFO - Epoch 826, Total: 0.014707, Pos: 0.005316, Mass: 0.010355
+2026-05-09 02:48:13,373 - INFO - Epoch 826, Validation loss: 0.014523829580244854
+2026-05-09 02:48:47,565 - INFO - Epoch 827, Total: 0.014643, Pos: 0.005140, Mass: 0.010081
+2026-05-09 02:49:00,571 - INFO - Epoch 827, Validation loss: 0.014539634474577049
+2026-05-09 02:49:35,565 - INFO - Epoch 828, Total: 0.014639, Pos: 0.005178, Mass: 0.009315
+2026-05-09 02:49:48,145 - INFO - Epoch 828, Validation loss: 0.014620750656940488
+2026-05-09 02:50:22,078 - INFO - Epoch 829, Total: 0.014618, Pos: 0.005072, Mass: 0.009865
+2026-05-09 02:50:35,104 - INFO - Epoch 829, Validation loss: 0.014504958549116412
+2026-05-09 02:51:09,198 - INFO - Epoch 830, Total: 0.014698, Pos: 0.005772, Mass: 0.008051
+2026-05-09 02:51:27,076 - INFO - Epoch 830, Validation loss: 0.014576771336360874
+2026-05-09 02:52:01,071 - INFO - Epoch 831, Total: 0.014657, Pos: 0.005230, Mass: 0.009420
+2026-05-09 02:52:14,068 - INFO - Epoch 831, Validation loss: 0.01452650897937198
+2026-05-09 02:52:48,485 - INFO - Epoch 832, Total: 0.014735, Pos: 0.004975, Mass: 0.009193
+2026-05-09 02:53:01,062 - INFO - Epoch 832, Validation loss: 0.014532371830099668
+2026-05-09 02:53:35,048 - INFO - Epoch 833, Total: 0.014598, Pos: 0.005060, Mass: 0.009693
+2026-05-09 02:53:47,602 - INFO - Epoch 833, Validation loss: 0.014629352376119703
+2026-05-09 02:54:21,673 - INFO - Epoch 834, Total: 0.014660, Pos: 0.005394, Mass: 0.008713
+2026-05-09 02:54:36,245 - INFO - Epoch 834, Validation loss: 0.014516503430711918
+2026-05-09 02:55:10,223 - INFO - Epoch 835, Total: 0.014603, Pos: 0.005187, Mass: 0.010802
+2026-05-09 02:55:23,393 - INFO - Epoch 835, Validation loss: 0.014640091496527705
+2026-05-09 02:55:57,476 - INFO - Epoch 836, Total: 0.014643, Pos: 0.004988, Mass: 0.009096
+2026-05-09 02:56:10,104 - INFO - Epoch 836, Validation loss: 0.014513838924785964
+2026-05-09 02:56:44,913 - INFO - Epoch 837, Total: 0.014620, Pos: 0.004883, Mass: 0.009095
+2026-05-09 02:56:59,796 - INFO - Epoch 837, Validation loss: 0.014539452412953744
+2026-05-09 02:57:33,908 - INFO - Epoch 838, Total: 0.014640, Pos: 0.004997, Mass: 0.009490
+2026-05-09 02:57:46,732 - INFO - Epoch 838, Validation loss: 0.014725528983797273
+2026-05-09 02:58:20,392 - INFO - Epoch 839, Total: 0.014599, Pos: 0.005191, Mass: 0.008633
+2026-05-09 02:58:32,935 - INFO - Epoch 839, Validation loss: 0.014592325736760583
+2026-05-09 02:59:07,026 - INFO - Epoch 840, Total: 0.014620, Pos: 0.005350, Mass: 0.009932
+2026-05-09 02:59:20,261 - INFO - Epoch 840, Validation loss: 0.01460433954325242
+2026-05-09 02:59:54,097 - INFO - Epoch 841, Total: 0.014642, Pos: 0.005492, Mass: 0.010112
+2026-05-09 03:00:06,752 - INFO - Epoch 841, Validation loss: 0.01459324812819051
+2026-05-09 03:00:40,764 - INFO - Epoch 842, Total: 0.014715, Pos: 0.005516, Mass: 0.010009
+2026-05-09 03:00:56,358 - INFO - Epoch 842, Validation loss: 0.014658038838742634
+2026-05-09 03:01:30,407 - INFO - Epoch 843, Total: 0.014649, Pos: 0.005222, Mass: 0.009206
+2026-05-09 03:01:43,036 - INFO - Epoch 843, Validation loss: 0.014505853932191674
+2026-05-09 03:02:26,211 - INFO - Epoch 844, Total: 0.014626, Pos: 0.005718, Mass: 0.009756
+2026-05-09 03:02:38,756 - INFO - Epoch 844, Validation loss: 0.0145219103870993
+2026-05-09 03:03:12,692 - INFO - Epoch 845, Total: 0.014662, Pos: 0.005265, Mass: 0.009431
+2026-05-09 03:03:28,058 - INFO - Epoch 845, Validation loss: 0.01457644069296682
+2026-05-09 03:04:02,197 - INFO - Epoch 846, Total: 0.014666, Pos: 0.004983, Mass: 0.007628
+2026-05-09 03:04:16,399 - INFO - Epoch 846, Validation loss: 0.01465955979994729
+2026-05-09 03:04:53,120 - INFO - Epoch 847, Total: 0.014670, Pos: 0.005201, Mass: 0.008383
+2026-05-09 03:05:06,352 - INFO - Epoch 847, Validation loss: 0.014540600057086375
+2026-05-09 03:05:40,228 - INFO - Epoch 848, Total: 0.014655, Pos: 0.005141, Mass: 0.008202
+2026-05-09 03:05:52,807 - INFO - Epoch 848, Validation loss: 0.014539960127037305
+2026-05-09 03:06:27,012 - INFO - Epoch 849, Total: 0.014625, Pos: 0.004768, Mass: 0.009381
+2026-05-09 03:06:39,866 - INFO - Epoch 849, Validation loss: 0.014641947399538297
+2026-05-09 03:07:13,881 - INFO - Epoch 850, Total: 0.014636, Pos: 0.005240, Mass: 0.008639
+2026-05-09 03:07:27,408 - INFO - Epoch 850, Validation loss: 0.014601494559747541
+2026-05-09 03:08:01,308 - INFO - Epoch 851, Total: 0.014593, Pos: 0.005854, Mass: 0.011136
+2026-05-09 03:08:14,872 - INFO - Epoch 851, Validation loss: 0.014608282142151624
+2026-05-09 03:08:49,112 - INFO - Epoch 852, Total: 0.014606, Pos: 0.004808, Mass: 0.008097
+2026-05-09 03:09:02,334 - INFO - Epoch 852, Validation loss: 0.014562818261547985
+2026-05-09 03:09:39,460 - INFO - Epoch 853, Total: 0.014695, Pos: 0.005371, Mass: 0.007902
+2026-05-09 03:09:52,316 - INFO - Epoch 853, Validation loss: 0.014609327667161949
+2026-05-09 03:10:26,296 - INFO - Epoch 854, Total: 0.014616, Pos: 0.005000, Mass: 0.009092
+2026-05-09 03:10:40,440 - INFO - Epoch 854, Validation loss: 0.014725314644284738
+2026-05-09 03:11:14,353 - INFO - Epoch 855, Total: 0.014559, Pos: 0.005293, Mass: 0.008402
+2026-05-09 03:11:27,015 - INFO - Epoch 855, Validation loss: 0.014552213506311433
+2026-05-09 03:12:01,196 - INFO - Epoch 856, Total: 0.014622, Pos: 0.005232, Mass: 0.008487
+2026-05-09 03:12:13,758 - INFO - Epoch 856, Validation loss: 0.01459596351457712
+2026-05-09 03:12:49,525 - INFO - Epoch 857, Total: 0.014694, Pos: 0.005874, Mass: 0.008894
+2026-05-09 03:13:03,890 - INFO - Epoch 857, Validation loss: 0.014588693905080486
+2026-05-09 03:13:37,830 - INFO - Epoch 858, Total: 0.014690, Pos: 0.005347, Mass: 0.009827
+2026-05-09 03:13:50,371 - INFO - Epoch 858, Validation loss: 0.014500345915364914
+2026-05-09 03:14:24,166 - INFO - Epoch 859, Total: 0.014689, Pos: 0.005120, Mass: 0.010775
+2026-05-09 03:14:40,263 - INFO - Epoch 859, Validation loss: 0.014657794983468505
+2026-05-09 03:15:15,699 - INFO - Epoch 860, Total: 0.014630, Pos: 0.005083, Mass: 0.010731
+2026-05-09 03:15:28,269 - INFO - Epoch 860, Validation loss: 0.014563593671171583
+2026-05-09 03:16:02,062 - INFO - Epoch 861, Total: 0.014652, Pos: 0.005097, Mass: 0.008420
+2026-05-09 03:16:15,370 - INFO - Epoch 861, Validation loss: 0.014593489698938325
+2026-05-09 03:16:50,932 - INFO - Epoch 862, Total: 0.014556, Pos: 0.005484, Mass: 0.007335
+2026-05-09 03:17:03,330 - INFO - Epoch 862, Validation loss: 0.014573184407164907
+2026-05-09 03:17:37,299 - INFO - Epoch 863, Total: 0.014735, Pos: 0.005158, Mass: 0.009100
+2026-05-09 03:17:49,942 - INFO - Epoch 863, Validation loss: 0.014488842370163681
+2026-05-09 03:18:23,979 - INFO - Epoch 864, Total: 0.014712, Pos: 0.004900, Mass: 0.009791
+2026-05-09 03:18:36,552 - INFO - Epoch 864, Validation loss: 0.014631029672156542
+2026-05-09 03:19:10,388 - INFO - Epoch 865, Total: 0.014591, Pos: 0.005289, Mass: 0.010580
+2026-05-09 03:19:23,561 - INFO - Epoch 865, Validation loss: 0.014654355577360362
+2026-05-09 03:19:57,489 - INFO - Epoch 866, Total: 0.014575, Pos: 0.005184, Mass: 0.009043
+2026-05-09 03:20:10,137 - INFO - Epoch 866, Validation loss: 0.01450349921440212
+2026-05-09 03:20:44,050 - INFO - Epoch 867, Total: 0.014693, Pos: 0.005014, Mass: 0.010107
+2026-05-09 03:20:57,404 - INFO - Epoch 867, Validation loss: 0.01459776200990901
+2026-05-09 03:21:31,294 - INFO - Epoch 868, Total: 0.014686, Pos: 0.005453, Mass: 0.008912
+2026-05-09 03:21:43,822 - INFO - Epoch 868, Validation loss: 0.014507141513511157
+2026-05-09 03:22:26,254 - INFO - Epoch 869, Total: 0.014578, Pos: 0.005350, Mass: 0.008852
+2026-05-09 03:22:43,277 - INFO - Epoch 869, Validation loss: 0.01453601034819825
+2026-05-09 03:23:25,121 - INFO - Epoch 870, Total: 0.014571, Pos: 0.005267, Mass: 0.009720
+2026-05-09 03:23:37,599 - INFO - Epoch 870, Validation loss: 0.01452522002096869
+2026-05-09 03:24:11,548 - INFO - Epoch 871, Total: 0.014645, Pos: 0.005257, Mass: 0.009852
+2026-05-09 03:24:25,078 - INFO - Epoch 871, Validation loss: 0.014571408916296612
+2026-05-09 03:24:59,061 - INFO - Epoch 872, Total: 0.014620, Pos: 0.005342, Mass: 0.010538
+2026-05-09 03:25:11,630 - INFO - Epoch 872, Validation loss: 0.014597347953444363
+2026-05-09 03:25:45,941 - INFO - Epoch 873, Total: 0.014562, Pos: 0.005161, Mass: 0.009834
+2026-05-09 03:25:59,717 - INFO - Epoch 873, Validation loss: 0.014655700311637841
+2026-05-09 03:26:33,559 - INFO - Epoch 874, Total: 0.014704, Pos: 0.005160, Mass: 0.009971
+2026-05-09 03:26:46,323 - INFO - Epoch 874, Validation loss: 0.014506935086260494
+2026-05-09 03:27:20,300 - INFO - Epoch 875, Total: 0.014727, Pos: 0.005352, Mass: 0.009912
+2026-05-09 03:27:33,669 - INFO - Epoch 875, Validation loss: 0.014544318557486065
+2026-05-09 03:28:07,608 - INFO - Epoch 876, Total: 0.014666, Pos: 0.005029, Mass: 0.008167
+2026-05-09 03:28:20,189 - INFO - Epoch 876, Validation loss: 0.014605603602706876
+2026-05-09 03:28:54,001 - INFO - Epoch 877, Total: 0.014572, Pos: 0.005116, Mass: 0.008249
+2026-05-09 03:29:06,628 - INFO - Epoch 877, Validation loss: 0.014528563683932154
+2026-05-09 03:29:40,380 - INFO - Epoch 878, Total: 0.014546, Pos: 0.005406, Mass: 0.009167
+2026-05-09 03:29:52,916 - INFO - Epoch 878, Validation loss: 0.014476396071796235
+2026-05-09 03:30:26,963 - INFO - Epoch 879, Total: 0.014627, Pos: 0.005575, Mass: 0.009823
+2026-05-09 03:30:40,482 - INFO - Epoch 879, Validation loss: 0.0145796129368564
+2026-05-09 03:31:15,175 - INFO - Epoch 880, Total: 0.014598, Pos: 0.005042, Mass: 0.009616
+2026-05-09 03:31:28,047 - INFO - Epoch 880, Validation loss: 0.014499827789572569
+2026-05-09 03:32:04,538 - INFO - Epoch 881, Total: 0.014625, Pos: 0.005427, Mass: 0.009695
+2026-05-09 03:32:18,578 - INFO - Epoch 881, Validation loss: 0.01455003110707825
+2026-05-09 03:32:52,779 - INFO - Epoch 882, Total: 0.014629, Pos: 0.005143, Mass: 0.010201
+2026-05-09 03:33:07,153 - INFO - Epoch 882, Validation loss: 0.014548669481634075
+2026-05-09 03:33:41,325 - INFO - Epoch 883, Total: 0.014784, Pos: 0.005462, Mass: 0.009554
+2026-05-09 03:33:53,959 - INFO - Epoch 883, Validation loss: 0.014435868065517683
+2026-05-09 03:34:27,891 - INFO - Epoch 884, Total: 0.014711, Pos: 0.005338, Mass: 0.008465
+2026-05-09 03:34:40,942 - INFO - Epoch 884, Validation loss: 0.01448624579506552
+2026-05-09 03:35:15,235 - INFO - Epoch 885, Total: 0.014645, Pos: 0.005183, Mass: 0.009788
+2026-05-09 03:35:27,861 - INFO - Epoch 885, Validation loss: 0.014559886076002039
+2026-05-09 03:36:01,983 - INFO - Epoch 886, Total: 0.014641, Pos: 0.004942, Mass: 0.010147
+2026-05-09 03:36:14,609 - INFO - Epoch 886, Validation loss: 0.014553388381679343
+2026-05-09 03:36:50,394 - INFO - Epoch 887, Total: 0.014557, Pos: 0.004922, Mass: 0.009693
+2026-05-09 03:37:08,410 - INFO - Epoch 887, Validation loss: 0.014636420780140111
+2026-05-09 03:37:42,551 - INFO - Epoch 888, Total: 0.014655, Pos: 0.005170, Mass: 0.009246
+2026-05-09 03:37:56,496 - INFO - Epoch 888, Validation loss: 0.014694250873329803
+2026-05-09 03:38:30,497 - INFO - Epoch 889, Total: 0.014666, Pos: 0.005814, Mass: 0.008146
+2026-05-09 03:38:43,098 - INFO - Epoch 889, Validation loss: 0.014486644592167985
+2026-05-09 03:39:17,632 - INFO - Epoch 890, Total: 0.014606, Pos: 0.005495, Mass: 0.010889
+2026-05-09 03:39:30,210 - INFO - Epoch 890, Validation loss: 0.014624133626492614
+2026-05-09 03:40:04,084 - INFO - Epoch 891, Total: 0.014563, Pos: 0.004933, Mass: 0.009794
+2026-05-09 03:40:17,089 - INFO - Epoch 891, Validation loss: 0.014603151470168024
+2026-05-09 03:40:53,274 - INFO - Epoch 892, Total: 0.014645, Pos: 0.005020, Mass: 0.009579
+2026-05-09 03:41:06,018 - INFO - Epoch 892, Validation loss: 0.014782391615912445
+2026-05-09 03:41:45,596 - INFO - Epoch 893, Total: 0.014597, Pos: 0.004849, Mass: 0.008712
+2026-05-09 03:41:58,173 - INFO - Epoch 893, Validation loss: 0.01457655362975903
+2026-05-09 03:42:32,026 - INFO - Epoch 894, Total: 0.014649, Pos: 0.004965, Mass: 0.009152
+2026-05-09 03:42:45,417 - INFO - Epoch 894, Validation loss: 0.014601987356749864
+2026-05-09 03:43:20,044 - INFO - Epoch 895, Total: 0.014601, Pos: 0.005371, Mass: 0.008919
+2026-05-09 03:43:33,212 - INFO - Epoch 895, Validation loss: 0.014533269163380321
+2026-05-09 03:44:07,349 - INFO - Epoch 896, Total: 0.014673, Pos: 0.005029, Mass: 0.009859
+2026-05-09 03:44:20,868 - INFO - Epoch 896, Validation loss: 0.01463945841209756
+2026-05-09 03:44:54,977 - INFO - Epoch 897, Total: 0.014604, Pos: 0.004850, Mass: 0.009546
+2026-05-09 03:45:07,753 - INFO - Epoch 897, Validation loss: 0.014500901039339539
+2026-05-09 03:45:41,668 - INFO - Epoch 898, Total: 0.014602, Pos: 0.005235, Mass: 0.009430
+2026-05-09 03:45:54,288 - INFO - Epoch 898, Validation loss: 0.014503033807835517
+2026-05-09 03:46:35,896 - INFO - Epoch 899, Total: 0.014612, Pos: 0.005571, Mass: 0.009137
+2026-05-09 03:46:50,031 - INFO - Epoch 899, Validation loss: 0.014551534349273922
+2026-05-09 03:47:24,249 - INFO - Epoch 900, Total: 0.014646, Pos: 0.005321, Mass: 0.009007
+2026-05-09 03:47:38,327 - INFO - Epoch 900, Validation loss: 0.014583164977275917
+2026-05-09 03:48:12,744 - INFO - Epoch 901, Total: 0.014654, Pos: 0.005602, Mass: 0.009039
+2026-05-09 03:48:25,830 - INFO - Epoch 901, Validation loss: 0.014590131875095714
+[2026-05-09T03:48:48.086] error: *** JOB 22585278 ON gcn90 CANCELLED AT 2026-05-09T03:48:48 DUE TO TIME LIMIT ***

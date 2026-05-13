@@ -1,0 +1,116 @@
+2026-05-10 15:11:20,362 - INFO - Output_dir: /gpfs/home4/bartb/T256/T256-SUBBOX/results/run_20260508_154857/quantitative_2pcf/20260510_151120
+2026-05-10 15:11:20,363 - INFO - Final training configuration:
+{'data': {'cosm_param': None,
+          'cosmologies_dir': '../Data/subboxes/',
+          'cosmologies_info_dir': '../Data/subboxes/',
+          'dataset': 'subset_5000',
+          'rotations': False,
+          'translations': False},
+ 'inference': {'T': 200,
+               'batch_size': 10,
+               'checkpoint_path': '/gpfs/home4/bartb/T256/T256-SUBBOX/results/run_20260508_154857/model_epoch_900.pth',
+               'infer_type': 'quantitative_2pcf',
+               'inference_halo_count': 256,
+               'n_repeats': 10},
+ 'logging': {'epoch_log_interval': 1,
+             'level': 'INFO',
+             'model_save_interval': 100},
+ 'model': {'egnn': {'activation': 'silu',
+                    'aggregation_fn': 'sum',
+                    'attention': True,
+                    'coords_weight': 1.0,
+                    'hidden_nf': 128,
+                    'input_node_d': 2,
+                    'input_theta_d': 5,
+                    'latent_nf': 64,
+                    'mlp_layers': 2,
+                    'n_layers': 4,
+                    'norm': 'layer',
+                    'norm_diff': False,
+                    'recurrent': True,
+                    'scale_pred': True,
+                    'single_layer': True,
+                    'theta_nf': 64,
+                    'theta_param_embd_dim': 32},
+           'fm': {'k': 32,
+                  'lambda_reg': 0.1,
+                  'optimal_transport': True,
+                  'prior': 'uniform',
+                  'r': 0.3,
+                  'sigma_0': 0.0,
+                  'sigma_sched': False,
+                  't_embed': 'sinusoidal',
+                  't_embed_dim': 64,
+                  'version': 'icfm'}},
+ 'output': {'base_path': './results/'},
+ 'training': {'batch_size': 16,
+              'batch_size_valid': 16,
+              'checkpoint_path': None,
+              'clip_value': 1.0,
+              'early_stopping': {'min_delta': 0.0001, 'patience': 9999},
+              'epochs': 10000,
+              'optimizer': {'weight_decay': 0},
+              'scheduler': {'factor': 0.5,
+                            'initial_lr': '1e-3',
+                            'min_lr': 1e-08,
+                            'patience': 50,
+                            'target_lr': '1e-5',
+                            'threshold': 0.0001,
+                            'type': 'cosine',
+                            'warmup_epochs': 10},
+              'start_from_scratch': True},
+ 'wandb': {'log_freq': 50,
+           'project_name': 'T256-SUBBOX',
+           'run_name': 'egnn_mass_mean'}}
+2026-05-10 15:11:20,363 - INFO - Inference on run: /gpfs/home4/bartb/T256/T256-SUBBOX/results/run_20260508_154857/model_epoch_900.pth
+2026-05-10 15:11:20,363 - INFO - Inference on icfm model
+2026-05-10 15:11:20,363 - INFO - Inference for quantitative_2pcf evaluation
+/gpfs/home4/bartb/T256/T256-SUBBOX/src/infer.py:87: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  checkpoint = torch.load(config["inference"]["checkpoint_path"], map_location=device)
+Device:  cuda
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - t_embed: sinusoidal
+        - dim: 3
+              
+Loaded model
+Traceback (most recent call last):
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/infer.py", line 283, in <module>
+    infer(final_config, output_dir)
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/infer.py", line 211, in infer
+    gen_samples, gen_masses = sample(x0=x0, batch=batch, conditioning=cond_infer, model=model, r=config["model"]["fm"]["r"], device=device, config=config)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/infer.py", line 122, in sample
+    pred_v, pred_v_m = model.vnet(h=h_in,
+                       ^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/egnn.py", line 77, in forward
+    h, v, edge_feat = layer(h, edge_index, x, t_embed, edge_attr=edge_attr, 
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/egcl.py", line 147, in forward
+    edge_feat = self.edge_model(h[row], h[col], scalar, row, coord_diff, 
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/T256/T256-SUBBOX/src/egcl.py", line 81, in edge_model
+    out = torch.cat(components, dim=1)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 101.73 GiB. GPU 0 has a total capacity of 93.09 GiB of which 35.70 GiB is free. Including non-PyTorch memory, this process has 57.38 GiB memory in use. Of the allocated memory 55.46 GiB is allocated by PyTorch, and 1.25 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
