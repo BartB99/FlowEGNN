@@ -4,7 +4,7 @@ A generative model for 3D dark matter halo distributions using **flow matching**
 
 ---
 
-## What is this?
+## Project
 
 This project is part of a thesis on simulation-based inference and emulation of large-scale structure. The goal is to train a generative model that can produce realistic dark matter halo catalogues for any given set of cosmological parameters (Ω_m, Ω_b, h, n_s, σ_8), without running expensive N-body simulations.
 
@@ -95,7 +95,7 @@ FlowEGNN/
 │   │   ├── overfit_configs.yaml
 │   │   └── infer_configs.yaml
 │   ├── Notebooks/              # 2PCF, 3PCF, power spectrum, bispectrum analysis
-│   ├── training_script.sh
+
 │   ├── training_script_single.sh
 │   ├── tune_script.sh
 │   └── infer_script.sh
