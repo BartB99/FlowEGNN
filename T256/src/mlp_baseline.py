@@ -39,9 +39,6 @@ class MLPBaseline(nn.Module):
         """
         self.theta_embed.to(x.device)
         theta_embd = self.theta_embed(theta) if theta is not None else None
-
-        # Expand global features (t_embed, theta) to per-node
-        # t_embed is [B, t_embed_dim], batch is [N] mapping nodes to graphs
         t_per_node = t_embed[batch]  # [N, t_embed_dim]
 
         components = [x, h]
@@ -49,11 +46,11 @@ class MLPBaseline(nn.Module):
         if t_per_node is not None:
             components.append(t_per_node)
         if theta_embd is not None:
-            theta_per_node = theta_embd[batch]  # [N, theta_emb_dim]
+            theta_per_node = theta_embd[batch]  
             components.append(theta_per_node)
 
-        inp = torch.cat(components, dim=1)  # [N, in_dim]
+        inp = torch.cat(components, dim=1)  
 
-        vel = self.net(inp)  # [N, 3]
+        vel = self.net(inp) 
 
         return vel

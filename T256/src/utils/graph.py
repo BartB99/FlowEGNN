@@ -11,7 +11,6 @@ def compute_local_density(edge_index, x1):
     coord_diff = min_image(x1[row] - x1[col], **BOX)
     distances = torch.norm(coord_diff, dim=1, keepdim=True)
     mean_dist = scatter_mean(distances, row, dim=0, dim_size=x1.shape[0])
-    # print(f"Mean distance shape: {mean_dist.shape}")
     return mean_dist
 
 def radius_graph_pbc_batch(x, r, batch, box_size=1.0):

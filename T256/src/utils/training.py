@@ -1,10 +1,12 @@
 import glob
 import os
-import yaml
 
 import torch
 import torch.nn as nn
+import yaml
 from torch.optim.lr_scheduler import CosineAnnealingLR, ReduceLROnPlateau
+
+from utils.data import unsorted_segment_mean, unsorted_segment_sum
 
 def gradient_norm(model):
 
@@ -98,7 +100,6 @@ def init_weights(m, method="xavier_uniform", mode="fan_in", gain=5):
         
         if m.bias is not None:
             torch.nn.init.uniform_(m.bias, -0.1, 0.1)
-            # m.bias.data.fill_(0.01)
 
 def load_yaml_from_directory(directory):
     # Find all YAML files in the directory

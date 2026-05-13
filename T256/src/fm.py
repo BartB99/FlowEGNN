@@ -120,7 +120,6 @@ class FlowMatching(nn.Module):
         else:
             raise ValueError(f"Unknown version: {self.version}")
 
-        # torch.manual_seed(99)
         x = mu_t + sigma_t * torch.randn_like(x1)
 
         return wrap(x, **BOX)

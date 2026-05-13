@@ -1,15 +1,3 @@
-"""
-Hyperparameter tuning with Ray Tune for T256-SUBBOX.
-Runs parallel single-GPU training trials.
-
-Usage:
-    python src/train_tune.py --config Configs/overfit_configs.yaml
-
-Tuning targets: coords_weight, hidden_nf, sigma_0, lambda_mass, coord_agg
-Fixed: n_layers=4, r=0.3, latent_nf=64, batch_size=16, OT, cosine schedule, 
-       gradient clipping=1.0, attention=True, recurrent=True, layer norm
-"""
-
 import copy
 import logging
 import os
@@ -25,7 +13,7 @@ from ray.tune.schedulers import ASHAScheduler
 from torch.optim import AdamW
 from torch_geometric.loader import DataLoader
 
-# ---------- Search space ----------
+# search space
 SEARCH_SPACE = {
     "coords_weight": tune.choice([0.5, 1.0, 2.0]),
     "hidden_nf":     tune.choice([128, 192, 256]),
@@ -49,7 +37,6 @@ def train_one_trial(ray_config, base_config_path, tune_epochs, project_root):
 
     logging.disable(logging.CRITICAL)
 
-    # Load base config and override with this trial's hyperparameters
     config = copy.deepcopy(load_config(base_config_path))
 
     config["model"]["egnn"]["coords_weight"]   = ray_config["coords_weight"]
@@ -58,14 +45,14 @@ def train_one_trial(ray_config, base_config_path, tune_epochs, project_root):
     config["model"]["egnn"]["norm"]             = ray_config["norm"] if ray_config["norm"] != "none" else None
     config["training"]["scheduler"]["initial_lr"] = ray_config["lr"]
 
-    # Training settings for tuning
+    # training settings for tuning
     config["training"]["epochs"]    = tune_epochs
     config["log_wandb"]             = False
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     batch_size = config["training"]["batch_size"]
 
-    # --- Data loading (non-distributed) ---
+    # non-distributed dataloading
     train_kwargs = {"batch_size": batch_size, "num_workers": 2, "pin_memory": True}
     valid_kwargs = {"batch_size": config["training"]["batch_size_valid"], "num_workers": 2, "pin_memory": True}
 
@@ -80,7 +67,7 @@ def train_one_trial(ray_config, base_config_path, tune_epochs, project_root):
         cosm_param=config["data"]["cosm_param"],
     )
 
-    # --- Model ---
+    # model
     input_theta_d = len(config["data"]["cosm_param"]) if config["data"]["cosm_param"] is not None else 5
 
     egnn = EGNN(
@@ -119,7 +106,7 @@ def train_one_trial(ray_config, base_config_path, tune_epochs, project_root):
         dim=3,
     ).to(device)
 
-    # --- Optimizer & scheduler ---
+    # optimizer and scheduler
     optimizer = AdamW(
         model.parameters(),
         lr=float(ray_config["lr"]),
@@ -130,7 +117,7 @@ def train_one_trial(ray_config, base_config_path, tune_epochs, project_root):
     clip_value = config["training"]["clip_value"]
     warmup_epochs = config["training"]["scheduler"].get("warmup_epochs", 0)
 
-    # --- Training loop ---
+    # training loop
     try:
         for epoch in range(1, tune_epochs + 1):
 
@@ -205,7 +192,6 @@ def train_one_trial(ray_config, base_config_path, tune_epochs, project_root):
         print("OOM — trial killed.")
 
 
-# ---------- Main ----------
 def main():
     parser = ArgumentParser()
     parser.add_argument("--config", type=str, required=True)

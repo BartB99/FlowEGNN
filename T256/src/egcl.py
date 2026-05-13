@@ -51,7 +51,7 @@ class EGCL(nn.Module):
                     self.node_mlp.mlp[i] = weight_norm(module)
 
         layer = nn.Linear(hidden_nf, 1, bias=False)
-        torch.nn.init.xavier_uniform_(layer.weight)#, gain=0.01)
+        torch.nn.init.xavier_uniform_(layer.weight)
         coord_mlp = []
         coord_mlp.append(nn.Linear(2*input_nf, hidden_nf))
         coord_mlp.append(activation)
@@ -67,11 +67,7 @@ class EGCL(nn.Module):
             
     def edge_model(self, source, target, radial, row, edge_attr=None, global_attr=None, num_nodes=None):
 
-        # print(f"Source shape: {source.shape}, Target shape: {target.shape}, Radial shape: {radial.shape}")
-        # components = [source - target, radial]
-        # components = [source - target]
         components = [source, target, radial]
-
 
         if edge_attr is not None:
             components.append(edge_attr)
@@ -83,10 +79,8 @@ class EGCL(nn.Module):
 
         if self.attention:
             att_val = self.attn_mlp(out)
-            # Normalize across all neighboring edges ensuring they sum up to 1 for each node
-            # alpha = softmax(att_val, row, num_nodes=torch.unique(row).shape[0])
             alpha = softmax(att_val, row, num_nodes=num_nodes)           
-            out = out * alpha  # Weighted edge features
+            out = out * alpha  
 
         return out
 
@@ -105,13 +99,9 @@ class EGCL(nn.Module):
         if self.recurrent:
             out += h
         
-        # print(f"pre-norm: {out.norm(dim=-1).mean():.4f}, std: {out.std(dim=-1).mean():.4f}")
-
         # Normalization after residual connection ensures stable gradients and smoother training
         if self.norm == "layer":
             out = self.node_norm(out)
-
-        # print(f"post-norm: {out.norm(dim=-1).mean():.4f}, std: {out.std(dim=-1).mean():.4f}")
 
         return out
 
@@ -120,10 +110,6 @@ class EGCL(nn.Module):
         trans = coord_diff * self.coord_mlp(torch.cat([edge_feat, h[row]], dim=1))
         agg = unsorted_segment_mean(trans, row, num_segments=coord.size(0))
         vel = agg*self.coords_weight
-        # print(f"coord_diff magnitude: {coord_diff.norm(dim=-1).mean():.6f}")
-        # print(f"coord_mlp output: {self.coord_mlp(torch.cat([edge_feat, h[row]], dim=1)).abs().mean():.6f}")
-        # print(f"per-edge trans magnitude: {trans.norm(dim=-1).mean():.6f}")
-        # print(f"agg magnitude: {agg.norm(dim=-1).mean():.6f}")
         return vel
     
     def coord_2_scalar_distance(self, edge_index, coord, velocities=None):
@@ -136,7 +122,6 @@ class EGCL(nn.Module):
             norm = torch.sqrt(scalar).clamp(min=1e-6)       # Calculate scalar distance between all connected nodes
             coord_diff = coord_diff/(norm)
 
-        # return scalar, coord_diff * 100
         return scalar, coord_diff
       
     def forward(self, h, edge_index, coord, t_embed, edge_attr=None, global_attr=None):

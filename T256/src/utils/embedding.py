@@ -13,7 +13,7 @@ class SinusoidalTimeEmbedding(nn.Module):
         t = t * 850
         half = self.t_embd_dim // 2
         freqs = torch.exp(
-            -math.log(10) * torch.arange(half, device=t.device) / (half - 1) # originally 10000
+            -math.log(10) * torch.arange(half, device=t.device) / (half - 1) 
         )                                          # (half,)
         args = t * freqs                           # (batch_size, half)
         emb = torch.cat([args.sin(), args.cos()], dim=-1)  # (batch_size, t_embd_dim)

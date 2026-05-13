@@ -218,12 +218,6 @@ def train_epoch(ddp_model, train_dl, optimizer, device, config, epoch, rank, glo
 
         loss.backward()
 
-        # for name, param in ddp_model.named_parameters():
-        #     if param.grad is not None:
-        #         print(f"{name}: grad_norm={param.grad.norm().item():.2e}")
-        #     else:
-        #         print(f"{name}: grad=None")
-
         total_norm = gradient_norm(ddp_model)
         
         global_step += 1  # Increase step at each batch

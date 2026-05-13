@@ -4,7 +4,6 @@ import os
 import pprint
 from argparse import ArgumentParser
 
-import numpy as np
 import pandas as pd
 import torch
 import yaml
@@ -93,9 +92,6 @@ def sample(x0, batch, conditioning, model, r, device, config):
     ts = torch.linspace(0, 1, config["inference"]["T"], device=device)
     dt = ts[1] - ts[0]
 
-    # h_in = torch.ones(x0.shape[0], 1, device=device)
-    # h_in = torch.normal(mean=0.3499, std=0.1008, size=(x0.shape[0], 1), device=device)  # Sample masses using the mean and std of the training data masses (after log10 and scaling)
-
     m0 = scaled_log10_gaussian_mass_prior(torch.empty(x0.shape[0], 1, device=device))  
     m_t = m0
     x_t = x0
@@ -138,7 +134,6 @@ def which_cosmologies(config):
 
     # load cosmological param/ conditioning
     conditioning = pd.read_csv(f'{config["data"]["cosmologies_info_dir"]}test_cosmology.csv').values
-
 
     if config["inference"]["infer_type"] == "qualitative_2pcf":
         
@@ -187,13 +182,9 @@ def infer(config, output_dir):
 
             print(conditioning_used.shape)
 
-            # if conditioning_used.shape[0] == 200:
             n_cosmologies = batch_size // n_repeats
             lower_bound = i * n_cosmologies
             upper_bound = (i+1) * n_cosmologies
-            # else:
-            #     lower_bound = 0
-            #     upper_bound = conditioning_used.shape[0]
 
             if prior == "uniform":
                 x0 = uniform_prior(torch.empty(n_halos * n_repeats * n_cosmologies, 3, dtype=torch.float32, device=device))
@@ -242,15 +233,11 @@ def infer(config, output_dir):
 
     print(f"Finished")
     
-    # final_samples = np.array(generated_samples)
-    # final_masses = np.array(generated_masses)   
-
     torch.save(generated_samples, f'{output_dir}/gen_samples.pth')
     torch.save(generated_masses, f'{output_dir}/gen_masses.pth')
     torch.save(conditioning_used, f'{output_dir}/cond.pth')
 
     return gen_samples
-
 
 if __name__ == "__main__":
     args = parse_arguments()

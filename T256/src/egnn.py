@@ -57,7 +57,6 @@ class EGNN(nn.Module):
         self.theta_embed.to(x.device)
         theta_embd = self.theta_embed(theta) if theta is not None else None
 
-        x_input = x.clone()
 
         if theta_embd is None:
             global_attr = t_embed
@@ -73,17 +72,11 @@ class EGNN(nn.Module):
         vel = torch.zeros_like(x)
 
         for i, layer in enumerate(self.layers):
-            # print(f"Layer {i}: h input magnitude = {h.norm(dim=-1).mean():.6f}")
             h, v, edge_feat = layer(h, edge_index, x, t_embed, edge_attr=edge_attr, 
                             global_attr=global_attr_embd[batch] if global_attr_embd is not None else None,
                             )
-            # print(f"Layer {i}: h output magnitude = {h.norm(dim=-1).mean():.6f}")
-            # print(f"Layer {i}: v magnitude = {v.norm(dim=-1).mean():.6f}")
-            # x = wrap(x + v, **BOX)
             vel += v 
-                
-        # vel = min_image(x - x_input, **BOX)
-        # vel = self.vel_mlp(h)
+            
         vel_m = self.mass_readout(h)
 
         return vel, vel_m

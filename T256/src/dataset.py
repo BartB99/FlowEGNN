@@ -43,7 +43,7 @@ def augment_data(x, rotations, translations):
         x = np.dot(x, matrix.T)
 
     if translations:
-        shift = np.random.uniform(size=(3,)) # sample a random shift for each dimension
+        shift = np.random.uniform(size=(3,))
         x = x + shift
     
     return wrap(x, **BOX) # ensure pbc
@@ -70,7 +70,6 @@ class CosmologyData(Data):
     """
 
     def __cat_dim__(self, key, value, *args, **kwargs):
-        # Whatever values "theta" and "z" hold, they are graph-level features
         if key == 'theta':
             return None
         return super().__cat_dim__(key, value, *args, **kwargs)
