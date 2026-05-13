@@ -32,16 +32,16 @@ Trained on the complete **top-5000 heaviest halo catalogues** directly from Quij
 
 ```bash
 # Multi-GPU training (SLURM)
-sbatch training_script.sh
+sbatch training_script.sh --configs Configs/train_configs.yaml
 
 # Single-GPU training
-python src/train_ddp.py --config Configs/train_configs.yaml
+sbatch training_script_single.sh --config Configs/train_configs.yaml
 
 # Hyperparameter search
-bash tune_script.sh
+sbatch tune_script.sh
 
 # Generate samples
-python src/infer.py --config Configs/infer_configs.yaml
+sbatch infer_script.sh --config Configs/infer_configs.yaml
 ```
 
 All settings (data paths, model size, training schedule, inference parameters) are controlled through YAML config files in `Configs/`.
