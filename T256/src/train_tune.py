@@ -14,11 +14,11 @@ import copy
 import logging
 import os
 import sys
-import yaml
 from argparse import ArgumentParser
 
 import ray
 import torch
+import yaml
 from ray import tune
 from ray.tune import Tuner, TuneConfig
 from ray.tune.schedulers import ASHAScheduler
@@ -41,10 +41,11 @@ def train_one_trial(ray_config, base_config_path, tune_epochs, project_root):
     sys.path.insert(0, os.path.join(project_root, "src"))
     os.chdir(project_root)
 
+    from dataset import create_dataloader
     from egnn import EGNN
     from fm import FlowMatching
-    from dataset import create_dataloader
-    from utils import load_config, get_activation_fn, get_scheduler, adjust_learning_rate
+    from utils.config import load_config
+    from utils.training import adjust_learning_rate, get_activation_fn, get_scheduler
 
     logging.disable(logging.CRITICAL)
 

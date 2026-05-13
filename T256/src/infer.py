@@ -2,12 +2,12 @@ import logging
 import math
 import os
 import pprint
-import yaml
 from argparse import ArgumentParser
 
 import numpy as np
 import pandas as pd
 import torch
+import yaml
 from torch.amp import autocast
 
 from egnn import EGNN
@@ -15,17 +15,12 @@ from fm import FlowMatching
 from mlp_baseline import MLPBaseline
 from pbc_config import BOX, wrap
 from prior import scaled_log10_gaussian_mass_prior, uniform_prior, wrapped_gaussian_prior
-from utils import (
-    compute_local_density,
-    find_equally_spaced_indices,
-    get_activation_fn,
-    load_config,
-    load_yaml_from_directory,
-    radius_graph_pbc_batch,
-    scale_thetas,
-    setup_logging_infer,
-    unique_output_dir_infer,
-)
+from utils.config import load_config
+from utils.data import find_equally_spaced_indices
+from utils.graph import compute_local_density, radius_graph_pbc_batch
+from utils.logging import setup_logging_infer, unique_output_dir_infer
+from utils.scale import scale_thetas
+from utils.training import get_activation_fn, load_yaml_from_directory
 
 def parse_arguments():
     """Parses CLI arguments."""

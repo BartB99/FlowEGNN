@@ -7,7 +7,7 @@ from torch_geometric.data import Data, Dataset
 from torch_geometric.loader import DataLoader
 
 from pbc_config import BOX, wrap
-from utils import scale_masses
+from utils.scale import scale_masses
 
 def define_rotations():
     signs = np.array([

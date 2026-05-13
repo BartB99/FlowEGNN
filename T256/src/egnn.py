@@ -3,7 +3,7 @@ import torch.nn as nn
 
 from egcl import EGCL
 from mlp import MLP
-from utils import SinusoidalThetaEmbedding
+from utils.embedding import SinusoidalThetaEmbedding
 
 class EGNN(nn.Module):
     def __init__(self, t_embed_dim, input_node_d, input_theta_d, theta_param_embd_dim, hidden_nf, 

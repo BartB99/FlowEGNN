@@ -15,18 +15,9 @@ from dataset import create_dataloader
 from egnn import EGNN
 from fm import FlowMatching
 from mlp_baseline import MLPBaseline
-from utils import (
-    adjust_learning_rate,
-    copy_config_to_output,
-    count_parameters,
-    get_activation_fn,
-    get_scheduler,
-    gradient_norm,
-    load_config,
-    merge_configs,
-    setup_logging,
-    unique_output_dir,
-)
+from utils.config import load_config, merge_configs
+from utils.logging import copy_config_to_output, setup_logging, unique_output_dir
+from utils.training import adjust_learning_rate, count_parameters, get_activation_fn, get_scheduler, gradient_norm
 
 ### Distributed Training Functions ####################################
 def setup(rank, world_size):

@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 
-from utils import SinusoidalThetaEmbedding
+from utils.embedding import SinusoidalThetaEmbedding
 
 
 class MLPBaseline(nn.Module):

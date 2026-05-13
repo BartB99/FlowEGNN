@@ -5,7 +5,7 @@ from torch_geometric.utils import softmax
 
 from mlp import MLP
 from pbc_config import BOX, min_image
-from utils import unsorted_segment_mean, unsorted_segment_sum
+from utils.data import unsorted_segment_mean, unsorted_segment_sum
 
 class EGCL(nn.Module):
     def __init__(self,

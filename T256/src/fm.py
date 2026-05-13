@@ -3,13 +3,10 @@ import torch.nn as nn
 
 from pbc_config import BOX, min_image, wrap
 from prior import scaled_log10_gaussian_mass_prior, uniform_prior, wrapped_gaussian_prior
-from utils import (
-    SinusoidalTimeEmbedding,
-    compute_local_density,
-    ot_alignment_variable,
-    radius_graph_pbc_batch,
-    scale_thetas,
-)
+from utils.data import ot_alignment_variable
+from utils.embedding import SinusoidalTimeEmbedding
+from utils.graph import compute_local_density, radius_graph_pbc_batch
+from utils.scale import scale_thetas
 
 class FlowMatching(nn.Module):
     def __init__(self,
