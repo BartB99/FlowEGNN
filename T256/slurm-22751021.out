@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/gpfs/home4/bartb/FlowEGNN/T256/src/infer.py", line 247, in <module>
+    train_config = load_yaml_from_directory(output_dir)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/gpfs/home4/bartb/FlowEGNN/T256/src/utils/training.py", line 109, in load_yaml_from_directory
+    raise FileNotFoundError(f"No YAML file found in {directory}")
+FileNotFoundError: No YAML file found in /gpfs/home4/bartb/T256/T256-SUBBOX/results/run_20260514_113408

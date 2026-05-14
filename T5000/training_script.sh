@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -J T256-SUBBOX
+#SBATCH -J T5000-Exp
 #SBATCH -t 50:00:00
 #SBATCH -p gpu_h100
 #SBATCH --nodes=1 

@@ -1,0 +1,517 @@
++ export MPLCONFIGDIR=/scratch-local/bartb.22749461/matplotlib
++ MPLCONFIGDIR=/scratch-local/bartb.22749461/matplotlib
++ export XDG_CACHE_HOME=/scratch-local/bartb.22749461/.cache
++ XDG_CACHE_HOME=/scratch-local/bartb.22749461/.cache
++ mkdir -p /scratch-local/bartb.22749461/matplotlib /scratch-local/bartb.22749461/.cache
++ export TORCH_DISTRIBUTED_DEBUG=DETAIL
++ TORCH_DISTRIBUTED_DEBUG=DETAIL
++ module load 2023
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+Shell debugging restarted
++ unset __lmod_sh_dbg
++ return 0
++ source /gpfs/home4/bartb/venvs/boids/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/home/bartb/venvs/boids
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ PATH=/home/bartb/venvs/boids/bin:/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(boids) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(boids) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ torchrun --standalone --nproc_per_node=4 src/train_ddp.py --config Configs/overfit_configs.yaml
+W0514 13:54:12.293000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] 
+W0514 13:54:12.293000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+W0514 13:54:12.293000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0514 13:54:12.293000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+Group initialized? True
+host: gcn86.local.snellius.surf.nl, rank: 0, local_rank: 0
+2026-05-14 13:54:24,225 - INFO - Output_dir: ./results/run_20260514_135423
+2026-05-14 13:54:24,226 - INFO - Final training configuration:
+{'config': 'Configs/overfit_configs.yaml',
+ 'data': {'cosm_param': None,
+          'cosmologies_dir': '../Data/',
+          'cosmologies_info_dir': '../Data/',
+          'dataset': 'subset_5000',
+          'rotations': False,
+          'translations': False},
+ 'log_wandb': False,
+ 'logging': {'epoch_log_interval': 1,
+             'level': 'INFO',
+             'model_save_interval': 100},
+ 'model': {'egnn': {'activation': 'silu',
+                    'aggregation_fn': 'sum',
+                    'attention': True,
+                    'coords_weight': 1.0,
+                    'hidden_nf': 128,
+                    'input_node_d': 2,
+                    'input_theta_d': 5,
+                    'latent_nf': 64,
+                    'mlp_layers': 2,
+                    'n_layers': 4,
+                    'norm': 'layer',
+                    'norm_diff': False,
+                    'recurrent': True,
+                    'scale_pred': True,
+                    'single_layer': True,
+                    'theta_nf': 64,
+                    'theta_param_embd_dim': 32},
+           'fm': {'k': 32,
+                  'lambda_mass': 1.0,
+                  'lambda_reg': 0.1,
+                  'optimal_transport': True,
+                  'prior': 'uniform',
+                  'r': 0.3,
+                  'sigma_0': 0.0,
+                  'sigma_sched': False,
+                  't_embed': 'sinusoidal',
+                  't_embed_dim': 64,
+                  'version': 'icfm'}},
+ 'output': {'base_path': './results/'},
+ 'training': {'batch_size': 4,
+              'batch_size_valid': 4,
+              'checkpoint_path': None,
+              'clip_value': 1.0,
+              'early_stopping': {'min_delta': 0.0001, 'patience': 9999},
+              'epochs': 10000,
+              'optimizer': {'weight_decay': 0},
+              'scheduler': {'factor': 0.5,
+                            'initial_lr': '1e-3',
+                            'min_lr': 1e-08,
+                            'patience': 50,
+                            'target_lr': '1e-5',
+                            'threshold': 0.0001,
+                            'type': 'cosine',
+                            'warmup_epochs': 10},
+              'start_from_scratch': True},
+ 'wandb': {'log_freq': 50, 'project_name': 'T5000-exp', 'run_name': 'baseline'}}
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+host: gcn86.local.snellius.surf.nl, rank: 3, local_rank: 3
+host: gcn86.local.snellius.surf.nl, rank: 2, local_rank: 2
+host: gcn86.local.snellius.surf.nl, rank: 1, local_rank: 1
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+2026-05-14 13:54:27,709 - INFO - Number of trainable parameters: 538698
+2026-05-14 13:54:27,710 - INFO - Model architecture: DistributedDataParallel(
+  (module): FlowMatching(
+    (vnet): EGNN(
+      (h_embed): MLP(
+        (layer): Linear(in_features=2, out_features=64, bias=True)
+      )
+      (theta_embed): SinusoidalThetaEmbedding()
+      (global_attr_projection): Linear(in_features=224, out_features=64, bias=True)
+      (mass_readout): MLP(
+        (mlp): Sequential(
+          (0): Linear(in_features=64, out_features=128, bias=True)
+          (1): SiLU()
+          (2): Linear(in_features=128, out_features=128, bias=True)
+          (3): SiLU()
+          (4): Linear(in_features=128, out_features=1, bias=True)
+        )
+      )
+      (layers): ModuleList(
+        (0-3): 4 x EGCL(
+          (activation): SiLU()
+          (edge_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=196, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=192, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (coord_mlp): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=False)
+          )
+          (attn_mlp): Sequential(
+            (0): Linear(in_features=64, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=True)
+          )
+        )
+      )
+      (theta_predictor): Linear(in_features=64, out_features=5, bias=True)
+    )
+    (time_mlp): Linear(in_features=1, out_features=64, bias=True)
+    (sinusoidal_time_embedding): SinusoidalTimeEmbedding()
+  )
+)
+2026-05-14 13:54:27,712 - INFO - Started training
+[rank1]: Traceback (most recent call last):
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 399, in <module>
+[rank1]:     main()
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 396, in main
+[rank1]:     train_model(final_config, output_dir, rank, local_rank)
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 305, in train_model
+[rank1]:     train_loss, global_step = train_epoch(ddp_model, train_dl, optimizer, \
+[rank1]:                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 213, in train_epoch
+[rank1]:     loss, pos_loss, mass_loss = ddp_model(samples=samples)  
+[rank1]:                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
+[rank1]:     else self._run_ddp_forward(*inputs, **kwargs)
+[rank1]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
+[rank1]:     return self.module(*inputs, **kwargs)  # type: ignore[index]
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/fm.py", line 201, in forward
+[rank1]:     pred_vel, pred_vel_m = self.vnet(h_in, x_t, t_embedded, batch, edge_index, theta=theta)   
+[rank1]:                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egnn.py", line 75, in forward
+[rank1]:     h, v, edge_feat = layer(h, edge_index, x, t_embed, edge_attr=edge_attr, 
+[rank1]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egcl.py", line 132, in forward
+[rank1]:     edge_feat = self.edge_model(h[row], h[col], scalar, row, coord_diff, 
+[rank1]:                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egcl.py", line 78, in edge_model
+[rank1]:     out = self.edge_mlp(out)
+[rank1]:           ^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/mlp.py", line 21, in forward
+[rank1]:     return self.mlp(x)
+[rank1]:            ^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/container.py", line 250, in forward
+[rank1]:     input = module(input)
+[rank1]:             ^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank1]:     return self._call_impl(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank1]:     return forward_call(*args, **kwargs)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+[rank1]:     return F.linear(input, self.weight, self.bias)
+[rank1]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank1]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.40 GiB. GPU 1 has a total capacity of 93.09 GiB of which 711.19 MiB is free. Including non-PyTorch memory, this process has 92.38 GiB memory in use. Of the allocated memory 90.11 GiB is allocated by PyTorch, and 337.37 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]: Traceback (most recent call last):
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 399, in <module>
+[rank0]:     main()
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 396, in main
+[rank0]:     train_model(final_config, output_dir, rank, local_rank)
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 305, in train_model
+[rank0]:     train_loss, global_step = train_epoch(ddp_model, train_dl, optimizer, \
+[rank0]:                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 213, in train_epoch
+[rank0]:     loss, pos_loss, mass_loss = ddp_model(samples=samples)  
+[rank0]:                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
+[rank0]:     else self._run_ddp_forward(*inputs, **kwargs)
+[rank0]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
+[rank0]:     return self.module(*inputs, **kwargs)  # type: ignore[index]
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/fm.py", line 201, in forward
+[rank0]:     pred_vel, pred_vel_m = self.vnet(h_in, x_t, t_embedded, batch, edge_index, theta=theta)   
+[rank0]:                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egnn.py", line 75, in forward
+[rank0]:     h, v, edge_feat = layer(h, edge_index, x, t_embed, edge_attr=edge_attr, 
+[rank0]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egcl.py", line 132, in forward
+[rank0]:     edge_feat = self.edge_model(h[row], h[col], scalar, row, coord_diff, 
+[rank0]:                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egcl.py", line 78, in edge_model
+[rank0]:     out = self.edge_mlp(out)
+[rank0]:           ^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/mlp.py", line 21, in forward
+[rank0]:     return self.mlp(x)
+[rank0]:            ^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/container.py", line 250, in forward
+[rank0]:     input = module(input)
+[rank0]:             ^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank0]:     return self._call_impl(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank0]:     return forward_call(*args, **kwargs)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+[rank0]:     return F.linear(input, self.weight, self.bias)
+[rank0]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank0]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.40 GiB. GPU 0 has a total capacity of 93.09 GiB of which 815.19 MiB is free. Including non-PyTorch memory, this process has 92.28 GiB memory in use. Of the allocated memory 90.11 GiB is allocated by PyTorch, and 341.52 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 399, in <module>
+[rank2]:     main()
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 396, in main
+[rank2]:     train_model(final_config, output_dir, rank, local_rank)
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 305, in train_model
+[rank2]:     train_loss, global_step = train_epoch(ddp_model, train_dl, optimizer, \
+[rank2]:                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/train_ddp.py", line 213, in train_epoch
+[rank2]:     loss, pos_loss, mass_loss = ddp_model(samples=samples)  
+[rank2]:                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/parallel/distributed.py", line 1643, in forward
+[rank2]:     else self._run_ddp_forward(*inputs, **kwargs)
+[rank2]:          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/parallel/distributed.py", line 1459, in _run_ddp_forward
+[rank2]:     return self.module(*inputs, **kwargs)  # type: ignore[index]
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/fm.py", line 201, in forward
+[rank2]:     pred_vel, pred_vel_m = self.vnet(h_in, x_t, t_embedded, batch, edge_index, theta=theta)   
+[rank2]:                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egnn.py", line 75, in forward
+[rank2]:     h, v, edge_feat = layer(h, edge_index, x, t_embed, edge_attr=edge_attr, 
+[rank2]:                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egcl.py", line 132, in forward
+[rank2]:     edge_feat = self.edge_model(h[row], h[col], scalar, row, coord_diff, 
+[rank2]:                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/egcl.py", line 78, in edge_model
+[rank2]:     out = self.edge_mlp(out)
+[rank2]:           ^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/gpfs/home4/bartb/FlowEGNN/T5000/src/mlp.py", line 21, in forward
+[rank2]:     return self.mlp(x)
+[rank2]:            ^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/container.py", line 250, in forward
+[rank2]:     input = module(input)
+[rank2]:             ^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+[rank2]:     return self._call_impl(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+[rank2]:     return forward_call(*args, **kwargs)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]:   File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/nn/modules/linear.py", line 125, in forward
+[rank2]:     return F.linear(input, self.weight, self.bias)
+[rank2]:            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[rank2]: torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 5.39 GiB. GPU 2 has a total capacity of 93.09 GiB of which 817.19 MiB is free. Including non-PyTorch memory, this process has 92.28 GiB memory in use. Of the allocated memory 90.02 GiB is allocated by PyTorch, and 327.84 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+[rank0]:[W514 13:54:56.422435955 ProcessGroupNCCL.cpp:1250] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())
+W0514 13:54:56.766000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 105960 closing signal SIGTERM
+W0514 13:54:56.768000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 105962 closing signal SIGTERM
+W0514 13:54:56.768000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:897] Sending process 105963 closing signal SIGTERM
+E0514 13:54:57.646000 105942 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/api.py:869] failed (exitcode: 1) local_rank: 1 (pid: 105961) of binary: /home/bartb/venvs/boids/bin/python
+Traceback (most recent call last):
+  File "/home/bartb/venvs/boids/bin/torchrun", line 7, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 355, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py", line 919, in main
+    run(args)
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py", line 910, in run
+    elastic_launch(
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 138, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/launcher/api.py", line 269, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+src/train_ddp.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2026-05-14_13:54:56
+  host      : gcn86.local.snellius.surf.nl
+  rank      : 1 (local_rank: 1)
+  exitcode  : 1 (pid: 105961)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

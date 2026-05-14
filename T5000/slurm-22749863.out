@@ -1,0 +1,238 @@
++ export MPLCONFIGDIR=/scratch-local/bartb.22749863/matplotlib
++ MPLCONFIGDIR=/scratch-local/bartb.22749863/matplotlib
++ export XDG_CACHE_HOME=/scratch-local/bartb.22749863/.cache
++ XDG_CACHE_HOME=/scratch-local/bartb.22749863/.cache
++ mkdir -p /scratch-local/bartb.22749863/matplotlib /scratch-local/bartb.22749863/.cache
++ export TORCH_DISTRIBUTED_DEBUG=DETAIL
++ TORCH_DISTRIBUTED_DEBUG=DETAIL
++ module load 2023
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+Shell debugging restarted
++ unset __lmod_sh_dbg
++ return 0
++ source /gpfs/home4/bartb/venvs/boids/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/home/bartb/venvs/boids
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ PATH=/home/bartb/venvs/boids/bin:/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(boids) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(boids) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ torchrun --standalone --nproc_per_node=4 src/train_ddp.py --config Configs/overfit_configs.yaml
+W0514 14:02:46.832000 152405 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] 
+W0514 14:02:46.832000 152405 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+W0514 14:02:46.832000 152405 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0514 14:02:46.832000 152405 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+Group initialized? True
+host: gcn145.local.snellius.surf.nl, rank: 0, local_rank: 0
+2026-05-14 14:03:10,615 - INFO - Output_dir: ./results/run_20260514_140258
+2026-05-14 14:03:10,616 - INFO - Final training configuration:
+{'config': 'Configs/overfit_configs.yaml',
+ 'data': {'cosm_param': None,
+          'cosmologies_dir': '../Data/',
+          'cosmologies_info_dir': '../Data/',
+          'dataset': 'subset_5000',
+          'rotations': False,
+          'translations': False},
+ 'log_wandb': False,
+ 'logging': {'epoch_log_interval': 1,
+             'level': 'INFO',
+             'model_save_interval': 100},
+ 'model': {'egnn': {'activation': 'silu',
+                    'aggregation_fn': 'sum',
+                    'attention': True,
+                    'coords_weight': 1.0,
+                    'hidden_nf': 128,
+                    'input_node_d': 2,
+                    'input_theta_d': 5,
+                    'latent_nf': 64,
+                    'mlp_layers': 2,
+                    'n_layers': 4,
+                    'norm': 'layer',
+                    'norm_diff': False,
+                    'recurrent': True,
+                    'scale_pred': True,
+                    'single_layer': True,
+                    'theta_nf': 64,
+                    'theta_param_embd_dim': 32},
+           'fm': {'k': 32,
+                  'lambda_mass': 1.0,
+                  'lambda_reg': 0.1,
+                  'optimal_transport': True,
+                  'prior': 'uniform',
+                  'r': 0.2,
+                  'sigma_0': 0.0,
+                  'sigma_sched': False,
+                  't_embed': 'sinusoidal',
+                  't_embed_dim': 64,
+                  'version': 'icfm'}},
+ 'output': {'base_path': './results/'},
+ 'training': {'batch_size': 4,
+              'batch_size_valid': 4,
+              'checkpoint_path': None,
+              'clip_value': 1.0,
+              'early_stopping': {'min_delta': 0.0001, 'patience': 9999},
+              'epochs': 10000,
+              'optimizer': {'weight_decay': 0},
+              'scheduler': {'factor': 0.5,
+                            'initial_lr': '1e-3',
+                            'min_lr': 1e-08,
+                            'patience': 50,
+                            'target_lr': '1e-5',
+                            'threshold': 0.0001,
+                            'type': 'cosine',
+                            'warmup_epochs': 10},
+              'start_from_scratch': True},
+ 'wandb': {'log_freq': 50, 'project_name': 'T5000-exp', 'run_name': 'baseline'}}
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.2
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+host: gcn145.local.snellius.surf.nl, rank: 1, local_rank: 1
+host: gcn145.local.snellius.surf.nl, rank: 3, local_rank: 3
+host: gcn145.local.snellius.surf.nl, rank: 2, local_rank: 2
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.2
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.2
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 4
+        - prior: uniform
+        - k: 32
+        - r: 0.2
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+2026-05-14 14:03:13,976 - INFO - Number of trainable parameters: 538698
+2026-05-14 14:03:13,977 - INFO - Model architecture: DistributedDataParallel(
+  (module): FlowMatching(
+    (vnet): EGNN(
+      (h_embed): MLP(
+        (layer): Linear(in_features=2, out_features=64, bias=True)
+      )
+      (theta_embed): SinusoidalThetaEmbedding()
+      (global_attr_projection): Linear(in_features=224, out_features=64, bias=True)
+      (mass_readout): MLP(
+        (mlp): Sequential(
+          (0): Linear(in_features=64, out_features=128, bias=True)
+          (1): SiLU()
+          (2): Linear(in_features=128, out_features=128, bias=True)
+          (3): SiLU()
+          (4): Linear(in_features=128, out_features=1, bias=True)
+        )
+      )
+      (layers): ModuleList(
+        (0-3): 4 x EGCL(
+          (activation): SiLU()
+          (edge_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=196, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=192, out_features=128, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=128, out_features=128, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=128, out_features=64, bias=True)
+            )
+          )
+          (node_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (coord_mlp): Sequential(
+            (0): Linear(in_features=128, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=False)
+          )
+          (attn_mlp): Sequential(
+            (0): Linear(in_features=64, out_features=128, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=128, out_features=1, bias=True)
+          )
+        )
+      )
+      (theta_predictor): Linear(in_features=64, out_features=5, bias=True)
+    )
+    (time_mlp): Linear(in_features=1, out_features=64, bias=True)
+    (sinusoidal_time_embedding): SinusoidalTimeEmbedding()
+  )
+)
+2026-05-14 14:03:13,979 - INFO - Started training
+[2026-05-14T14:33:52.989] error: *** JOB 22749863 ON gcn145 CANCELLED AT 2026-05-14T14:33:52 DUE to SIGNAL Terminated ***

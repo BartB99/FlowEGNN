@@ -3,7 +3,7 @@ import torch.nn as nn
 
 from pbc_config import BOX, min_image, wrap
 from prior import scaled_log10_gaussian_mass_prior, uniform_prior, wrapped_gaussian_prior
-from utils.data import ot_alignment_variable
+from utils.data import ot_alignment
 from utils.embedding import SinusoidalTimeEmbedding
 from utils.graph import compute_local_density, radius_graph_pbc_batch
 from utils.scale import scale_thetas
@@ -172,7 +172,7 @@ class FlowMatching(nn.Module):
         assert x1.shape[0] == torch.sum(node_counts_per_graph), "Number of nodes in x is different than number of halos per graph."
 
         if self.optimal_transport:
-            x0 = ot_alignment_variable(x0, x1, batch, self.batch_size)       
+            x0 = ot_alignment(x0, x1, self.batch_size)       
 
         # Sample time and embed
         t = torch.rand(size=(self.batch_size, 1), device=x1.device)
