@@ -75,7 +75,7 @@ class CosmologyData(Data):
         return super().__cat_dim__(key, value, *args, **kwargs)
     
 
-class T256Dataset(Dataset):
+class T5000Dataset(Dataset):
 
     def __init__(self, cosmologies_dir, cosmologies_info_dir, split, 
                     rotations=False, translations=False, cosm_param=None):
@@ -84,8 +84,7 @@ class T256Dataset(Dataset):
         """
         super().__init__()
         
-        self.halos = np.load(Path(cosmologies_dir) / f"{split}_subbox_halos.npy")
-        self.subbox_counts = np.load(Path(cosmologies_dir) / f"{split}_subbox_counts.npy")
+        self.halos = np.load(Path(cosmologies_dir) / f"{split}_halos.npy")
 
         # Load cosmlogical parameters
         params = pd.read_csv(Path(cosmologies_info_dir) / f"{split}_cosmology.csv")
@@ -103,17 +102,14 @@ class T256Dataset(Dataset):
     def get(self, idx):
 
         # Load the dataset file for the specific index
-        graph = self.halos[idx]
-        n = self.subbox_counts[idx]
+        data_point = self.halos[idx]
         params = self.params[idx]
-
-        data_point = graph[:n]
 
         mass = torch.tensor(data_point[:, -1], dtype=torch.float32)
         log_mass = torch.log10(mass)
         scaled_log_mass = scale_masses(log_mass)
 
-        x = (data_point[:, :3] - 0.) / (370. - 0.)
+        x = (data_point[:, :3] - 0.) / (1000. - 0.)
         
         x = augment_data(x, rotations=self.rotations, translations=self.translations)
 
@@ -129,7 +125,7 @@ class T256Dataset(Dataset):
 def deterministic_sample(cosmologies_dir="Data", cosmologies_info_dir="Data",
                          rotations=False, translations=False,
                          cosm_param=False):
-    valid_dataset = T256Dataset(cosmologies_dir, cosmologies_info_dir, 
+    valid_dataset = T5000Dataset(cosmologies_dir, cosmologies_info_dir, 
                                  split="test", rotations=rotations, 
                                  translations=translations, cosm_param=None)
 
@@ -144,8 +140,8 @@ def create_dataloader(cosmologies_dir,
                       translations=False,
                       cosm_param=None):
 
-    train_dataset = T256Dataset(cosmologies_dir, cosmologies_info_dir, split="train", translations=translations, cosm_param=cosm_param)
-    valid_dataset = T256Dataset(cosmologies_dir, cosmologies_info_dir, split="test", rotations=rotations, translations=translations, cosm_param=cosm_param)
+    train_dataset = T5000Dataset(cosmologies_dir, cosmologies_info_dir, split="train", translations=translations, cosm_param=cosm_param)
+    valid_dataset = T5000Dataset(cosmologies_dir, cosmologies_info_dir, split="test", rotations=rotations, translations=translations, cosm_param=cosm_param)
 
     if distributed:
         train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset, shuffle=True, drop_last=True)

@@ -1,0 +1,283 @@
++ export MPLCONFIGDIR=/scratch-local/bartb.22745566/matplotlib
++ MPLCONFIGDIR=/scratch-local/bartb.22745566/matplotlib
++ export XDG_CACHE_HOME=/scratch-local/bartb.22745566/.cache
++ XDG_CACHE_HOME=/scratch-local/bartb.22745566/.cache
++ mkdir -p /scratch-local/bartb.22745566/matplotlib /scratch-local/bartb.22745566/.cache
++ export TORCH_DISTRIBUTED_DEBUG=DETAIL
++ TORCH_DISTRIBUTED_DEBUG=DETAIL
++ module load 2023
++ '[' -z '' ']'
++ case "$-" in
++ __lmod_sh_dbg=x
++ '[' -n x ']'
++ set +x
+Shell debugging temporarily silenced: export LMOD_SH_DBG_ON=1 for Lmod's output
+Shell debugging restarted
++ unset __lmod_sh_dbg
++ return 0
++ source /gpfs/home4/bartb/venvs/boids/bin/activate
+++ deactivate nondestructive
+++ '[' -n '' ']'
+++ '[' -n '' ']'
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
+++ '[' -n '' ']'
+++ unset VIRTUAL_ENV
+++ unset VIRTUAL_ENV_PROMPT
+++ '[' '!' nondestructive = nondestructive ']'
+++ VIRTUAL_ENV=/home/bartb/venvs/boids
+++ export VIRTUAL_ENV
+++ _OLD_VIRTUAL_PATH=/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ PATH=/home/bartb/venvs/boids/bin:/home/bartb/.local/bin:/home/bartb/bin:/usr/hpc/bin:/opt/neovim/current/bin:/opt/ear/current/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/mellanox/doca/tools/
+++ export PATH
+++ '[' -n '' ']'
+++ '[' -z '' ']'
+++ _OLD_VIRTUAL_PS1=
+++ PS1='(boids) '
+++ export PS1
+++ VIRTUAL_ENV_PROMPT='(boids) '
+++ export VIRTUAL_ENV_PROMPT
+++ '[' -n /bin/bash -o -n '' ']'
+++ hash -r
++ torchrun --standalone --nproc_per_node=4 src/train_ddp.py --config Configs/tuned_configs.yaml --log_wandb
+W0514 11:33:57.268000 389253 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] 
+W0514 11:33:57.268000 389253 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+W0514 11:33:57.268000 389253 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0514 11:33:57.268000 389253 /gpfs/home4/bartb/venvs/boids/lib/python3.11/site-packages/torch/distributed/run.py:793] *****************************************
+Group initialized? True
+host: gcn122.local.snellius.surf.nl, rank: 0, local_rank: 0
+2026-05-14 11:34:08,946 - INFO - Output_dir: ./results/run_20260514_113408
+2026-05-14 11:34:08,946 - INFO - Final training configuration:
+{'config': 'Configs/tuned_configs.yaml',
+ 'data': {'cosm_param': None,
+          'cosmologies_dir': '../Data/subboxes/',
+          'cosmologies_info_dir': '../Data/subboxes/',
+          'dataset': 'subset_5000',
+          'rotations': False,
+          'translations': False},
+ 'log_wandb': True,
+ 'logging': {'epoch_log_interval': 1,
+             'level': 'INFO',
+             'model_save_interval': 100},
+ 'model': {'egnn': {'activation': 'silu',
+                    'aggregation_fn': 'sum',
+                    'attention': True,
+                    'coords_weight': 2.0,
+                    'hidden_nf': 256,
+                    'input_node_d': 2,
+                    'input_theta_d': 5,
+                    'latent_nf': 64,
+                    'mlp_layers': 2,
+                    'n_layers': 4,
+                    'norm': 'layer',
+                    'norm_diff': False,
+                    'recurrent': True,
+                    'scale_pred': True,
+                    'single_layer': True,
+                    'theta_nf': 64,
+                    'theta_param_embd_dim': 32},
+           'fm': {'k': 32,
+                  'lambda_mass': 1.0,
+                  'lambda_reg': 0.1,
+                  'optimal_transport': True,
+                  'prior': 'uniform',
+                  'r': 0.3,
+                  'sigma_0': 0.0,
+                  'sigma_sched': False,
+                  't_embed': 'sinusoidal',
+                  't_embed_dim': 64,
+                  'version': 'icfm'}},
+ 'output': {'base_path': './results/'},
+ 'training': {'batch_size': 16,
+              'batch_size_valid': 16,
+              'checkpoint_path': None,
+              'clip_value': 1.0,
+              'early_stopping': {'min_delta': 0.0001, 'patience': 9999},
+              'epochs': 10000,
+              'optimizer': {'weight_decay': 0},
+              'scheduler': {'factor': 0.5,
+                            'initial_lr': '1e-3',
+                            'min_lr': 1e-08,
+                            'patience': 50,
+                            'target_lr': '1e-5',
+                            'threshold': 0.0001,
+                            'type': 'cosine',
+                            'warmup_epochs': 10},
+              'start_from_scratch': True},
+ 'wandb': {'log_freq': 50,
+           'project_name': 'T256-SUBBOX',
+           'run_name': 'egnn_tuned'}}
+host: gcn122.local.snellius.surf.nl, rank: 1, local_rank: 1
+host: gcn122.local.snellius.surf.nl, rank: 2, local_rank: 2
+host: gcn122.local.snellius.surf.nl, rank: 3, local_rank: 3
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+
+wandb: Currently logged in as: bart-bronsgeest (bart-bronsgeest-eindhoven-university-of-technology) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run r4i1s2ti
+wandb: Tracking run with wandb version 0.23.1
+wandb: Run data is saved locally in /gpfs/home4/bartb/FlowEGNN/T256/wandb/run-20260514_113409-r4i1s2ti
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run egnn_tuned
+wandb: ⭐️ View project at https://wandb.ai/bart-bronsgeest-eindhoven-university-of-technology/T256-SUBBOX
+wandb: 🚀 View run at https://wandb.ai/bart-bronsgeest-eindhoven-university-of-technology/T256-SUBBOX/runs/r4i1s2ti
+/home/bartb/venvs/boids/lib/python3.11/site-packages/torch/utils/data/dataloader.py:617: UserWarning: This DataLoader will create 64 worker processes in total. Our suggested max number of worker in current system is 16, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+
+        Initializing Flow Matching model with:
+        - sigma_0: 0.0
+        - sigma_sched: False
+        - t_embed_dim: 64
+        - version: icfm
+        - batch_size: 16
+        - prior: uniform
+        - k: 32
+        - r: 0.3
+        - optimal_transport: True
+        - lambda_mass: 1.0
+        - t_embed: sinusoidal
+        - dim: 3
+              
+2026-05-14 11:34:14,318 - INFO - Number of trainable parameters: 1356234
+2026-05-14 11:34:14,318 - INFO - Model architecture: DistributedDataParallel(
+  (module): FlowMatching(
+    (vnet): EGNN(
+      (h_embed): MLP(
+        (layer): Linear(in_features=2, out_features=64, bias=True)
+      )
+      (theta_embed): SinusoidalThetaEmbedding()
+      (global_attr_projection): Linear(in_features=224, out_features=64, bias=True)
+      (mass_readout): MLP(
+        (mlp): Sequential(
+          (0): Linear(in_features=64, out_features=256, bias=True)
+          (1): SiLU()
+          (2): Linear(in_features=256, out_features=256, bias=True)
+          (3): SiLU()
+          (4): Linear(in_features=256, out_features=1, bias=True)
+        )
+      )
+      (layers): ModuleList(
+        (0-3): 4 x EGCL(
+          (activation): SiLU()
+          (edge_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=196, out_features=256, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=256, out_features=64, bias=True)
+            )
+          )
+          (node_mlp): MLP(
+            (mlp): Sequential(
+              (0): Linear(in_features=192, out_features=256, bias=True)
+              (1): SiLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): SiLU()
+              (4): Linear(in_features=256, out_features=64, bias=True)
+            )
+          )
+          (node_norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (coord_mlp): Sequential(
+            (0): Linear(in_features=128, out_features=256, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=256, out_features=1, bias=False)
+          )
+          (attn_mlp): Sequential(
+            (0): Linear(in_features=64, out_features=256, bias=True)
+            (1): SiLU()
+            (2): Linear(in_features=256, out_features=1, bias=True)
+          )
+        )
+      )
+      (theta_predictor): Linear(in_features=64, out_features=5, bias=True)
+    )
+    (time_mlp): Linear(in_features=1, out_features=64, bias=True)
+    (sinusoidal_time_embedding): SinusoidalTimeEmbedding()
+  )
+)
+2026-05-14 11:34:14,322 - INFO - Started training
+2026-05-14 11:35:08,069 - INFO - Epoch 1, Total: 0.019498, Pos: 0.005633, Mass: 0.010955
+2026-05-14 11:35:20,940 - INFO - Epoch 1, Validation loss: 0.016209703957677908
+2026-05-14 11:36:46,325 - INFO - Epoch 2, Total: 0.015936, Pos: 0.005947, Mass: 0.009389
+2026-05-14 11:37:10,962 - INFO - Epoch 2, Validation loss: 0.015599952556957036
+2026-05-14 11:38:39,734 - INFO - Epoch 3, Total: 0.015642, Pos: 0.005613, Mass: 0.010452
+2026-05-14 11:38:55,371 - INFO - Epoch 3, Validation loss: 0.015355338008166889
+2026-05-14 11:40:51,222 - INFO - Epoch 4, Total: 0.015456, Pos: 0.005516, Mass: 0.010135
+2026-05-14 11:41:48,408 - INFO - Epoch 4, Validation loss: 0.015325332140056496
+2026-05-14 11:44:32,851 - INFO - Epoch 5, Total: 0.015375, Pos: 0.005741, Mass: 0.009988
+2026-05-14 11:45:17,066 - INFO - Epoch 5, Validation loss: 0.015269093597546602
+2026-05-14 11:45:53,403 - INFO - Epoch 6, Total: 0.015391, Pos: 0.005644, Mass: 0.010462
+2026-05-14 11:46:07,180 - INFO - Epoch 6, Validation loss: 0.015344651487584297
+2026-05-14 11:46:43,701 - INFO - Epoch 7, Total: 0.015426, Pos: 0.005567, Mass: 0.008733
+2026-05-14 11:46:56,617 - INFO - Epoch 7, Validation loss: 0.015173363626703747
+2026-05-14 11:47:33,400 - INFO - Epoch 8, Total: 0.015314, Pos: 0.005644, Mass: 0.009109
+2026-05-14 11:47:46,316 - INFO - Epoch 8, Validation loss: 0.015136730156711534
+2026-05-14 11:48:23,572 - INFO - Epoch 9, Total: 0.015223, Pos: 0.005455, Mass: 0.009697
+2026-05-14 11:48:36,706 - INFO - Epoch 9, Validation loss: 0.015143163788777132
+2026-05-14 11:49:13,344 - INFO - Epoch 10, Total: 0.015230, Pos: 0.005496, Mass: 0.009637
+2026-05-14 11:49:26,363 - INFO - Epoch 10, Validation loss: 0.015055640751862118
+2026-05-14 11:50:04,674 - INFO - Epoch 11, Total: 0.015143, Pos: 0.005454, Mass: 0.010190
+2026-05-14 11:50:17,653 - INFO - Epoch 11, Validation loss: 0.015144835791399336
+2026-05-14 11:50:55,404 - INFO - Epoch 12, Total: 0.015175, Pos: 0.005471, Mass: 0.009036
+2026-05-14 11:51:08,195 - INFO - Epoch 12, Validation loss: 0.015146142405131433
+2026-05-14 11:51:44,682 - INFO - Epoch 13, Total: 0.015239, Pos: 0.005782, Mass: 0.009445
+2026-05-14 11:51:57,858 - INFO - Epoch 13, Validation loss: 0.015148375955466023
+2026-05-14 11:52:34,835 - INFO - Epoch 14, Total: 0.015169, Pos: 0.005561, Mass: 0.010524
+2026-05-14 11:52:47,985 - INFO - Epoch 14, Validation loss: 0.015079953453033907
+2026-05-14 11:53:24,564 - INFO - Epoch 15, Total: 0.015080, Pos: 0.005930, Mass: 0.008888
+2026-05-14 11:53:37,427 - INFO - Epoch 15, Validation loss: 0.015104384965494148
+2026-05-14 11:54:14,002 - INFO - Epoch 16, Total: 0.015189, Pos: 0.006027, Mass: 0.009523
+2026-05-14 11:54:26,938 - INFO - Epoch 16, Validation loss: 0.015070213116387017
+2026-05-14 11:55:03,498 - INFO - Epoch 17, Total: 0.015132, Pos: 0.005454, Mass: 0.009457
+2026-05-14 11:55:16,362 - INFO - Epoch 17, Validation loss: 0.015027449800609013
+2026-05-14 11:55:52,840 - INFO - Epoch 18, Total: 0.015184, Pos: 0.005380, Mass: 0.009876
+2026-05-14 11:56:05,711 - INFO - Epoch 18, Validation loss: 0.01514698659730518

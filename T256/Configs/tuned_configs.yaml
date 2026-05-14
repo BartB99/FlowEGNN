@@ -17,7 +17,7 @@ model:
     k: 32
     r: 0.3
     optimal_transport: True
-    lambda_mass: 0.1
+    lambda_mass: 1.0
     lambda_reg: 0.1
   egnn:
     input_node_d: 2
@@ -35,7 +35,7 @@ model:
     attention: True
     aggregation_fn: sum 
     scale_pred: True 
-    coords_weight: 0.5
+    coords_weight: 2.0
     norm_diff: False
 
 training: 
@@ -51,7 +51,7 @@ training:
 
   scheduler:
     warmup_epochs: 10
-    initial_lr: 5e-4
+    initial_lr: 1e-3  
     target_lr: 1e-5 
     
     type: cosine # plateau or cosine

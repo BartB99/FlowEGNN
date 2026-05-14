@@ -32,16 +32,26 @@ def find_equally_spaced_indices(arr, n):
     original_indices = sorted_indices[closest_indices]
     return original_indices
 
-def ot_alignment(x0, x1): 
-    x1_ot = x1.clone()
-    for b in range(x0.shape[0]):
-        diff = x0[b].unsqueeze(1) - x1[b].unsqueeze(0)  # (N, N, 3)
+def ot_alignment(x0, x1, batch_size): 
+    n_halos = x0.shape[0] // batch_size
+    dim = x0.shape[1]
+
+    x0 = x0.view(batch_size, n_halos, dim)
+    x1 = x1.view(batch_size, n_halos, dim)
+
+    aligned_x0 = []
+    for b in range(batch_size):
+        g0 = x0[b]
+        g1 = x1[b]
+
+        diff = g1.unsqueeze(1) - g0.unsqueeze(0)
         diff = min_image(diff, **BOX)
-        cost = (diff ** 2).sum(-1)  # (N, N)
+        cost = (diff ** 2).sum(-1)
         _, col_ind = linear_sum_assignment(cost.detach().cpu().numpy())
-        x1_ot[b] = x1[b, col_ind]
-    
-    return x1_ot
+
+        aligned_x0.append(g0[col_ind])
+
+    return torch.cat(aligned_x0, dim=0)
 
 def ot_alignment_variable(x0, x1, batch, batch_size):
     aligned_x0 = []

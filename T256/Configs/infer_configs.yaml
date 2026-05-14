@@ -3,7 +3,7 @@ inference:
   n_repeats: 20 # only 10 for quantitative
   inference_halo_count: 256
   # checkpoint_path: "/gpfs/home4/bartb/T256/T256-SUBBOX/results/run_20260505_160642/model_final.pth"
-  checkpoint_path: "/gpfs/home4/bartb/T256/T256-SUBBOX/results/run_20260512_185646/model_epoch_1000.pth"
+  checkpoint_path: "/gpfs/home4/bartb/FlowEGNN/T256/results/run_20260508_154857/model_epoch_900.pth"
   infer_type: "qualitative_2pcf" # "qualitative_2pcf" or "quantitative_2pcf"
   batch_size: 10   
 

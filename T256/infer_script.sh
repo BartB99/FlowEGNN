@@ -15,4 +15,4 @@ module load Python/3.11.3-GCCcore-12.3.0
 #Activate environment
 source /gpfs/home4/bartb/venvs/boids/bin/activate
 
-python /gpfs/home4/bartb/T256/T256-SUBBOX/src/infer.py "$@"
+python /gpfs/home4/bartb/FlowEGNN/T256/src/infer.py "$@"
