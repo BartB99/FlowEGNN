@@ -281,3 +281,9 @@ wandb: 🚀 View run at https://wandb.ai/bart-bronsgeest-eindhoven-university-of
 2026-05-14 11:55:16,362 - INFO - Epoch 17, Validation loss: 0.015027449800609013
 2026-05-14 11:55:52,840 - INFO - Epoch 18, Total: 0.015184, Pos: 0.005380, Mass: 0.009876
 2026-05-14 11:56:05,711 - INFO - Epoch 18, Validation loss: 0.01514698659730518
+2026-05-14 11:56:41,995 - INFO - Epoch 19, Total: 0.015173, Pos: 0.005702, Mass: 0.008378
+2026-05-14 11:56:55,296 - INFO - Epoch 19, Validation loss: 0.015136055958767733
+2026-05-14 11:57:32,136 - INFO - Epoch 20, Total: 0.015079, Pos: 0.005449, Mass: 0.008972
+2026-05-14 11:57:45,096 - INFO - Epoch 20, Validation loss: 0.015074463330336615
+2026-05-14 11:58:21,509 - INFO - Epoch 21, Total: 0.015233, Pos: 0.005493, Mass: 0.010121
+2026-05-14 11:58:34,460 - INFO - Epoch 21, Validation loss: 0.01504299053365094
